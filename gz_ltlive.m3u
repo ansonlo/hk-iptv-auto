@@ -1,0 +1,761 @@
+#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml,https://epg.pw/xmltv/feed/subscription/free/hk.xml,https://epg.pw/xmltv/feed/subscription/free/tw.xml"
+#EXTINF:-1 group-title="廣州聯通" tvg-name="更", 更0313 20:13 
+http://10.255.255.1/info.ts
+#EXTINF:-1 group-title="廣州聯通" tvg-name="伪", 伪27.36.105.196 
+http://10.255.255.1/info.ts
+#EXTINF:-1 group-title="廣州聯通" tvg-name="查我IP",  您屋企粒真實IP
+http://mirror.leaseweb.com/speedtest/10mb.bin
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+http://112.27.235.94:8000/hls/33/index.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東衛視", 廣東衛視
+http://112.27.235.94:8000/hls/30/index.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+http://cdn2.163189.xyz/live/gdzj/stream.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+http://8.138.7.223/tv/gzjs.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東大灣區", 廣東大灣區
+http://222.128.55.152:9080/live/dwq.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://cdn2.163189.xyz/live/gdty/stream.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東經濟科教", 廣東經濟科教
+http://119.32.12.17:2901/udp/224.1.100.6:11111
+#EXTINF:-1 group-title="廣東" tvg-name="廣東影視", 廣東影視
+http://119.32.12.17:2901/udp/224.1.100.11:11111
+#EXTINF:-1 group-title="廣東" tvg-name="廣東新聞", 廣東新聞
+http://119.32.12.17:2901/udp/224.1.100.5:11111
+#EXTINF:-1 group-title="廣東" tvg-name="廣東少兒", 廣東少兒
+http://119.32.12.17:2901/udp/224.1.100.9:11111
+#EXTINF:-1 group-title="廣東" tvg-name="廣東衛視", 廣東衛視
+http://58.57.40.22:9901/tsfile/live/1039_1.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+http://8.138.7.223/tv/gzjs.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
+http://183.11.239.36:808/hls/18/index.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://r.jdshipin.com/LiYdg
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://cdn2.163189.xyz/live/gdty/stream.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+http://r.jdshipin.com/sE5vO
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+https://epg.pw/stream/7b470f9fc5c305db0c8622117b7b25ca00eb35ba3e93e865cf0ff9df5c736681.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視4K", 深圳衛視4K
+http://nn.7x9d.cn/深圳最新.php?id=szws4k
+#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
+http://119.32.12.17:2901/udp/224.1.100.4:11111
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+http://58.57.40.22:9901/tsfile/live/1036_1.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
+http://222.128.55.152:9080/live/dwq.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-38.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+http://z.b.bkpcp.top/m.php?id=szws
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-34.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-32.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://r.jdshipin.com/LiYdg
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-33.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+https://epg.pw/stream/7b470f9fc5c305db0c8622117b7b25ca00eb35ba3e93e865cf0ff9df5c736681.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://cdn2.132.us.kg/live/gdty/stream.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-2.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東衛視", 廣東衛視
+http://38.75.136.137:98/gslb/dsdqpub/gdwshd.m3u8?auth=testpub
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+http://38.64.72.148:80/hls/modn/list/4007/playlist.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東衛視", 廣東衛視
+https://iptv.catvod.com/live.php?id=%E5%B9%BF%E4%B8%9C%E5%8D%AB%E8%A7%86&line=2
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+http://cdn2.132.us.kg/live/gdzj/stream.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://cdn2.163189.xyz/live/gdty/stream.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東衛視", 廣東衛視
+https://iptv.catvod.com/live.php?id=%E5%B9%BF%E4%B8%9C%E5%8D%AB%E8%A7%86&line=4
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+http://cdn2.163189.xyz/live/gdzj/stream.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://php.jdshipin.com/TVOD/iptv.php?id=gdty
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://php.jdshipin.com/PLTV/iptv.php?id=gdty
+#EXTINF:-1 group-title="廣東" tvg-name="廣東衛視", 廣東衛視
+https://iptv.catvod.com/live.php?id=%E5%B9%BF%E4%B8%9C%E5%8D%AB%E8%A7%86&line=1
+#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
+https://iptv.catvod.com/live.php?id=%E5%A4%A7%E6%B9%BE%E5%8C%BA%E5%8D%AB%E8%A7%86&line=1
+#EXTINF:-1 group-title="廣東" tvg-name="廣州綜合", 廣州綜合
+https://stream1.freetv.fun/yan-zhou-zong-he-11.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
+https://iptv.catvod.com/live.php?id=%E5%A4%A7%E6%B9%BE%E5%8C%BA%E5%8D%AB%E8%A7%86
+#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
+https://iptv.catvod.com/live.php?id=%E5%A4%A7%E6%B9%BE%E5%8C%BA%E5%8D%AB%E8%A7%86&line=2
+#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
+https://iptv.catvod.com/live.php?id=%E5%A4%A7%E6%B9%BE%E5%8C%BA%E5%8D%AB%E8%A7%86&line=3
+#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
+https://stream1.freetv.fun/yan-dong-min-sheng-21.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-38.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+https://iptv.catvod.com/live.php?id=%E6%B7%B1%E5%9C%B3%E5%8D%AB%E8%A7%86&line=2
+#EXTINF:-1 group-title="廣東" tvg-name="廣州影視", 廣州影視
+https://stream1.freetv.fun/yan-zhou-ying-shi-7.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-33.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
+https://stream1.freetv.fun/yan-dong-min-sheng-35.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+https://iptv.catvod.com/live.php?id=%E6%B7%B1%E5%9C%B3%E5%8D%AB%E8%A7%86
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-34.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣州影視", 廣州影視
+https://stream1.freetv.fun/yan-zhou-ying-shi-28.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+http://38.75.136.137:98/gslb/dsdqpub/szwshd.m3u8?auth=testpub
+#EXTINF:-1 group-title="廣東" tvg-name="深圳衛視", 深圳衛視
+https://iptv.catvod.com/live.php?id=%E6%B7%B1%E5%9C%B3%E5%8D%AB%E8%A7%86&line=1
+#EXTINF:-1 group-title="廣東" tvg-name="廣州綜合", 廣州綜合
+https://stream1.freetv.fun/yan-zhou-zong-he-19.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-2.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
+https://stream1.freetv.fun/yan-dong-min-sheng-16.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東新聞", 廣東新聞
+https://stream1.freetv.fun/yan-dong-xin-wen-2.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣州影視", 廣州影視
+https://stream1.freetv.fun/yan-zhou-ying-shi-15.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://r.jdshipin.com/LiYdg
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+https://stream1.freetv.fun/yan-dong-zhu-jiang-16.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣州影視", 廣州影視
+https://stream1.freetv.fun/yan-zhou-ying-shi-25.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東新聞", 廣東新聞
+https://stream1.freetv.fun/yan-dong-xin-wen-20.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+http://r.jdshipin.com/sE5vO
+#EXTINF:-1 group-title="廣東" tvg-name="廣州影視", 廣州影視
+https://stream1.freetv.fun/yan-zhou-ying-shi-6.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+https://stream1.freetv.fun/yan-zhou-jing-sai-32.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
+https://stream1.freetv.fun/yan-dong-min-sheng-9.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東新聞", 廣東新聞
+https://stream1.freetv.fun/yan-dong-xin-wen-27.ctv
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://php.jdshipin.com/PLTV/iptv.php?id=gdty
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
+http://php.jdshipin.com/TVOD/iptv.php?id=gdty
+#EXTINF:-1 group-title="香港" tvg-name="[VGA]RTHK 32[GEO-BLOCKED]", [VGA]RTHK 32[GEO-BLOCKED]
+https://stream1.freetv.fun/6293c65392dc2022f8a7b1f492f09dc41eea5a09ebe9c8ef1ec3a0d9c4065b69.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="[BD]VIUTV", [BD]VIUTV
+https://stream1.freetv.fun/855fcf2cb6242c3bbf91d073a966eefcecb239f58f03460b4947d32ee7785d2c.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="[HD]無線新聞", [HD]無線新聞
+https://stream1.freetv.fun/afb8519f6f276c74e63a0b8ee0454563e51a306ab426f5cff8d31283c9202743.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/GeWKr
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠", [BD]翡翠
+https://stream1.freetv.fun/8a31735d012894cb8c275ebf1a898a3bb42f7201dd54d6d1201d724877fd9c19.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="無線星河", 無線星河
+https://cdn6.101.qzz.io/163189/tvbxh
+#EXTINF:-1 group-title="香港" tvg-name="TVB無線新聞", TVB無線新聞
+http://cdn9.163189.xyz/smt1.1.php?id=inews_twn
+#EXTINF:-1 group-title="香港" tvg-name="TVB翡翠臺", TVB翡翠臺
+http://cdn9.163189.xyz/smt1.1.php?id=jade_twn
+#EXTINF:-1 group-title="香港" tvg-name="[VGA]VIUTV[GEO-BLOCKED]", [VGA]VIUTV[GEO-BLOCKED]
+https://stream1.freetv.fun/6e51cfdfdd9988358bd19ac505badd794b005798348da2715479b55057f921a5.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/qClQf
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠", [BD]翡翠
+https://stream1.freetv.fun/ec738c8f8b5d5706670eb42e4fe79edc5d6f471ba93d0eb20dff4c372efef4db.ctv
+#EXTINF:-1 group-title="香港" tvg-name="RTHK TV 31", RTHK TV 31
+https://rthktv31-live.akamaized.net/hls/live/2036818/RTHKTV31/master.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="[VGA]VIUTV 6[GEO-BLOCKED]", [VGA]VIUTV 6[GEO-BLOCKED]
+https://stream1.freetv.fun/423ee2544d505e33bc2a0032f04d7b3be2dab0ea2fdf41497c7e462f5d6f8c63.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠[GEO-BLOCKED]", [BD]翡翠[GEO-BLOCKED]
+https://stream1.freetv.fun/96be57df137f3e952c37d15c81c54511223f65ab2929549598ef3c601f7f0add.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]無線新聞", [BD]無線新聞
+https://stream1.freetv.fun/b9fc79702a33d75d0fa4c22a19341be1a7120d111c47d9e109566b9d42020383.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠", [BD]翡翠
+https://stream1.freetv.fun/169afe453d043b4888d3e0684163a3c8e7c13738df07bcfa187dcd05223e3891.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]明珠", [BD]明珠
+https://stream1.freetv.fun/fc542dddf6d96335d494c255d5df19fc0f2c61c46779dd9fe85e54b1559c3460.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]明珠", [BD]明珠
+https://stream1.freetv.fun/9355776363cced50b636fb90bd1d63ba128a62b87206583d553b215847a74d2d.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]VIUTVSIX", [BD]VIUTVSIX
+https://stream1.freetv.fun/df53d054294bb3499e8c5897908dd1e7a190e2505b2f45abd837a8bc405771fb.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠", [BD]翡翠
+https://stream1.freetv.fun/7626cd1e0830deb6cc37d51b751648e27e25c8136a22f61f6bb6ce5a85dcb0c4.ctv
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺4K", 翡翠臺4K
+http://cdn6.163189.xyz/163189/fct4k
+#EXTINF:-1 group-title="香港" tvg-name="[BD]TVB翡翠", [BD]TVB翡翠
+https://stream1.freetv.fun/0f0395c924dc13b6e2461a9ea78f4557372bbf3c2f7493d4ffd9181d3202f74d.ctv
+#EXTINF:-1 group-title="香港" tvg-name="HOY TV", HOY TV
+http://r.jdshipin.com/sFw4S
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠", [BD]翡翠
+https://stream1.freetv.fun/363a02513a5dbd6658d52b26c733386779319595957dce38c539ddb689d7b401.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[VGA]HOY TV[GEO-BLOCKED]", [VGA]HOY TV[GEO-BLOCKED]
+https://stream1.freetv.fun/291a5bb30a7b7fb42c9e7282eb03a32daa42a6d1ee66239459718160c56a2699.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/qrfbg
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠臺[GEO-BLOCKED]", [BD]翡翠臺[GEO-BLOCKED]
+https://stream1.freetv.fun/829b7e0470319a0e8fff9a9cc0eccdf0f87d0785005387b2a9f38fd9c7cde69c.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠", [BD]翡翠
+https://stream1.freetv.fun/07b8f89d6c2bf405852bd8eb695e2389afdb45dfaf30d5273f8d2b819720681f.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠", [BD]翡翠
+https://stream1.freetv.fun/b1128a129ebb9fd5ddde711ab565c82831400d80e5aa6aa9822e6c1b33ed95c5.ctv
+#EXTINF:-1 group-title="香港" tvg-name="RTHK TV 31 (港臺電視31) (1080P) [GEO-BLOCKED]", RTHK TV 31 (港臺電視31) (1080P) [GEO-BLOCKED]
+https://rthktv31-live.akamaized.net/hls/live/2036818/RTHKTV31/master.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="RTHK TV 31 (港臺電視31) (360P) [GEO-BLOCKED]", RTHK TV 31 (港臺電視31) (360P) [GEO-BLOCKED]
+https://rthklive1-lh.akamaihd.net/i/rthk31_1@167495/master.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/GeWKr
+#EXTINF:-1 group-title="香港" tvg-name="VIUTV", VIUTV
+http://r.jdshipin.com/vSJvl
+#EXTINF:-1 group-title="香港" tvg-name="[HD]明珠臺高清", [HD]明珠臺高清
+https://stream1.freetv.fun/a4ef3a05fe986f663938806c799210b5063fd8a4be0058da04fd45fe000a7e24.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]明珠", [BD]明珠
+https://stream1.freetv.fun/e56abfec74a8d135ddfc2c074a81751b6fc41d0272d5f5519c218b2e56d3265f.ctv
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/qClQf
+#EXTINF:-1 group-title="香港" tvg-name="HOY78", HOY78
+http://cdn.163189.xyz/live/hoy/stream.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="[BD]明珠", [BD]明珠
+https://stream1.freetv.fun/b49f11a7e68a76202daba76fb5c90eb8ef1c34d977c5e9eac0825112f74f87d3.ctv
+#EXTINF:-1 group-title="香港" tvg-name="明珠臺", 明珠臺
+http://r.jdshipin.com/ZQ4kN
+#EXTINF:-1 group-title="香港" tvg-name="[BD]明珠", [BD]明珠
+https://stream1.freetv.fun/18147fe9227d749afdbf2b79ad6a6182ecd2276f2338a696d0c23d998e2763b2.ctv
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/n90gt
+#EXTINF:-1 group-title="香港" tvg-name="[BD]VIUTV", [BD]VIUTV
+https://stream1.freetv.fun/acf28668e5790e2d2ac642051e52d00b0ea2372b79f0526617aa30a9af34b16b.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]VIUTV6 PLUS", [BD]VIUTV6 PLUS
+https://stream1.freetv.fun/dafbaa724a18418c77b2d637b28b1a31b7438f3a4dfc9e93e5c5e3b0bc538847.ctv
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/n90gt
+#EXTINF:-1 group-title="香港" tvg-name="[BD]VIUTV", [BD]VIUTV
+https://stream1.freetv.fun/5fc2ba313b387d2b2538a2e46aee6266cc10890fc8b8ccf478498b82af6f7c3b.ctv
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/qrfbg
+#EXTINF:-1 group-title="香港" tvg-name="華麗翡翠臺", 華麗翡翠臺
+http://r.jdshipin.com/thuYX
+#EXTINF:-1 group-title="香港" tvg-name="[HD]VIUTV高清", [HD]VIUTV高清
+https://stream1.freetv.fun/dcb93bc96d44fc8ee102cde52bcb32f067ef1a2a23e785fa4809cf3f054b0b4d.ctv
+#EXTINF:-1 group-title="香港" tvg-name="明珠臺", 明珠臺
+http://r.jdshipin.com/ZQ4kN
+#EXTINF:-1 group-title="香港" tvg-name="[BD]VIUTV", [BD]VIUTV
+https://stream1.freetv.fun/566447a554a11bb540e5e37ea32162caa2959fefd3707625f70de6ac96255364.ctv
+#EXTINF:-1 group-title="香港" tvg-name="明珠臺", 明珠臺
+http://php.jdshipin.com/TVOD/iptv.php?id=mzt2
+#EXTINF:-1 group-title="香港" tvg-name="[BD]明珠", [BD]明珠
+https://stream1.freetv.fun/4db377997e788111dc3a7a47fec67132e36bd8221c27f01f0d14ae82d86bc4ff.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]VIUTV PLUS", [BD]VIUTV PLUS
+https://stream1.freetv.fun/ab16a30d3816f20a7eabe52f579ceac858c17659b1a9c1915392d63552712622.ctv
+#EXTINF:-1 group-title="香港" tvg-name="明珠臺", 明珠臺
+http://cdn9.163189.xyz/smt1.1.php?id=pearl_twn
+#EXTINF:-1 group-title="香港" tvg-name="無線星河", 無線星河
+https://cdn6.101.qzz.io/163189/tvbxh
+#EXTINF:-1 group-title="香港" tvg-name="[BD]HOY TV", [BD]HOY TV
+https://stream1.freetv.fun/46e229877cf43dbe3bb518a02d3f4dbd2b2288cf9b54b191145786eebf1a2648.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[HD]VIUTV6高清", [HD]VIUTV6高清
+https://stream1.freetv.fun/c34b453ddb57c4641e22202a5d868b398148f0d4f86cc98beccb2f49ebcd755a.ctv
+#EXTINF:-1 group-title="香港" tvg-name="[BD]翡翠[GEO-BLOCKED]", [BD]翡翠[GEO-BLOCKED]
+https://stream1.freetv.fun/b6805e649e0c7b8193b4fd6d6b407675b3254a0eca4b30ef8ed033b5202b285e.ctv
+#EXTINF:-1 group-title="香港" tvg-name="無線新聞", 無線新聞
+http://r.jdshipin.com/CkuBd
+#EXTINF:-1 group-title="香港" tvg-name="明珠臺", 明珠臺
+http://iptv.4666888.xyz/iptv2A.php?id=29
+#EXTINF:-1 group-title="香港" tvg-name="翡翠", 翡翠
+http://php.jdshipin.com/TVOD/iptv.php?id=fct3
+#EXTINF:-1 group-title="香港" tvg-name="黃金翡翠", 黃金翡翠
+http://php.jdshipin.com/smt.php?id=Tvbjade
+#EXTINF:-1 group-title="香港" tvg-name="翡翠", 翡翠
+http://php.jdshipin.com/TVOD/iptv.php?id=fct2
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺北美版", 翡翠臺北美版
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=j1
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://iptv.4666888.xyz/iptv2A.php?id=34
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct4
+#EXTINF:-1 group-title="香港" tvg-name="明珠臺", 明珠臺
+http://r.jdshipin.com/jUx8K
+#EXTINF:-1 group-title="香港" tvg-name="HOY TV", HOY TV
+http://php.jdshipin.com/TVOD/iptv.php?id=hoytv
+#EXTINF:-1 group-title="香港" tvg-name="RTHK31", RTHK31
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=rthk31
+#EXTINF:-1 group-title="香港" tvg-name="[BD]TVB翡翠", [BD]TVB翡翠
+https://stream1.freetv.fun/68acc033476cd4c2ffeb3e90a756f023595401dbe5fc539de8a888d7f1f5abef.ctv
+#EXTINF:-1 group-title="香港" tvg-name="無線新聞臺", 無線新聞臺
+http://php.jdshipin.com/TVOD/iptv.php?id=wxxw
+#EXTINF:-1 group-title="香港" tvg-name="TVB明珠臺", TVB明珠臺
+http://cdn9.163189.xyz/smt1.1.php?id=pearl_twn
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/62WM7
+#EXTINF:-1 group-title="香港" tvg-name="RTHK32", RTHK32
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=rthk32
+#EXTINF:-1 group-title="香港" tvg-name="翡翠", 翡翠
+http://php.jdshipin.com/smt.php?id=jade_twn
+#EXTINF:-1 group-title="香港" tvg-name="華麗翡翠臺", 華麗翡翠臺
+http://php.jdshipin.com/TVOD/iptv.php?id=huali2
+#EXTINF:-1 group-title="香港" tvg-name="TVB翡翠臺 1080P", TVB翡翠臺 1080P
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct3
+#EXTINF:-1 group-title="香港" tvg-name="[BD]TVB翡翠[GEO-BLOCKED]", [BD]TVB翡翠[GEO-BLOCKED]
+https://stream1.freetv.fun/99bb646a71d6fb69f3287af93bc08e97e334d626c7889509579bf47e76b641f8.ctv
+#EXTINF:-1 group-title="香港" tvg-name="VIUTV", VIUTV
+http://php.jdshipin.com/TVOD/iptv.php?id=viutv2
+#EXTINF:-1 group-title="香港" tvg-name="明珠臺", 明珠臺
+http://php.jdshipin.com/TVOD/iptv.php?id=mzt2
+#EXTINF:-1 group-title="香港" tvg-name="華麗翡翠臺", 華麗翡翠臺
+http://cdn9.163189.xyz/smt1.1.php?id=Tvbjade
+#EXTINF:-1 group-title="香港" tvg-name="翡翠臺", 翡翠臺
+http://r.jdshipin.com/62WM7
+#EXTINF:-1 group-title="香港" tvg-name="福建漳州醉美沙灘翡翠灣", 福建漳州醉美沙灘翡翠灣
+https://gcalic.v.myalicdn.com/gc/fcw03_1/index.m3u8
+#EXTINF:-1 group-title="香港" tvg-name="VIUTV", VIUTV
+http://php.jdshipin.com/TVOD/iptv.php?id=viutv
+#EXTINF:-1 group-title="香港" tvg-name="無線星河", 無線星河
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=xinghe
+#EXTINF:-1 group-title="香港" tvg-name="VIUTV", VIUTV
+http://r.jdshipin.com/TcKr2
+#EXTINF:-1 group-title="香港" tvg-name="無線新聞臺", 無線新聞臺
+http://php.jdshipin.com:8880/smt.php?id=inews_twn
+#EXTINF:-1 group-title="香港" tvg-name="杭州明珠", 杭州明珠
+https://stream1.freetv.fun/hang-zhou-ming-zhu-1.ctv
+#EXTINF:-1 group-title="香港" tvg-name="TVB無線星河", TVB無線星河
+http://php.jdshipin.com:8880/smt.php?id=Xinhe
+#EXTINF:-1 group-title="香港" tvg-name="杭州明珠", 杭州明珠
+https://stream1.freetv.fun/hang-zhou-ming-zhu-2.ctv
+#EXTINF:-1 group-title="香港" tvg-name="無線星河", 無線星河
+http://php.jdshipin.com/smt.php?id=Xinhe
+#EXTINF:-1 group-title="香港" tvg-name="VIUTV", VIUTV
+http://php.jdshipin.com:8880/PLTV/iptv.php?id=viutv
+#EXTINF:-1 group-title="澳門" tvg-name="澳門蓮花", 澳門蓮花
+http://anren.live/HK/BiIOU11uLA.m3u8?zgangd
+#EXTINF:-1 group-title="澳門" tvg-name="澳視衛星", 澳視衛星
+http://r.jdshipin.com/QFhCq
+#EXTINF:-1 group-title="澳門" tvg-name="澳門蓮花", 澳門蓮花
+http://anren.live/HK/BiIOU11uLA.m3u8
+#EXTINF:-1 group-title="澳門" tvg-name="澳視澳門", 澳視澳門
+http://r.jdshipin.com/n2YZI
+#EXTINF:-1 group-title="澳門" tvg-name="澳門綜藝", 澳門綜藝
+http://cdn6.163189.xyz/163189/amzy
+#EXTINF:-1 group-title="澳門" tvg-name="澳門體育", 澳門體育
+http://cdn6.163189.xyz/163189/amty
+#EXTINF:-1 group-title="澳門" tvg-name="澳視澳門", 澳視澳門
+https://cdn6.163189.xyz/163189/asam
+#EXTINF:-1 group-title="澳門" tvg-name="澳視衛星", 澳視衛星
+https://cdn6.163189.xyz/163189/as
+#EXTINF:-1 group-title="澳門" tvg-name="澳視澳門", 澳視澳門
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=asam
+#EXTINF:-1 group-title="澳門" tvg-name="澳門衛視", 澳門衛視
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=as
+#EXTINF:-1 group-title="澳門" tvg-name="澳視衛星", 澳視衛星
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=as
+#EXTINF:-1 group-title="澳門" tvg-name="澳視澳門", 澳視澳門
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=asam
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS ASIA (1080P)", TVBS ASIA (1080P)
+http://38.64.72.148/hls/modn/list/4005/playlist.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS亞洲", TVBS亞洲
+http://38.64.72.148/hls/modn/list/4005/chunklist1.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS亞洲", TVBS亞洲
+http://38.64.72.148/hls/modn/list/4005/chunklist1.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS亞洲", TVBS亞洲
+http://38.64.72.148:80/hls/modn/list/4005/playlist.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS亞洲", TVBS亞洲
+http://38.64.72.148:80/hls/modn/list/4005/chunklist0.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS亞洲", TVBS亞洲
+http://38.64.72.148:80/hls/modn/list/4005/chunklist1.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS新聞", TVBS新聞
+http://aktv.top/AKTV/live/aktv3/null-2/AKTV.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS新聞", TVBS新聞
+http://aktv.top/AKTV/live/aktv/tvbs-1/AKTV.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立INEWS", 三立INEWS
+https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV01.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立NEWS+", 三立NEWS+
+https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV32.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS新聞臺", TVBS新聞臺
+http://61.221.215.25:8800/hls/9/index.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS閩南", TVBS閩南
+http://aktv.top/AKTV/live/aktv/tvbs/AKTV.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="SET三立戲劇", SET三立戲劇
+http://61.221.215.25:8800/hls/41/index.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="[BD]TVBS亞洲", [BD]TVBS亞洲
+https://stream1.freetv.fun/2aef95d17a02f90322721318b132da070c7e4cf542e6fcebe3d6ce02379a4742.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="[BD]TVBS亞洲", [BD]TVBS亞洲
+https://stream1.freetv.fun/5d67b3e9131d07f6e7da4e6fafda09cc609ee7fefb2e14ca14cf5bd6da5e4107.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="[BD]TVBS亞洲", [BD]TVBS亞洲
+https://stream1.freetv.fun/395aa9bcecda230deb8046ff6d1b97f4158ab2d965e8610e865dc27560447d33.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS亞洲", TVBS亞洲
+http://38.64.72.148/hls/modn/list/4005/chunklist0.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="[BD]TVBS亞洲", [BD]TVBS亞洲
+https://stream1.freetv.fun/0e9dc5f67eeae3d90d5afce9b70b9a06d6b3db352230f64d93221b83afb9e9ff.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="[BD]TVBS亞洲", [BD]TVBS亞洲
+https://stream1.freetv.fun/0854ce5d4e8860e055549f5881ef05ab76b1bd0bc5bea78057553ed66f44d800.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS亞洲", TVBS亞洲
+http://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_5.m3u8?zshijd
+#EXTINF:-1 group-title="台灣" tvg-name="三立新聞", 三立新聞
+https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV32.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="[BD]TVBS亞洲", [BD]TVBS亞洲
+https://stream1.freetv.fun/52055e00fcf09c1a1fdd4289f27dce8639ebf402e478b7204b22711cb6589d4c.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="[BD]TVBS亞洲", [BD]TVBS亞洲
+https://stream1.freetv.fun/490340d742eb83c96123103e77460d8be396d5b87ee81e045aecaed070e152b6.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立戲劇", 三立戲劇
+http://61.221.215.25:8800/hls/41/index.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立臺灣台", 三立臺灣台
+https://epg.pw/stream/79a263b6160e568f6d3cd91417334e5b08f1638bf5990da99c65d94589d35fb7.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立綜合", 三立綜合
+http://aktv.top/AKTV/live/aktv/null-13/AKTV.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立新聞", 三立新聞
+http://aktv.top/AKTV/live/aktv/null-14/AKTV.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="TVBS新聞臺", TVBS新聞臺
+http://61.221.215.25:8800/hls/9/index.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立新聞", 三立新聞
+https://stream1.freetv.fun/san-li-xin-wen-5.ctv
+#EXTINF:-1 group-title="台灣" tvg-name="三立新聞", 三立新聞
+https://stream1.freetv.fun/san-li-xin-wen-4.m3u8
+#EXTINF:-1 group-title="台灣" tvg-name="三立臺灣", 三立臺灣
+https://stream1.freetv.fun/san-li-tai-wan-1.ctv
+#EXTINF:-1 group-title="台灣" tvg-name="三立新聞", 三立新聞
+https://stream1.freetv.fun/san-li-xin-wen-3.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="[BD]CCTV-1HD", [BD]CCTV-1HD
+https://stream1.freetv.fun/7bcb9055df8789fe1d3ab53c3907e5a0aac9ecd18c827a5c94148e850d9ab4fe.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV16", CCTV16
+http://69.30.246.194/live/cctv16.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV文化精品", CCTV文化精品
+http://38.75.136.137:98/gslb/dsdqpub/ysjp.m3u8?auth=testpub
+#EXTINF:-1 group-title="特色" tvg-name="CCTV懷舊劇場", CCTV懷舊劇場
+http://38.75.136.137:98/gslb/dsdqpub/hjjc.m3u8?auth=testpub
+#EXTINF:-1 group-title="特色" tvg-name="CCTV女性時尚", CCTV女性時尚
+http://38.75.136.137:98/gslb/dsdqpub/nxss.m3u8?auth=testpub
+#EXTINF:-1 group-title="特色" tvg-name="CCTV風雲足球", CCTV風雲足球
+https://epg.pw/stream/ac8062ec9484078061d3bef507c15a423ac57ae4144e3fcc4b0a198dd420f911.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV第一劇場", CCTV第一劇場
+https://epg.pw/stream/6d7bf281e3d739806a73f5373acaa6e01988ec9739f5ac1355ce54b47a928472.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV6", CCTV6
+http://112.27.235.94:8000/hls/7/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV1", CCTV1
+http://112.27.235.94:8000/hls/1/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV2", CCTV2
+http://112.27.235.94:8000/hls/2/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV7", CCTV7
+http://112.27.235.94:8000/hls/8/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV8", CCTV8
+http://112.27.235.94:8000/hls/9/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV5+", CCTV5+
+http://112.27.235.94:8000/hls/6/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV3", CCTV3
+http://112.27.235.94:8000/hls/3/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV9", CCTV9
+http://112.27.235.94:8000/hls/10/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV14", CCTV14
+http://112.27.235.94:8000/hls/15/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV4", CCTV4
+http://112.27.235.94:8000/hls/4/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV12", CCTV12
+http://112.27.235.94:8000/hls/13/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV5", CCTV5
+http://112.27.235.94:8000/hls/5/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV15", CCTV15
+http://112.27.235.94:8000/hls/16/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV11", CCTV11
+http://112.27.235.94:8000/hls/12/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV13", CCTV13
+http://112.27.235.94:8000/hls/14/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV10", CCTV10
+http://112.27.235.94:8000/hls/11/index.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="[BD]CCTV1", [BD]CCTV1
+https://stream1.freetv.fun/31f1a5c3a963625aff1eb70a33e10695ddabfc1d0f6c0c4e8bfeadf9d62a225e.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV央視檯球", CCTV央視檯球
+https://epg.pw/stream/ca9c1cd4b97fb824cedd7fedfd0c7a950afdd7f00751cfbb7c2d89831d7746a5.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV2", CCTV2
+http://58.57.40.22:9901/tsfile/live/1001_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV17", CCTV17
+http://58.57.40.22:9901/tsfile/live/0019_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV13", CCTV13
+http://58.57.40.22:9901/tsfile/live/1013_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV6", CCTV6
+http://58.57.40.22:9901/tsfile/live/1006_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-9", CCTV-9
+http://p.ytelc.com/169l/0/cctv.php?id=cctv9
+#EXTINF:-1 group-title="特色" tvg-name="CCTV1", CCTV1
+http://58.57.40.22:9901/tsfile/live/0001_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV14", CCTV14
+http://58.57.40.22:9901/tsfile/live/1014_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV4", CCTV4
+http://58.57.40.22:9901/tsfile/live/1003_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV5", CCTV5
+http://58.57.40.22:9901/tsfile/live/1004_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV3", CCTV3
+http://58.57.40.22:9901/tsfile/live/1002_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV8", CCTV8
+http://58.57.40.22:9901/tsfile/live/1008_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="[BD]CCTV-1高清", [BD]CCTV-1高清
+https://stream1.freetv.fun/6ddfa4bdb0c10dcf07ae08350b4ce7d67cd3051aa10147886fc6bc1eeb929550.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-16", CCTV-16
+http://69.30.246.194/live/cctv16.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV9", CCTV9
+http://58.57.40.22:9901/tsfile/live/1009_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV7", CCTV7
+http://58.57.40.22:9901/tsfile/live/1007_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="[HD]CCTV-1HD", [HD]CCTV-1HD
+https://stream1.freetv.fun/fb9d0546553a21c4591a86f298dad5f4b1556dc13b03d1aaa1c17d787f27678e.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV4K真4K", CCTV4K真4K
+http://vip1.xinketongxun.fun:8082/tsfile/live/1026_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-9", CCTV-9
+http://74.91.26.218:82/live/cctv9hd.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5+", CCTV-5+
+http://38.75.136.137:98/gslb/dsdqbv/cctv5p.m3u8?auth=test20251009
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-4", CCTV-4
+http://38.75.136.137:98/gslb/dsdqbv/cctv4hd.m3u8?auth=test20251009
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5+", CCTV-5+
+http://74.91.26.218:82/live/cctv5p.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-4", CCTV-4
+http://74.91.26.218:82/live/cctv4hd.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-2", CCTV-2
+https://iptv.catvod.com/live.php?id=CCTV2&line=1
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-1", CCTV-1
+http://74.91.26.218:82/live/cctv1hd.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-11", CCTV-11
+https://iptv.catvod.com/live.php?id=CCTV11&line=7
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-17", CCTV-17
+http://p.ytelc.com/169l/0/cctv.php?id=cctv17
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-9", CCTV-9
+http://38.75.136.137:98/gslb/dsdqpub/cctv9hd.m3u8?auth=testpub
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-11", CCTV-11
+https://iptv.catvod.com/live.php?id=CCTV11&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-7", CCTV-7
+http://38.75.136.137:98/gslb/dsdqbv/cctv7hd.m3u8?auth=test20251009
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-4", CCTV-4
+http://38.75.136.137:98/gslb/dsdqpub/cctv4k.m3u8?auth=testpub
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-3", CCTV-3
+https://iptv.catvod.com/live.php?id=CCTV3&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-3", CCTV-3
+https://iptv.catvod.com/live.php?id=CCTV3&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV15", CCTV15
+http://58.57.40.22:9901/tsfile/live/1015_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-2", CCTV-2
+https://iptv.catvod.com/live.php?id=CCTV2&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV11", CCTV11
+http://58.57.40.22:9901/tsfile/live/1011_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV12", CCTV12
+http://58.57.40.22:9901/tsfile/live/1012_1.m3u8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-4", CCTV-4
+https://iptv.catvod.com/live.php?id=CCTV4&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-12", CCTV-12
+https://iptv.catvod.com/live.php?id=CCTV12&line=1
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-11", CCTV-11
+https://iptv.catvod.com/live.php?id=CCTV11&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-9", CCTV-9
+https://iptv.catvod.com/live.php?id=CCTV9&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5", CCTV-5
+https://iptv.catvod.com/live.php?id=CCTV5&line=10
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-10", CCTV-10
+https://iptv.catvod.com/live.php?id=CCTV10&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-11", CCTV-11
+https://iptv.catvod.com/live.php?id=CCTV11&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5", CCTV-5
+https://iptv.catvod.com/live.php?id=CCTV5&line=8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-12", CCTV-12
+https://iptv.catvod.com/live.php?id=CCTV12
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-12", CCTV-12
+https://iptv.catvod.com/live.php?id=CCTV12&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-11", CCTV-11
+https://iptv.catvod.com/live.php?id=CCTV11&line=5
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5", CCTV-5
+https://iptv.catvod.com/live.php?id=CCTV5
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-7", CCTV-7
+https://iptv.catvod.com/live.php?id=CCTV7&line=9
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-7", CCTV-7
+https://iptv.catvod.com/live.php?id=CCTV7&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5", CCTV-5
+https://iptv.catvod.com/live.php?id=CCTV5&line=1
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-1", CCTV-1
+https://iptv.catvod.com/live.php?id=CCTV1&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-4", CCTV-4
+https://iptv.catvod.com/live.php?id=CCTV4&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV17", CCTV17
+http://p.ytelc.com/169l/0/cctv.php?id=cctv17
+#EXTINF:-1 group-title="特色" tvg-name="CCTV15", CCTV15
+http://p.ytelc.com/169l/0/cctv.php?id=cctv15
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-1", CCTV-1
+https://iptv.catvod.com/live.php?id=CCTV1&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV4K", CCTV4K
+http://p.ytelc.com/169l/0/cctv.php?id=cctv4k
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-12", CCTV-12
+https://iptv.catvod.com/live.php?id=CCTV12&line=5
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5", CCTV-5
+https://iptv.catvod.com/live.php?id=CCTV5&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-12", CCTV-12
+https://iptv.catvod.com/live.php?id=CCTV12&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-7", CCTV-7
+https://iptv.catvod.com/live.php?id=CCTV7&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-6電影", CCTV-6電影
+http://8.138.7.223/tv/1905.php?id=LIVE3YPYZ30E7V1R0
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-2", CCTV-2
+https://iptv.catvod.com/live.php?id=CCTV2&line=5
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-2", CCTV-2
+https://iptv.catvod.com/live.php?id=CCTV2&line=8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-13", CCTV-13
+https://iptv.catvod.com/live.php?id=CCTV13&line=12
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-13", CCTV-13
+https://iptv.catvod.com/live.php?id=CCTV13&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-13", CCTV-13
+https://iptv.catvod.com/live.php?id=CCTV13&line=13
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-13", CCTV-13
+https://iptv.catvod.com/live.php?id=CCTV13&line=7
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-14", CCTV-14
+https://iptv.catvod.com/live.php?id=CCTV14&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-13", CCTV-13
+https://iptv.catvod.com/live.php?id=CCTV13&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-9", CCTV-9
+https://iptv.catvod.com/live.php?id=CCTV9&line=5
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-15", CCTV-15
+https://www.freetv.top/migu/673168223.m3u8?migutoken=4e8d5766579c6bef231494cabd07e5b49d965804790214280c9791e4c331fd90311cb62ea43d3a1899229bfa57be4afe5a567b32a6b78153fc9a9801e28a39435e078b48c211e71d6083519be4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-8", CCTV-8
+https://iptv.catvod.com/live.php?id=CCTV8&line=10
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-10", CCTV-10
+https://iptv.catvod.com/live.php?id=CCTV10&line=10
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-9", CCTV-9
+https://iptv.catvod.com/live.php?id=CCTV9&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-8", CCTV-8
+https://iptv.catvod.com/live.php?id=CCTV8&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-15", CCTV-15
+https://iptv.catvod.com/live.php?id=CCTV15&line=5
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-15", CCTV-15
+https://iptv.catvod.com/live.php?id=CCTV15&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-8", CCTV-8
+https://iptv.catvod.com/live.php?id=CCTV8&line=14
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-6", CCTV-6
+https://iptv.catvod.com/live.php?id=CCTV6&line=11
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-8", CCTV-8
+https://iptv.catvod.com/live.php?id=CCTV8&line=11
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-1", CCTV-1
+https://iptv.catvod.com/live.php?id=CCTV1&line=14
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-7", CCTV-7
+https://iptv.catvod.com/live.php?id=CCTV7&line=7
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-3", CCTV-3
+https://iptv.catvod.com/live.php?id=CCTV3&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-6", CCTV-6
+https://iptv.catvod.com/live.php?id=CCTV6&line=7
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-6", CCTV-6
+https://iptv.catvod.com/live.php?id=CCTV6&line=13
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-6", CCTV-6
+https://iptv.catvod.com/live.php?id=CCTV6&line=9
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-15", CCTV-15
+http://38.75.136.137:98/gslb/dsdqpub/cctv15hd.m3u8?auth=testpub
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-3", CCTV-3
+https://iptv.catvod.com/live.php?id=CCTV3&line=7
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-10", CCTV-10
+https://iptv.catvod.com/live.php?id=CCTV10&line=8
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5", CCTV-5
+https://www.freetv.top/migu/641886683.m3u8?migutoken=3e5c01f93922de8d1c940fe15bb47349b27e8f7a2e624dde1a83dff3b2a80f58b7624151a3a4d00488edee34f202818557340903382fae02bb754084eb942bd50e59061df36fab62fb5b908903
+#EXTINF:-1 group-title="特色" tvg-name="[BD]CCTV1綜合", [BD]CCTV1綜合
+https://stream1.freetv.fun/e2d614c15f9f44a66769286821f4e204843fbb1ea976d65e2e7380425aa5b412.ctv
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5+", CCTV-5+
+https://www.freetv.top/migu/641886773.m3u8?migutoken=03a1b82e35e58cd89a95034ecb29e77e50493397000ec2b1e4d1ce59af01e6420d6dbc068c8230ec03be3a35a20eed8714e0959e3570a08713a7a2e8d86085eabf8f1aa85744c80c38343988b2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-1", CCTV-1
+https://iptv.catvod.com/live.php?id=CCTV1&line=16
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-10", CCTV-10
+https://iptv.catvod.com/live.php?id=CCTV10&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-14", CCTV-14
+https://iptv.catvod.com/live.php?id=CCTV14
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-8", CCTV-8
+https://iptv.catvod.com/live.php?id=CCTV8&line=15
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-10", CCTV-10
+https://iptv.catvod.com/live.php?id=CCTV10&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-17", CCTV-17
+https://iptv.catvod.com/live.php?id=CCTV17&line=1
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-16", CCTV-16
+https://iptv.catvod.com/live.php?id=CCTV16&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-16", CCTV-16
+http://38.75.136.137:98/gslb/dsdqbv/cctv16hd.m3u8?auth=test20251009
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-17", CCTV-17
+https://iptv.catvod.com/live.php?id=CCTV17&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-3", CCTV-3
+https://iptv.catvod.com/live.php?id=CCTV3&line=5
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-14", CCTV-14
+https://iptv.catvod.com/live.php?id=CCTV14&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-15", CCTV-15
+https://iptv.catvod.com/live.php?id=CCTV15&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-14", CCTV-14
+https://iptv.catvod.com/live.php?id=CCTV14&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-16", CCTV-16
+https://iptv.catvod.com/live.php?id=CCTV16&line=1
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-16", CCTV-16
+https://iptv.catvod.com/live.php?id=CCTV16
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-2", CCTV-2
+https://iptv.catvod.com/live.php?id=CCTV2&line=4
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-15", CCTV-15
+https://iptv.catvod.com/live.php?id=CCTV15
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-17", CCTV-17
+https://iptv.catvod.com/live.php?id=CCTV17&line=2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-17", CCTV-17
+https://iptv.catvod.com/live.php?id=CCTV17&line=3
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-14", CCTV-14
+https://iptv.catvod.com/live.php?id=CCTV14&line=6
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-17", CCTV-17
+https://iptv.catvod.com/live.php?id=CCTV17&line=5
+#EXTINF:-1 group-title="特色" tvg-name="[BD]CCTV-01[GEO-BLOCKED]", [BD]CCTV-01[GEO-BLOCKED]
+https://stream1.freetv.fun/d38c8a04ea8806126f87e7695d9cb09ebc6fcbaf38d443b92a77d4e37d1eb2e9.ctv
+#EXTINF:-1 group-title="特色" tvg-name="CCTV-5+", CCTV-5+
+https://www.freetv.top/migu/641886773.m3u8?migutoken=03a1b82e35e58cd89a95034ecb29e77e50493397000ec2b1e4d1ce59af01e6420d6dbc068c8230ec03be3a35a20eed8714e0959e3570a08713a7a2e8d86085eabf8f1aa85744c80c38343988b2
+#EXTINF:-1 group-title="特色" tvg-name="CCTV16", CCTV16
+http://p.ytelc.com/169l/0/cctv.php?id=cctv16
+#EXTINF:-1 group-title="特色" tvg-name="CCTV5+", CCTV5+
+http://58.57.40.22:9901/tsfile/live/1005_1.m3u8
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰資訊高清", 鳳凰資訊高清
+http://cdn6.163189.xyz/163189/fhzx
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港高清", 鳳凰香港高清
+http://cdn6.163189.xyz/163189/fhhk
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰中文高清", 鳳凰中文高清
+http://cdn6.163189.xyz/163189/fhzw
+#EXTINF:-1 group-title="其他" tvg-name="[BD]鳳凰中文", [BD]鳳凰中文
+https://stream1.freetv.fun/c8ad10f8d135ebbea6b77779874c1d8a6da07d925786ac11f855c0dfa87b4487.m3u8
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰中文", 鳳凰中文
+http://r.jdshipin.com/cCCzW
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰中文", 鳳凰中文
+http://cdn6.163189.xyz/163189/fhzw
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港", 鳳凰香港
+http://cdn6.163189.xyz/163189/fhhk
+#EXTINF:-1 group-title="其他" tvg-name="[BD]鳳凰資訊", [BD]鳳凰資訊
+https://stream1.freetv.fun/320c213f4bb29b607f6c659b2a94918fc7f922c996ede3738fdff2ab9bd90217.ctv
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港", 鳳凰香港
+http://pull-vivek.speedws.com/live/aaafhxg.flv
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港", 鳳凰香港
+https://cdn6.163189.xyz/live/fhhk/stream.m3u8
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港臺", 鳳凰香港臺
+https://epg.pw/stream/27b49ba568efc8dcc9af6a79ec06ffd4a2e354e3e2060143be83fca695edf46e.m3u8
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰資訊", 鳳凰資訊
+http://61.221.215.25:8800/hls/47/index.m3u8
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰資訊", 鳳凰資訊
+http://r.jdshipin.com/0Rp07
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港", 鳳凰香港
+http://r.jdshipin.com/yDoTN
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港", 鳳凰香港
+http://r.jdshipin.com/yDoTN
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰中文", 鳳凰中文
+http://r.jdshipin.com/cCCzW
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰資訊", 鳳凰資訊
+http://r.jdshipin.com/0Rp07
+#EXTINF:-1 group-title="其他" tvg-name="[VGA]鳳凰資訊", [VGA]鳳凰資訊
+https://stream1.freetv.fun/7d3e0683dbf6e0636efa3bc17815aba2c44580449b0be83ed1e3ca97ed45bccc.ctv
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰資訊", 鳳凰資訊
+http://php.jdshipin.com/TVOD/iptv.php?id=fhzx
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰中文", 鳳凰中文
+http://php.jdshipin.com/TVOD/iptv.php?id=fhzw
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰資訊臺", 鳳凰資訊臺
+http://php.jdshipin.com/TVOD/iptv.php?id=fhzx
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰衛視", 鳳凰衛視
+http://php.jdshipin.com/TVOD/iptv.php?id=fhzw
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰香港臺", 鳳凰香港臺
+http://php.jdshipin.com/TVOD/iptv.php?id=fhhk
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰衛視臺", 鳳凰衛視臺
+http://php.jdshipin.com/TVOD/iptv.php?id=fhzw
+#EXTINF:-1 group-title="其他" tvg-name="特種兵之火鳳凰", 特種兵之火鳳凰
+https://live.ottiptv.cc/huya/29982636
+#EXTINF:-1 group-title="其他" tvg-name="鳳凰衛視", 鳳凰衛視
+http://php.jdshipin.com:8880/smt.php?id=phoenixtv_hd
