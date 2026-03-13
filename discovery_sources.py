@@ -16,7 +16,7 @@ KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線"
             "中天", "非凡", "澳視", "澳門", "TDM", "澳亞", "CCTV"]
 
 # 🚫 新增：排除黑名單（過濾垃圾源）
-BLOCK_KEYWORDS = ["購物", "測試", "TEST", "SHOP", "廣告", "酒店", "福利", "PREVIEW", "杭州"]
+BLOCK_KEYWORDS = ["購物", "測試", "TEST", "SHOP", "廣告", "酒店", "福利", "PREVIEW", "杭州", "兵"]
 
 BASE_DISCOVERY_URLS = [
     "https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u",
