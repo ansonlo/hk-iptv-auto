@@ -1,46 +1,46 @@
 ✅ [數據讀取] 已從 sources.txt 加載 60 個源
 =================================================================
-📅 更新時間：0313 19:46
+📅 更新時間：0313 20:34
 =================================================================
 ✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u
    ┣ [源頭掃描] 總台數: 1775
-   ┣ [網絡狀況] 連通數: 1109 | 唔通數: 666
-   ┗ [內容過濾] 中白名單: 180 (採納) | 中黑名單: 167 (剔除)
+   ┣ [網絡狀況] 連通數: 1131 | 唔通數: 644
+   ┗ [內容過濾] 中白名單: 183 (採納) | 中黑名單: 169 (剔除)
    ┗ [🚫 黑名單細節]:
       浙江衛視, 浙江衛視, 浙江衛視, 浙江衛視, 浙江衛視
-      湖南衛視, 湖南衛視, 湖南衛視, 湖南衛視, 湖北衛視
-      湖北衛視, 湖北衛視, 湖北衛視, 江蘇衛視, 江蘇衛視
-      江蘇衛視, 江蘇衛視, 江蘇衛視, 深圳衛視, 深圳衛視
-      深圳衛視, 深圳衛視, 深圳衛視, 深圳衛視, 浙江錢江
-      浙江錢江, 浙江錢江, 浙江錢江都市, 浙江錢江都市, 浙江錢江都市
-      浙江生活, 浙江生活, 浙江生活, 浙江生活, 浙江經濟生活
-      浙江經濟生活, 浙江經濟生活, 浙江教育, 浙江民生, 浙江民生
-      浙江民生, 浙江民生, 浙江民生, 浙江新聞, 浙江新聞
-      浙江新聞, 浙江新聞, 浙江少兒, 浙江少兒, 浙江少兒
-      浙江少兒, 杭州綜合, 杭州綜合, 杭州明珠, 杭州明珠
-      杭州生活, 杭州生活, 杭州生活, 杭州影視, 浙江教科
-      浙江經濟, 浙江國際, 浙江國際, 浙江國際, 浙江國際
+      湖南衛視, 湖南衛視, 湖南衛視, 湖南衛視, 湖南衛視
+      湖北衛視, 湖北衛視, 湖北衛視, 湖北衛視, 江蘇衛視
+      江蘇衛視, 江蘇衛視, 江蘇衛視, 江蘇衛視, 深圳衛視
+      深圳衛視, 深圳衛視, 深圳衛視, 深圳衛視, 深圳衛視
+      浙江錢江, 浙江錢江, 浙江錢江, 浙江錢江, 浙江錢江都市
+      浙江錢江都市, 浙江錢江都市, 浙江生活, 浙江生活, 浙江生活
+      浙江經濟生活, 浙江經濟生活, 浙江經濟生活, 浙江經濟生活, 浙江教育
+      浙江民生, 浙江民生, 浙江民生, 浙江民生, 浙江民生
+      浙江新聞, 浙江新聞, 浙江新聞, 浙江新聞, 浙江少兒
+      浙江少兒, 浙江少兒, 浙江少兒, 杭州綜合, 杭州綜合
+      杭州明珠, 杭州明珠, 杭州生活, 杭州生活, 杭州生活
+      杭州影視, 浙江教科, 浙江經濟, 浙江國際, 浙江國際
       浙江國際, 浙江經視, 浙江民生休閒, 浙江民生休閒, 浙江民生休閒
-      浙江民生休閒, 浙江民生休閒, 浙江數碼時代, 浙江公共新聞, 浙江公共新聞
-      浙江公共新聞, 浙江公共新聞, 浙江休閒台, 江蘇城市, 江蘇城市
-      江蘇城市, 江蘇影視, 江蘇影視, 江蘇影視, 江蘇影視
-      江蘇教育, 江蘇教育, 湖南都市, 湖南都市, 湖南都市
-      湖南都市, 湖南都市, 湖南經視, 湖南經視, 湖南經視
-      湖南經視, 湖南經視, 湖南電視劇, 湖南電視劇, 湖南電視劇
-      湖南電視劇, 湖南電視劇, 湖南電影, 湖南電影, 湖南愛晚
-      湖南教育, 湖南娛樂, 湖南娛樂, 湖南國際, 湖南國際
-      湖南公共, 湖南公共, 湖南公共, 湖南公共, 湖北綜合
-      湖北綜合, 湖北經視, 湖北經視, 湖北生活, 湖北生活
-      湖北生活, 湖北生活, 湖北教育, 湖北教育, 湖北教育
-      湖北影視, 湖北影視, 湖北影視, 湖北公共, 湖北壟上
-      湖北壟上, 福建新聞, 福建新聞, 福建新聞, 福建新聞
-      福建新聞, 福建電視劇, 福建電視劇, 福建電視劇, 福建電視劇
-      福建電視劇, 福建經濟, 福建經濟, 福建經濟, 福建經濟
-      福建經濟, 福建綜合, 福建綜合, 福建綜合, 福建綜合
-      福建綜合, 福建公共, 福建旅遊, 福建經視, 福建經視
-      福建經視, 福建經視, 福建經視, 福建少兒, 福建少兒
-      福建少兒, 福建少兒, 福建少兒, 浙江少兒, 浙江少兒
-      浙江少兒, 浙江少兒
+      浙江民生休閒, 浙江民生休閒, 浙江數碼時代, 浙江教科影視, 浙江公共新聞
+      浙江公共新聞, 浙江公共新聞, 浙江公共新聞, 浙江休閒台, 浙江遂昌
+      江蘇城市, 江蘇城市, 江蘇影視, 江蘇影視, 江蘇影視
+      江蘇影視, 江蘇教育, 江蘇教育, 湖南都市, 湖南都市
+      湖南都市, 湖南都市, 湖南都市, 湖南經視, 湖南經視
+      湖南經視, 湖南經視, 湖南經視, 湖南電視劇, 湖南電視劇
+      湖南電視劇, 湖南電視劇, 湖南電視劇, 湖南電影, 湖南電影
+      湖南愛晚, 湖南教育, 湖南娛樂, 湖南娛樂, 湖南國際
+      湖南國際, 湖南公共, 湖南公共, 湖南公共, 湖南公共
+      湖北綜合, 湖北綜合, 湖北經視, 湖北經視, 湖北經視
+      湖北生活, 湖北生活, 湖北生活, 湖北生活, 湖北教育
+      湖北教育, 湖北教育, 湖北影視, 湖北影視, 湖北影視
+      湖北公共, 湖北壟上, 湖北壟上, 福建新聞, 福建新聞
+      福建新聞, 福建新聞, 福建新聞, 福建電視劇, 福建電視劇
+      福建電視劇, 福建電視劇, 福建電視劇, 福建經濟, 福建經濟
+      福建經濟, 福建經濟, 福建經濟, 福建綜合, 福建綜合
+      福建綜合, 福建綜合, 福建綜合, 福建公共, 福建旅遊
+      福建經視, 福建經視, 福建經視, 福建經視, 福建經視
+      福建少兒, 福建少兒, 福建少兒, 福建少兒, 福建少兒
+      浙江少兒, 浙江少兒, 浙江少兒, 浙江少兒
 💀 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u
    ┣ [源頭掃描] 總台數: 82
    ┣ [網絡狀況] 連通數: 14 | 唔通數: 68
@@ -62,34 +62,35 @@
    ┗ [內容過濾] 中白名單: 0 (採納) | 中黑名單: 0 (剔除)
 ✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u
    ┣ [源頭掃描] 總台數: 1469
-   ┣ [網絡狀況] 連通數: 420 | 唔通數: 1049
-   ┗ [內容過濾] 中白名單: 31 (採納) | 中黑名單: 35 (剔除)
+   ┣ [網絡狀況] 連通數: 487 | 唔通數: 982
+   ┗ [內容過濾] 中白名單: 33 (採納) | 中黑名單: 37 (剔除)
    ┗ [🚫 黑名單細節]:
-      湖北衛視, 江蘇衛視, 深圳衛視, 浙江衛視, 浙江教科影視
-      北京紀實科教8K, 浙江少兒, 浙江休閒台, 浙江公共新聞, 浙江國際
-      浙江教科, 浙江教育, 浙江數碼時代, 浙江民生, 浙江民生休閒
-      浙江留學, 浙江經濟, 浙江經視, 浙江遂昌, 浙江錢江
-      浙江錢江都市, 浙江錢江頻道, 湖南國際, 湖南電視劇, 福建新聞
-      福建經濟, 江蘇南京牛首山, 江蘇徐州雲龍湖風景區雲龍山觀景台西, 浙江舟山東極島, 湖南張家界天門山西線玻璃棧道
-      湖南張家界寶峯湖, 湖南張家界御筆峯, 湖南張家界水繞四門, 福建武夷山玉女峯, 福建漳州醉美沙灘翡翠灣
+      湖北衛視, 湖南衛視, 江蘇衛視, 深圳衛視, 浙江衛視
+      浙江教科影視, 北京紀實科教8K, 浙江少兒, 浙江休閒台, 浙江公共新聞
+      浙江國際, 浙江教科, 浙江教育, 浙江數碼時代, 浙江民生
+      浙江民生休閒, 浙江生活, 浙江留學, 浙江經濟, 浙江經濟生活
+      浙江經視, 浙江遂昌, 浙江錢江, 浙江錢江都市, 浙江錢江頻道
+      湖南國際, 湖南電視劇, 福建新聞, 福建經濟, 江蘇南京牛首山
+      江蘇徐州雲龍湖風景區雲龍山觀景台西, 浙江舟山東極島, 湖南張家界天門山西線玻璃棧道, 湖南張家界寶峯湖, 湖南張家界御筆峯
+      湖南張家界水繞四門, 福建武夷山玉女峯
 ✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u
    ┣ [源頭掃描] 總台數: 202
-   ┣ [網絡狀況] 連通數: 125 | 唔通數: 77
-   ┗ [內容過濾] 中白名單: 43 (採納) | 中黑名單: 0 (剔除)
+   ┣ [網絡狀況] 連通數: 111 | 唔通數: 91
+   ┗ [內容過濾] 中白名單: 40 (採納) | 中黑名單: 0 (剔除)
 ✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u
    ┣ [源頭掃描] 總台數: 151
-   ┣ [網絡狀況] 連通數: 19 | 唔通數: 132
-   ┗ [內容過濾] 中白名單: 5 (採納) | 中黑名單: 0 (剔除)
+   ┣ [網絡狀況] 連通數: 20 | 唔通數: 131
+   ┗ [內容過濾] 中白名單: 6 (採納) | 中黑名單: 0 (剔除)
 ✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u
    ┣ [源頭掃描] 總台數: 106
-   ┣ [網絡狀況] 連通數: 48 | 唔通數: 58
-   ┗ [內容過濾] 中白名單: 16 (採納) | 中黑名單: 6 (剔除)
+   ┣ [網絡狀況] 連通數: 51 | 唔通數: 55
+   ┗ [內容過濾] 中白名單: 21 (採納) | 中黑名單: 6 (剔除)
    ┗ [🚫 黑名單細節]:
       東森購物2, 東森購物3, MOMO購物1台, MOMO購物2台, Viva 美好購物1台
       Viva 美好購物2台
 ✅ 報告: https://epg.pw/test_channels_hong_kong.m3u
    ┣ [源頭掃描] 總台數: 107
-   ┣ [網絡狀況] 連通數: 102 | 唔通數: 5
+   ┣ [網絡狀況] 連通數: 103 | 唔通數: 4
    ┗ [內容過濾] 中白名單: 47 (採納) | 中黑名單: 0 (剔除)
 💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u
    ┣ [源頭掃描] 總台數: 16
@@ -97,7 +98,7 @@
    ┗ [內容過濾] 中白名單: 0 (採納) | 中黑名單: 0 (剔除)
 ✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u
    ┣ [源頭掃描] 總台數: 50
-   ┣ [網絡狀況] 連通數: 34 | 唔通數: 16
+   ┣ [網絡狀況] 連通數: 33 | 唔通數: 17
    ┗ [內容過濾] 中白名單: 1 (採納) | 中黑名單: 0 (剔除)
 💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u
    ┣ [源頭掃描] 總台數: 9
@@ -105,15 +106,16 @@
    ┗ [內容過濾] 中白名單: 0 (採納) | 中黑名單: 0 (剔除)
 ✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u
    ┣ [源頭掃描] 總台數: 1288
-   ┣ [網絡狀況] 連通數: 439 | 唔通數: 849
-   ┗ [內容過濾] 中白名單: 86 (採納) | 中黑名單: 30 (剔除)
+   ┣ [網絡狀況] 連通數: 452 | 唔通數: 836
+   ┗ [內容過濾] 中白名單: 92 (採納) | 中黑名單: 31 (剔除)
    ┗ [🚫 黑名單細節]:
-      深圳衛視4K, 浙江衛視, 浙江衛視, 浙江衛視, 湖南衛視
-      江蘇衛視, 深圳衛視, 湖北衛視, 紀實科教8K, 浙江少兒
-      浙江新聞, 浙江國際, 浙江教科, 浙江少兒, 浙江民生
-      浙江經濟, 浙江錢江, 江蘇城市, 江蘇綜藝, 江蘇影視
-      江蘇教育, 江蘇體育休閒, 福建綜合, 福建新聞, 福建鄉村振興公共
-      福建電視劇, 福建旅遊, 福建經濟, 福建文體, 福建少兒
+      江蘇衛視4K, 深圳衛視4K, 浙江衛視, 浙江衛視, 浙江衛視
+      湖南衛視, 江蘇衛視, 深圳衛視, 湖北衛視, 紀實科教8K
+      浙江少兒, 浙江新聞, 浙江國際, 浙江教科, 浙江少兒
+      浙江民生, 浙江經濟, 浙江錢江, 江蘇城市, 江蘇綜藝
+      江蘇影視, 江蘇教育, 江蘇體育休閒, 福建綜合, 福建新聞
+      福建鄉村振興公共, 福建電視劇, 福建旅遊, 福建經濟, 福建文體
+      福建少兒
 💀 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8
    ┣ [源頭掃描] 總台數: 5
    ┣ [網絡狀況] 連通數: 0 | 唔通數: 5
@@ -130,40 +132,101 @@
       浙江新聞, 浙江國際, 浙江少兒, 浙江教科, 浙江民生
       浙江經濟, 浙江錢江
 -----------------------------------------------------------------
-🏁 完工！共處理 155 個頻道
-🎭 【移动】戴上面具: 120.197.159.88
-✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 216/368)
+🏁 完工！共處理 157 個頻道
+🎭 【移动】戴上面具: 120.196.212.55
+💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1099/1775)
+✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1119/1775)
 ✅ 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
 💀 報告: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u (連通: 0/90)
 💀 報告: https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/tv/tv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u (連通: 0/3)
 💀 報告: https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u (連通: 0/129)
-✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 424/1469)
+✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 513/1469)
+💀 報告: https://live.hacks.tools/tv/ipv4/categories/macau.m3u (連通: 0/0)
+💀 報告: https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
+💀 報告: https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
+💀 報告: https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 127/202)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 21/151)
+✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 51/106)
+💀 報告: https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/mizhen/IPTV/master/m3u8/hk.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Memory-of-Love/IPTV/main/HK.m3u (連通: 0/0)
+✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 103/107)
+✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 2/16)
+✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u (連通: 33/50)
+💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u (連通: 0/9)
+✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 475/1288)
+💀 報告: https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/moevv/iptv/main/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Supprise0901/TVBox-IPTV/main/live.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/FongMi/TV/main/iptv/m3u/base.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 0/5)
+💀 報告: https://raw.githubusercontent.com/m3u8playlist/convert/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8 (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Zane-One/IPTV/main/IPTV.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/v_v_v_v/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/wesion-com/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/spark-m/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/billy21/tvbox/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Meroser/IPTV/main/IPTV-Free.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/longasf/IPTV/main/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/shiko/iptv/master/channels.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/vlive/iptv/main/playlist.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Kimentanm/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/pxm-iptv/pxm-iptv.github.io/main/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/jirengu/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/kilv/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/L-codes/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/ls-files/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/MoKeSee/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/nswish/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/oilbebe/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/S-K-S/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/smartone-iptv/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/TheGreatWall-IPTV/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/weon/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/wzwl/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/xyz123/iptv/master/iptv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Y-S-K/iptv/master/iptv.m3u (連通: 0/0)
+✅ 報告: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
+🎭 【电信】戴上面具: 113.108.200.12
+💀 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
+💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
+💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
+💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u (連通: 0/0)
+✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1141/1775)
+✅ 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
+💀 報告: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u (連通: 0/90)
+💀 報告: https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/tv/tv.m3u (連通: 0/0)
+💀 報告: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u (連通: 0/3)
+💀 報告: https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u (連通: 0/129)
+✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 508/1469)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/macau.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
 ✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 126/202)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 18/151)
-✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 48/106)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 21/151)
+✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 53/106)
 💀 報告: https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/mizhen/IPTV/master/m3u8/hk.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Memory-of-Love/IPTV/main/HK.m3u (連通: 0/0)
-✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 101/107)
+✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 102/107)
 ✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 2/16)
 ✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u (連通: 34/50)
 💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u (連通: 0/9)
-✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 406/1288)
+✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 487/1288)
 💀 報告: https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/moevv/iptv/main/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Supprise0901/TVBox-IPTV/main/live.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/FongMi/TV/main/iptv/m3u/base.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 1/5)
+💀 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 0/5)
 💀 報告: https://raw.githubusercontent.com/m3u8playlist/convert/master/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8 (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Zane-One/IPTV/main/IPTV.m3u (連通: 0/0)
@@ -192,39 +255,39 @@
 💀 報告: https://raw.githubusercontent.com/xyz123/iptv/master/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Y-S-K/iptv/master/iptv.m3u (連通: 0/0)
 ✅ 報告: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
-🎭 【电信】戴上面具: 14.145.29.75
+🎭 【联通】戴上面具: 27.36.105.196
 💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1054/1775)
+✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1139/1775)
 ✅ 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
 💀 報告: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u (連通: 0/90)
 💀 報告: https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/tv/tv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u (連通: 0/3)
 💀 報告: https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u (連通: 0/129)
-✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 430/1469)
+✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 515/1469)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/macau.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 98/202)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 19/151)
-✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 48/106)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 127/202)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 21/151)
+✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 53/106)
 💀 報告: https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/mizhen/IPTV/master/m3u8/hk.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Memory-of-Love/IPTV/main/HK.m3u (連通: 0/0)
 ✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 102/107)
-✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 4/16)
+✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 2/16)
 ✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u (連通: 34/50)
 💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u (連通: 0/9)
-✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 454/1288)
+✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 494/1288)
 💀 報告: https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/moevv/iptv/main/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Supprise0901/TVBox-IPTV/main/live.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/FongMi/TV/main/iptv/m3u/base.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 1/5)
+💀 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 0/5)
 💀 報告: https://raw.githubusercontent.com/m3u8playlist/convert/master/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8 (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Zane-One/IPTV/main/IPTV.m3u (連通: 0/0)
@@ -253,39 +316,39 @@
 💀 報告: https://raw.githubusercontent.com/xyz123/iptv/master/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Y-S-K/iptv/master/iptv.m3u (連通: 0/0)
 ✅ 報告: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
-🎭 【联通】戴上面具: 121.33.150.55
-💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
+🎭 【广电】戴上面具: 103.27.26.100
+✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 271/368)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1102/1775)
+✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1086/1775)
 ✅ 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
 💀 報告: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u (連通: 0/90)
 💀 報告: https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/tv/tv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u (連通: 0/3)
 💀 報告: https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u (連通: 0/129)
-✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 435/1469)
+✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 490/1469)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/macau.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 126/202)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 19/151)
-✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 48/106)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 127/202)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 21/151)
+✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 53/106)
 💀 報告: https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/mizhen/IPTV/master/m3u8/hk.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Memory-of-Love/IPTV/main/HK.m3u (連通: 0/0)
-✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 102/107)
-✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 4/16)
+✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 103/107)
+✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 2/16)
 ✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u (連通: 34/50)
 💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u (連通: 0/9)
-✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 451/1288)
+✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 472/1288)
 💀 報告: https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/moevv/iptv/main/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Supprise0901/TVBox-IPTV/main/live.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/FongMi/TV/main/iptv/m3u/base.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 1/5)
+💀 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 0/5)
 💀 報告: https://raw.githubusercontent.com/m3u8playlist/convert/master/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8 (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Zane-One/IPTV/main/IPTV.m3u (連通: 0/0)
@@ -314,100 +377,39 @@
 💀 報告: https://raw.githubusercontent.com/xyz123/iptv/master/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Y-S-K/iptv/master/iptv.m3u (連通: 0/0)
 ✅ 報告: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
-🎭 【广电】戴上面具: 103.27.26.88
-💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
-💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
-💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
-💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1116/1775)
-✅ 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
-💀 報告: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u (連通: 0/90)
-💀 報告: https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/tv/tv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u (連通: 0/3)
-💀 報告: https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u (連通: 0/129)
-✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 444/1469)
-💀 報告: https://live.hacks.tools/tv/ipv4/categories/macau.m3u (連通: 0/0)
-💀 報告: https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
-💀 報告: https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
-💀 報告: https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 126/202)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 18/151)
-✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 48/106)
-💀 報告: https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/mizhen/IPTV/master/m3u8/hk.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/Memory-of-Love/IPTV/main/HK.m3u (連通: 0/0)
-✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 102/107)
-✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 4/16)
-✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u (連通: 33/50)
-💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u (連通: 0/9)
-✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 454/1288)
-💀 報告: https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/moevv/iptv/main/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/Supprise0901/TVBox-IPTV/main/live.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/FongMi/TV/main/iptv/m3u/base.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 1/5)
-💀 報告: https://raw.githubusercontent.com/m3u8playlist/convert/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8 (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/Zane-One/IPTV/main/IPTV.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/v_v_v_v/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/wesion-com/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/spark-m/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/billy21/tvbox/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/Meroser/IPTV/main/IPTV-Free.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/longasf/IPTV/main/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/shiko/iptv/master/channels.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/vlive/iptv/main/playlist.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/Kimentanm/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/pxm-iptv/pxm-iptv.github.io/main/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/jirengu/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/kilv/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/L-codes/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/ls-files/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/MoKeSee/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/nswish/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/oilbebe/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/S-K-S/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/smartone-iptv/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/TheGreatWall-IPTV/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/weon/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/wzwl/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/xyz123/iptv/master/iptv.m3u (連通: 0/0)
-💀 報告: https://raw.githubusercontent.com/Y-S-K/iptv/master/iptv.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u (連通: 6/82)
 ⚠️  通用 無面具，用原生 IP
-💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
+✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 254/368)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1099/1775)
-✅ 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u (連通: 6/82)
+✅ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u (連通: 1104/1775)
+✅ 報告: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u (連通: 14/82)
 💀 報告: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u (連通: 0/90)
 💀 報告: https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/tv/tv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u (連通: 0/3)
 💀 報告: https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u (連通: 0/129)
-✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 420/1469)
+✅ 報告: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u (連通: 517/1469)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/macau.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/taiwan.m3u (連通: 0/0)
 💀 報告: https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 123/202)
-✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 19/151)
-✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 48/106)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u (連通: 126/202)
+✅ 報告: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u (連通: 21/151)
+✅ 報告: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u (連通: 53/106)
 💀 報告: https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/mizhen/IPTV/master/m3u8/hk.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Memory-of-Love/IPTV/main/HK.m3u (連通: 0/0)
-✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 100/107)
-✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 4/16)
+✅ 報告: https://epg.pw/test_channels_hong_kong.m3u (連通: 103/107)
+✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u (連通: 2/16)
 ✅ 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u (連通: 34/50)
 💀 報告: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u (連通: 0/9)
-✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 448/1288)
+✅ 報告: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u (連通: 460/1288)
 💀 報告: https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/moevv/iptv/main/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Supprise0901/TVBox-IPTV/main/live.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/FongMi/TV/main/iptv/m3u/base.m3u (連通: 0/0)
-✅ 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 1/5)
+💀 報告: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8 (連通: 0/5)
 💀 報告: https://raw.githubusercontent.com/m3u8playlist/convert/master/iptv.m3u (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8 (連通: 0/0)
 💀 報告: https://raw.githubusercontent.com/Zane-One/IPTV/main/IPTV.m3u (連通: 0/0)
@@ -439,7 +441,7 @@
 
 📊 --- 【直播源五線連通性終極報告】 ---
 源: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u
-┗ 總量: 0 | 移动: 216 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
+┗ 總量: 368 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 271 | 通用: 254
 源: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
@@ -453,9 +455,9 @@
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
 源: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.m3u
-┗ 總量: 1775 | 移动: 1099 | 电信: 1054 | 联通: 1102 | 广电: 1116 | 通用: 1099
+┗ 總量: 1775 | 移动: 1119 | 电信: 1141 | 联通: 1139 | 广电: 1086 | 通用: 1104
 源: https://raw.githubusercontent.com/FanMingming/live/main/tv/m3u/ipv6.m3u
-┗ 總量: 82 | 移动: 14 | 电信: 14 | 联通: 14 | 广电: 14 | 通用: 6
+┗ 總量: 82 | 移动: 14 | 电信: 14 | 联通: 14 | 广电: 14 | 通用: 14
 源: https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u
 ┗ 總量: 90 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
@@ -469,7 +471,7 @@
 ┗ 總量: 129 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
 源: https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u
-┗ 總量: 1469 | 移动: 424 | 电信: 430 | 联通: 435 | 广电: 444 | 通用: 420
+┗ 總量: 1469 | 移动: 513 | 电信: 508 | 联通: 515 | 广电: 490 | 通用: 517
 源: https://live.hacks.tools/tv/ipv4/categories/macau.m3u
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
@@ -483,11 +485,11 @@
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
 源: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u
-┗ 總量: 202 | 移动: 126 | 电信: 98 | 联通: 126 | 广电: 126 | 通用: 123
+┗ 總量: 202 | 移动: 127 | 电信: 126 | 联通: 127 | 广电: 127 | 通用: 126
 源: https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/refs/heads/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A82023.m3u
-┗ 總量: 151 | 移动: 18 | 电信: 19 | 联通: 19 | 广电: 18 | 通用: 19
+┗ 總量: 151 | 移动: 21 | 电信: 21 | 联通: 21 | 广电: 21 | 通用: 21
 源: https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u
-┗ 總量: 106 | 移动: 48 | 电信: 48 | 联通: 48 | 广电: 48 | 通用: 48
+┗ 總量: 106 | 移动: 51 | 电信: 53 | 联通: 53 | 广电: 53 | 通用: 53
 源: https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
@@ -498,16 +500,16 @@
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
 源: https://epg.pw/test_channels_hong_kong.m3u
-┗ 總量: 107 | 移动: 101 | 电信: 102 | 联通: 102 | 广电: 102 | 通用: 100
+┗ 總量: 107 | 移动: 103 | 电信: 102 | 联通: 102 | 广电: 103 | 通用: 103
 源: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u
-┗ 總量: 16 | 移动: 2 | 电信: 4 | 联通: 4 | 广电: 4 | 通用: 4
+┗ 總量: 16 | 移动: 2 | 电信: 2 | 联通: 2 | 广电: 2 | 通用: 2
 源: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u
-┗ 總量: 50 | 移动: 34 | 电信: 34 | 联通: 34 | 广电: 33 | 通用: 34
+┗ 總量: 50 | 移动: 33 | 电信: 34 | 联通: 34 | 广电: 34 | 通用: 34
 源: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u
 ┗ 總量: 9 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
 源: https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u
-┗ 總量: 1288 | 移动: 406 | 电信: 454 | 联通: 451 | 广电: 454 | 通用: 448
+┗ 總量: 1288 | 移动: 475 | 电信: 487 | 联通: 494 | 广电: 472 | 通用: 460
 源: https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
@@ -521,7 +523,8 @@
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
 源: https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8
-┗ 總量: 5 | 移动: 1 | 电信: 1 | 联通: 1 | 广电: 1 | 通用: 1
+┗ 總量: 5 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
+   ⚠️  建議移除。
 源: https://raw.githubusercontent.com/m3u8playlist/convert/master/iptv.m3u
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
@@ -604,7 +607,7 @@
 ┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
    ⚠️  建議移除。
 源: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u
-┗ 總量: 82 | 移动: 14 | 电信: 14 | 联通: 14 | 广电: 6 | 通用: 14
+┗ 總量: 82 | 移动: 14 | 电信: 14 | 联通: 14 | 广电: 14 | 通用: 14
 💾 檔案已保存: gz_live.m3u
 💾 檔案已保存: gz_dxlive.m3u
 💾 檔案已保存: gz_ltlive.m3u
