@@ -8,7 +8,7 @@ from tqdm import tqdm
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 SOURCE_FILE = "sources.txt"
-MAX_AUTO_KEEP = 150000  # 提升上限，容納更多唔同 IP 嘅源
+MAX_AUTO_KEEP = 1500  # 提升上限，容納更多唔同 IP 嘅源
 cc = OpenCC('s2t')
 
 # 關鍵字：保留你想睇嘅台
