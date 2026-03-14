@@ -1,6 +1,6 @@
 import requests, re, os, logging, time, random
 import urllib3
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 from opencc import OpenCC
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from requests.adapters import HTTPAdapter
@@ -16,12 +16,10 @@ SOURCE_FILE = "sources.txt"
 MAX_AUTO_KEEP = 1000  
 cc = OpenCC('s2t')
 
-# 核心白名單
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
             "珠江", "廣州", "大灣區", "南方", "深圳", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", "緯來", "年代",
             "中天", "非凡", "澳視", "澳門", "TDM", "澳亞", "CCTV"]
 
-# 排除黑名單
 BLOCK_KEYWORDS = ["購物", "測試", "TEST", "SHOP", "廣告", "酒店", "福利", "PREVIEW", "杭州", "兵", "廣播", "電台"]
 
 BASE_DISCOVERY_URLS = [
@@ -46,11 +44,7 @@ def get_random_headers():
     versions = ["120.0.0.0", "121.0.0.0", "122.0.0.0"]
     return {'User-Agent': f'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{random.choice(versions)} Safari/537.36'}
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(message)s',
-    handlers=[logging.FileHandler("auto_repair.log", mode='a', encoding="utf-8"), logging.StreamHandler()]
-)
+logging.basicConfig(level=logging.INFO, format='%(message)s', handlers=[logging.FileHandler("auto_repair.log", mode='a', encoding="utf-8"), logging.StreamHandler()])
 
 # --- 【2. 搜尋引擎函數】 ---
 def search_github():
@@ -65,13 +59,20 @@ def search_github():
                 full_name = repo.get('full_name')
                 branch = repo.get('default_branch', 'main')
                 discovered.append(f"https://raw.githubusercontent.com/{full_name}/{branch}/live.m3u")
-                discovered.append(f"https://raw.githubusercontent.com/{full_name}/{branch}/tv.m3u")
     except: pass
     return list(set(discovered))
 
 # --- 【3. 核心抓取與過濾邏輯】 ---
 def get_filtered_links(url):
+    """回傳格式：(台名, URL, 來源標籤)"""
     results = []
+    # 提取域名或 GitHub 用戶名作為標籤
+    parsed = urlparse(url)
+    if "raw.githubusercontent.com" in url:
+        label = url.split('/')[3] # 攞 GitHub 用戶名
+    else:
+        label = parsed.netloc # 攞網站域名
+    
     try:
         r = session.get(url, timeout=15, headers=get_random_headers(), verify=False)
         r.encoding = 'utf-8'
@@ -91,7 +92,7 @@ def get_filtered_links(url):
             elif (line.startswith("http") or line.startswith("rtmp")) and temp_name:
                 clean_url = line.split('$')[0].split('#')[0].split('|')[0].strip()
                 if any(ext in clean_url.lower() for ext in [".m3u8", ".ts", ".flv", "m3u8"]):
-                    results.append(f"{temp_name},{clean_url}")
+                    results.append((temp_name, clean_url, label))
                 temp_name = ""
             elif "," in line and "://" in line:
                 parts = line.split(',')
@@ -99,18 +100,18 @@ def get_filtered_links(url):
                 clean_name = re.sub(r'\[.*?\]|\(.*?\)|-.*|HD|SD|高清|超清', '', raw_name).strip()
                 if any(k.upper() in clean_name for k in KEYWORDS) and not any(b in clean_name for b in BLOCK_KEYWORDS):
                     u = parts[1].strip().split('#')[0].split('$')[0]
-                    results.append(f"{clean_name},{u}")
+                    results.append((clean_name, u, label))
     except: pass
     return results
 
 # --- 【4. 主程序】 ---
 def main():
     logging.info("\n" + "="*60)
-    logging.info(f"🚀 啟動【高效靜音抓取模式】 (上限:{MAX_AUTO_KEEP})")
+    logging.info(f"🚀 啟動【源頭追蹤模式】 (上限:{MAX_AUTO_KEEP})")
     logging.info("="*60)
 
     fixed_content = []
-    auto_lines = []
+    auto_lines = [] # 格式: "台名,URL # 標籤"
     is_auto_zone = False
 
     if os.path.exists(SOURCE_FILE):
@@ -124,30 +125,26 @@ def main():
                 else:
                     fixed_content.append(line)
 
-    existing_urls = {line.split(',')[1] for line in auto_lines if "," in line}
-    existing_urls.update({line.split(',')[1] for line in fixed_content if "," in line})
+    existing_urls = {line.split(',')[1].split(' #')[0].strip() for line in auto_lines if "," in line}
 
     targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + search_github()))
     logging.info(f"📡 正在從 {len(targets)} 個源頭掃描...")
 
-    all_results = []
-    # 🌟 優化：使用 tqdm 配合 as_completed，並加入 ncols 限制寬度
+    all_data = []
     with ThreadPoolExecutor(max_workers=30) as executor:
         future_to_url = {executor.submit(get_filtered_links, url): url for url in targets}
         for future in tqdm(as_completed(future_to_url), total=len(targets), desc="🔍 掃描進度", unit="源", ncols=80):
             try:
-                all_results.append(future.result())
+                all_data.extend(future.result())
             except: pass
 
     new_count = 0
-    for found_list in all_results:
-        for item in found_list:
-            if ',' in item:
-                _, url = item.split(',', 1)
-                if url not in existing_urls:
-                    auto_lines.append(item)
-                    existing_urls.add(url)
-                    new_count += 1
+    for name, url, label in all_data:
+        if url not in existing_urls:
+            # 寫入格式：台名,URL # 來源
+            auto_lines.append(f"{name},{url} # {label}")
+            existing_urls.add(url)
+            new_count += 1
 
     final_auto = auto_lines[-MAX_AUTO_KEEP:] if len(auto_lines) > MAX_AUTO_KEEP else auto_lines
 
@@ -158,7 +155,7 @@ def main():
         for line in final_auto:
             f.write(line + "\n")
     
-    logging.info(f"✅ 完成！新增: {new_count} 條，目前總自動源: {len(final_auto)} 條。")
+    logging.info(f"✅ 完成！新增: {new_count} 條，標註來源完畢。")
 
 if __name__ == "__main__":
     main()
