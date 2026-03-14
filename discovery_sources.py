@@ -7,7 +7,7 @@ from urllib3.util.retry import Retry
 
 # --- 【1. 配置與初始化】 ---
 SOURCE_FILE = "sources.txt"
-MAX_AUTO_KEEP = 500  
+MAX_AUTO_KEEP = 1500  
 cc = OpenCC('s2t')
 
 # 核心白名單
