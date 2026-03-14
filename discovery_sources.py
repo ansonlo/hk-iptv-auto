@@ -13,7 +13,7 @@ logging.getLogger("urllib3").setLevel(logging.ERROR)
 
 # --- 【1. 配置與初始化】 ---
 SOURCE_FILE = "sources.txt"
-MAX_AUTO_KEEP = 1000  
+MAX_AUTO_KEEP = 100000  
 cc = OpenCC('s2t')
 
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
