@@ -38,12 +38,12 @@ jobs:
         python discovery_sources.py
         
         # 2. 通用測試
-        #echo "🌍 正在執行通用環境測試 (main.py)..."
-        #python main.py
+        echo "🌍 正在執行通用環境測試 (main.py)..."
+        python main.py
         
         # 3. 專線診斷
-        #echo "🏥 正在執行廣州五路專線診斷 (gz_all_in_one.py)..."
-        #python gz_all_in_one.py
+        echo "🏥 正在執行廣州五路專線診斷 (gz_all_in_one.py)..."
+        python gz_all_in_one.py
 
     - name: Commit and push
       run: |
