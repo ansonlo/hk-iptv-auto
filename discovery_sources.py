@@ -1,13 +1,19 @@
 import requests, re, os, logging, time, random
+import urllib3
 from urllib.parse import quote
 from opencc import OpenCC
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from tqdm import tqdm
+
+# --- 【徹底屏蔽所有警告】 ---
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+logging.getLogger("urllib3").setLevel(logging.ERROR)
 
 # --- 【1. 配置與初始化】 ---
 SOURCE_FILE = "sources.txt"
-MAX_AUTO_KEEP = 1000  # 稍微放寬少少，等 main.py 有更多種子去測速
+MAX_AUTO_KEEP = 1000  
 cc = OpenCC('s2t')
 
 # 核心白名單
@@ -26,7 +32,6 @@ BASE_DISCOVERY_URLS = [
     "https://gitee.com/fomm/live/raw/main/tv/m3u/ipv6.m3u",
 ]
 
-# 優化 Session
 def get_session():
     session = requests.Session()
     retry = Retry(total=2, backoff_factor=0.3, status_forcelist=[500, 502, 503, 504])
@@ -53,7 +58,7 @@ def search_github():
     api_url = f"https://api.github.com/search/repositories?q={query}&sort=updated"
     discovered = []
     try:
-        r = session.get(api_url, headers=get_random_headers(), timeout=10)
+        r = session.get(api_url, headers=get_random_headers(), timeout=10, verify=False)
         if r.status_code == 200:
             repos = r.json().get('items', [])
             for repo in repos:
@@ -66,7 +71,6 @@ def search_github():
 
 # --- 【3. 核心抓取與過濾邏輯】 ---
 def get_filtered_links(url):
-    """抓取並回傳格式為 '台名,URL' 的列表"""
     results = []
     try:
         r = session.get(url, timeout=15, headers=get_random_headers(), verify=False)
@@ -77,14 +81,9 @@ def get_filtered_links(url):
         for line in lines:
             line = line.strip()
             if not line: continue
-            
-            # M3U 處理
             if line.startswith("#EXTINF"):
                 raw_name = cc.convert(line.split(',')[-1]).strip().upper()
-                # 清洗台名杂质
-                clean_name = re.sub(r'\[.*?\]|\(.*?\)|-.*|HD|SD|高清|超清|频道|频道', '', raw_name).strip()
-                
-                # 白名單 + 黑名單過濾
+                clean_name = re.sub(r'\[.*?\]|\(.*?\)|-.*|HD|SD|高清|超清|頻道', '', raw_name).strip()
                 if any(k.upper() in clean_name for k in KEYWORDS) and not any(b in clean_name for b in BLOCK_KEYWORDS):
                     temp_name = clean_name
                 else:
@@ -94,8 +93,6 @@ def get_filtered_links(url):
                 if any(ext in clean_url.lower() for ext in [".m3u8", ".ts", ".flv", "m3u8"]):
                     results.append(f"{temp_name},{clean_url}")
                 temp_name = ""
-                
-            # TXT 處理
             elif "," in line and "://" in line:
                 parts = line.split(',')
                 raw_name = cc.convert(parts[0]).upper()
@@ -109,14 +106,13 @@ def get_filtered_links(url):
 # --- 【4. 主程序】 ---
 def main():
     logging.info("\n" + "="*60)
-    logging.info(f"🚀 啟動【台名綁定模式】 (自動源上限:{MAX_AUTO_KEEP})")
+    logging.info(f"🚀 啟動【高效靜音抓取模式】 (上限:{MAX_AUTO_KEEP})")
     logging.info("="*60)
 
     fixed_content = []
-    auto_lines = [] # 儲存 "台名,URL"
+    auto_lines = []
     is_auto_zone = False
 
-    # 讀取現有檔案
     if os.path.exists(SOURCE_FILE):
         with open(SOURCE_FILE, "r", encoding="utf-8") as f:
             for line in f:
@@ -128,33 +124,33 @@ def main():
                 else:
                     fixed_content.append(line)
 
-    # 建立 URL 去重集合
-    existing_urls = set()
-    for line in auto_lines:
-        if "," in line: existing_urls.add(line.split(',')[1])
-    for line in fixed_content:
-        if "," in line: existing_urls.add(line.split(',')[1])
+    existing_urls = {line.split(',')[1] for line in auto_lines if "," in line}
+    existing_urls.update({line.split(',')[1] for line in fixed_content if "," in line})
 
-    # 執行抓取
     targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + search_github()))
     logging.info(f"📡 正在從 {len(targets)} 個源頭掃描...")
 
-    new_discovered_count = 0
+    all_results = []
+    # 🌟 優化：使用 tqdm 配合 as_completed，並加入 ncols 限制寬度
     with ThreadPoolExecutor(max_workers=30) as executor:
-        all_results = list(executor.map(get_filtered_links, targets))
-    
+        future_to_url = {executor.submit(get_filtered_links, url): url for url in targets}
+        for future in tqdm(as_completed(future_to_url), total=len(targets), desc="🔍 掃描進度", unit="源", ncols=80):
+            try:
+                all_results.append(future.result())
+            except: pass
+
+    new_count = 0
     for found_list in all_results:
         for item in found_list:
-            name, url = item.split(',', 1)
-            if url not in existing_urls:
-                auto_lines.append(item)
-                existing_urls.add(url)
-                new_discovered_count += 1
+            if ',' in item:
+                _, url = item.split(',', 1)
+                if url not in existing_urls:
+                    auto_lines.append(item)
+                    existing_urls.add(url)
+                    new_count += 1
 
-    # 末位淘汰 (保持新鮮度)
     final_auto = auto_lines[-MAX_AUTO_KEEP:] if len(auto_lines) > MAX_AUTO_KEEP else auto_lines
 
-    # 寫入檔案
     with open(SOURCE_FILE, "w", encoding="utf-8") as f:
         for line in fixed_content:
             f.write(line.strip() + "\n")
@@ -162,7 +158,7 @@ def main():
         for line in final_auto:
             f.write(line + "\n")
     
-    logging.info(f"✅ 完成！新增: {new_discovered_count} 條，目前 sources.txt 總自動源: {len(final_auto)} 條。")
+    logging.info(f"✅ 完成！新增: {new_count} 條，目前總自動源: {len(final_auto)} 條。")
 
 if __name__ == "__main__":
     main()
