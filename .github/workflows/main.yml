@@ -53,13 +53,21 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # 先 Add，再 Pull，最後 Push，解決 128 衝突問題
+        # 1. 確保所有改動都放入暫存區
         git add sources.txt auto_repair.log *.m3u || true
         
+        # 2. 檢查有無嘢改過
         if ! git diff --staged --quiet; then
-          git pull origin main --rebase
-          git commit -m "🚀 數據更新 [${{ github.event_name }}] ($(date +'%m-%d %H:%M'))"
+          # 3. 本地先提交
+          MODE_NAME=${SCAN_MODE:-"UNKNOWN"}
+          git commit -m "🚀 數據更新 [Mode: $MODE_NAME] ($(date +'%m-%d %H:%M'))"
+          
+          # 4. 強制執行一次 fetch 同 rebase
+          git fetch origin main
+          git rebase origin/main
+          
+          # 5. 推送
           git push origin main
         else
-          echo "✅ 冇數據變動，跳過提交"
+          echo "✅ 數據與日誌均無變動，跳過提交"
         fi
