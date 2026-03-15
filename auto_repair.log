@@ -300,3 +300,28 @@
 💾 檔案已保存: gz_dxlive.m3u
 💾 檔案已保存: gz_ltlive.m3u
 💾 檔案已保存: gz_gdlive.m3u
+
+============================================================
+🌐 【自動模式】 📅 更新時間：0315 16:04
+📡 啟動 12 小時全網搜刮 (GitHub/Gitee/核心源)...
+============================================================
+❌ 報告: https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u (連通失敗或無內容)
+✅ 報告: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u
+   ┣ [源頭掃描] 總台數: 83
+   ┣ [網絡狀況] 連通數: 83
+   ┗ [內容過濾] 中白名單: 34 (採納) | 中黑名單: 0 (剔除)
+❌ 報告: https://iptv.hacks.tools/m3u/all.m3u (連通失敗或無內容)
+✅ 報告: https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u
+   ┣ [源頭掃描] 總台數: 13746
+   ┣ [網絡狀況] 連通數: 13746
+   ┗ [內容過濾] 中白名單: 799 (採納) | 中黑名單: 4 (剔除)
+❌ 報告: https://gitee.com/fomm/live/raw/main/tv/m3u/ipv6.m3u (連通失敗或無內容)
+❌ 報告: https://raw.githubusercontent.com/golne999/gdiptv-m3u/main/live.m3u (連通失敗或無內容)
+❌ 報告: https://raw.githubusercontent.com/golne999/gdiptv-m3u/master/live.m3u (連通失敗或無內容)
+❌ 報告: https://gitee.com/static/favicon.ico/raw/main/live.m3u (連通失敗或無內容)
+❌ 報告: https://gitee.com/static/favicon.ico/raw/master/live.m3u (連通失敗或無內容)
+❌ 報告: https://gitee.com/assets/index-d9a8a2d4.css/raw/main/live.m3u (連通失敗或無內容)
+❌ 報告: https://gitee.com/assets/index-d9a8a2d4.css/raw/master/live.m3u (連通失敗或無內容)
+
+✅ 自動更新完畢：新增 824 個優質源。
+📊 已將最新結果保存至 sources.txt。
