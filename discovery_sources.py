@@ -13,7 +13,7 @@ logging.basicConfig(
     format='[%(asctime)s] %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=[
-        logging.FileHandler("auto_repair.log", mode='a', encoding="utf-8"), 
+        logging.FileHandler("auto_repair.log", mode='w', encoding="utf-8"), 
         logging.StreamHandler()
     ]
 )
