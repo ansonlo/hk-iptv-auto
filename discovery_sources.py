@@ -7,7 +7,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 cc = OpenCC('s2t')
 adapter = requests.adapters.HTTPAdapter(pool_connections=200, pool_maxsize=200)
 
-# 設定統一日誌：追加模式，加入時間戳 [%Y-%m-%d %H:%M:%S]
+# 🌟 統一日誌設定：作為第一份腳本，使用 mode='w' 清空舊紀錄
 logging.basicConfig(
     level=logging.INFO,
     format='[%(asctime)s] %(message)s',
@@ -17,6 +17,12 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
+# 🌟 強制刷新函數，確保 GitHub Actions 即時噴出 Log，唔會堆埋一齊
+def log_info(msg):
+    logging.info(msg)
+    for handler in logging.getLogger().handlers:
+        handler.flush()
 
 KEYWORDS = ["廣州", "珠江", "廣東", "大灣區", "南方", "深圳", "翡翠", "VIU", "HOY", "RTHK", "港台", "明珠", "無線", "鳳凰", "澳視", "澳門", "TDM", "澳亞", "CCTV", "台灣", "TVBS", "三立"]
 BLOCK_KEYWORDS = ["*SG", "REDIRECT", "酒店", "TEST", "測試", "購物", "延時", "8K", "UHD"]
@@ -75,7 +81,7 @@ def load_ip_pool(file_name="IP_Pool.txt"):
                     if not line or line.startswith("#"): continue
                     parts = [p.strip() for p in line.split(",")]
                     if len(parts) > 1: cache[parts[0]] = [ip for ip in parts[1:] if ip]
-        except Exception as e: logging.info(f"⚠️ 讀取 IP_Pool 錯誤: {e}")
+        except Exception as e: log_info(f"⚠️ 讀取 IP_Pool 錯誤: {e}")
     return cache
 
 def get_headers_with_mask(provider_name, pool_cache):
@@ -110,7 +116,7 @@ def diagnostic_and_test(source_list, ip_cache):
     # 專線模式診斷
     for p in ["移动", "电信", "联通", "广电"]:
         headers, mask = get_headers_with_mask(p, ip_cache)
-        logging.info(f"🛰️ 診斷中: 【{p}】專線模式 (Mask: {mask})...")
+        log_info(f"🛰️ 診斷中: 【{p}】專線模式 (Mask: {mask})...")
         
         for u in source_list:
             try:
@@ -141,7 +147,7 @@ def diagnostic_and_test(source_list, ip_cache):
             except: continue
 
     # 通用模式診斷
-    logging.info(f"🌐 診斷中: 【通用模式】直連測試...")
+    log_info(f"🌐 診斷中: 【通用模式】直連測試...")
     normal_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
     for u in source_list:
         try:
@@ -153,17 +159,17 @@ def diagnostic_and_test(source_list, ip_cache):
                     source_stats[u]["通用"] = sum(1 for f in futures if f.result() < 5.0)
         except: continue
 
-    logging.info("\n📊 --- 【直播源五線連通性終極報告】 ---")
+    log_info("\n📊 --- 【直播源五線連通性終極報告】 ---")
     for u, stat in source_stats.items():
-        logging.info(f"源: {u}")
-        logging.info(f"┗ 總量: {stat['total']} | 移动: {stat['移动']} | 电信: {stat['电信']} | 联通: {stat['联通']} | 广电: {stat['广电']} | 通用: {stat['通用']}")
-    logging.info("-" * 65)
+        log_info(f"源: {u}")
+        log_info(f"┗ 總量: {stat['total']} | 移动: {stat['移动']} | 电信: {stat['电信']} | 联通: {stat['联通']} | 广电: {stat['广电']} | 通用: {stat['通用']}")
+    log_info("-" * 65)
     return provider_items
 
 # --- 【5. 主流程】 ---
 
 def main():
-    logging.info("\n" + "="*30 + " 廣州專線 & 五線診斷啟動 " + "="*30)
+    log_info("\n" + "="*25 + " 廣州專線 & 五線診斷啟動 " + "="*25)
     
     ip_cache = load_ip_pool()
     sources = []
@@ -172,7 +178,7 @@ def main():
             sources = [line.strip() for line in f if line.strip() and not line.startswith("#")]
     
     if not sources: 
-        logging.error("❌ 無法讀取 sources.txt")
+        log_info("❌ 無法讀取 sources.txt")
         return
 
     all_provider_final_data = diagnostic_and_test(sources, ip_cache)
@@ -206,10 +212,10 @@ def main():
                             if channel_count[item['name']] <= 8:
                                 f.write(f'#EXTINF:-1 group-title="{target_group}" tvg-name="{item["name"]}", {item["name"]}\n{item["url"]}\n')
                                 seen_urls.add(item['url'])
-            logging.info(f"💾 產出完成: {filename}")
-        except Exception as e: logging.error(f"❌ 寫入錯誤 {filename}: {e}")
+            log_info(f"💾 產出完成: {filename}")
+        except Exception as e: log_info(f"❌ 寫入錯誤 {filename}: {e}")
     
-    logging.info("🏁 廣州診斷任務結束！")
+    log_info("🏁 廣州診斷任務結束！")
 
 if __name__ == "__main__":
     main()
