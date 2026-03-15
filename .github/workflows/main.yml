@@ -55,7 +55,7 @@ jobs:
         
         # 🌟 關鍵優化 1：先將所有可能改動過嘅嘢都 add 入去
         # 確保 rebase 嗰陣 worktree 係乾淨嘅
-        git add sources.txt sources_gz.txt auto_repair.log gz_repair.log *.m3u || true
+        git add *.txt *.log *.m3u || true
         
         # 檢查有無嘢改過
         if ! git diff --staged --quiet; then
