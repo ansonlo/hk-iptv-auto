@@ -12,12 +12,11 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(message)s',
     handlers=[
-        logging.FileHandler("auto_repair.log", mode='a', encoding="utf-8"), 
+        logging.FileHandler("gz_repair.log", mode='w', encoding="utf-8"), 
         logging.StreamHandler()
     ]
 )
 
-# 關鍵字與黑名單 (統一改為大寫方便匹配)
 KEYWORDS = ["廣州", "珠江", "廣東", "大灣區", "南方", "深圳", "翡翠", "VIU", "HOY", "RTHK", "港台", "明珠", "無線", "鳳凰", "澳視", "澳門", "TDM", "澳亞", "CCTV", "台灣", "TVBS", "三立"]
 BLOCK_KEYWORDS = ["*SG", "REDIRECT", "酒店", "TEST", "測試", "購物", "延時", "8K", "UHD"]
 
@@ -39,6 +38,7 @@ def clean_name(raw_name):
     return name.strip("-").strip("_").strip()
 
 def get_speed(url, custom_headers, current_session): 
+    # 隨機 UA 模擬真實設備
     custom_headers['User-Agent'] = random.choice([
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         'Mozilla/5.0 (Linux; Android 11; Pixel 5)',
@@ -47,7 +47,7 @@ def get_speed(url, custom_headers, current_session):
     for i in range(2):
         try:
             start = time.time()
-            with current_session.get(url, timeout=2.5, headers=custom_headers, stream=True, verify=False) as r:
+            with current_session.get(url, timeout=2.0, headers=custom_headers, stream=True, verify=False) as r:
                 if r.status_code < 400: return time.time() - start
         except:
             if i == 0: time.sleep(0.3)
@@ -97,63 +97,77 @@ def get_headers_with_mask(provider_name, pool_cache):
     headers.update({'X-Forwarded-For': mask_ip, 'X-Real-IP': mask_ip, 'Client-IP': mask_ip})
     return headers, mask_ip
 
-# --- 【4. 核心測試與診斷邏輯】 ---
+# --- 【4. 核心診斷流程 (五線連通性)】 ---
 
-def crawl_and_test(provider_name, source_list, ip_cache):
+def diagnostic_and_test(source_list, ip_cache):
     test_session = requests.Session()
     test_session.mount('http://', adapter)
     test_session.mount('https://', adapter)
-    current_headers, mask_ip = get_headers_with_mask(provider_name, ip_cache)
-    provider_results = {}
     
-    total_online = 0
-    source_stats = []
+    # 統計表
+    source_stats = {u: {"移动": 0, "电信": 0, "联通": 0, "广电": 0, "通用": 0, "total": 0} for u in source_list}
+    provider_items = {"移动": [], "电信": [], "联通": [], "广电": []}
 
+    # A. 專線面具測試
+    for p in ["移动", "电信", "联通", "广电"]:
+        headers, mask = get_headers_with_mask(p, ip_cache)
+        logging.info(f"🛰️ 診斷中: 【{p}】專線模式...")
+        
+        for u in source_list:
+            try:
+                r = test_session.get(u, timeout=10, headers=headers, verify=False)
+                r.encoding = 'utf-8'
+                lines = r.text.splitlines()
+                
+                name, raw_items = "", []
+                for line in lines:
+                    line = line.strip()
+                    if line.startswith("#EXTINF"): name = clean_name(line.split(',')[-1])
+                    elif line.startswith("http") and name:
+                        raw_items.append({'name': name, 'url': line.split('$')[0].strip()})
+                        name = ""
+                
+                if raw_items:
+                    source_stats[u]["total"] = len(raw_items)
+                    with ThreadPoolExecutor(max_workers=100) as ex:
+                        futures = {ex.submit(get_speed, x['url'], headers, test_session): x for x in raw_items}
+                        for f in futures:
+                            item = futures[f]
+                            s = f.result()
+                            if s < 5.0:
+                                # 中關鍵字才存入 M3U 數據
+                                if any(k in item['name'].upper() for k in KEYWORDS):
+                                    # 權重優化
+                                    feat_list = FEATURES.get(p, [])
+                                    final_s = s - 10.0 if any(ft.lower() in item['url'].lower() for ft in feat_list) else s
+                                    new_item = item.copy()
+                                    new_item['speed'] = final_s
+                                    provider_items[p].append(new_item)
+                                    source_stats[u][p] += 1
+            except: continue
+
+    # B. 通用模式測試 (不戴面具)
+    logging.info(f"🌐 診斷中: 【通用模式】測試...")
+    normal_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
     for u in source_list:
-        summary = {'items': []}
         try:
-            r = test_session.get(u, timeout=10, headers=current_headers, verify=False)
-            r.encoding = 'utf-8'
-            lines = r.text.splitlines()
-            name, current_raw = "", []
-            for line in lines:
-                line = line.strip()
-                if line.startswith("#EXTINF"):
-                    parts = line.split(',')
-                    name = clean_name(parts[-1])
-                elif (line.startswith("http") or line.startswith("rtmp")) and name:
-                    current_raw.append({'name': name, 'url': line.split('$')[0].strip()})
-                    name = ""
+            r = test_session.get(u, timeout=5, headers=normal_headers, verify=False)
+            urls = [l for l in r.text.splitlines() if l.startswith("http")]
+            if urls:
+                # 抽樣 20 條測連通性
+                with ThreadPoolExecutor(max_workers=40) as ex:
+                    futures = [ex.submit(get_speed, url, normal_headers, test_session) for url in urls[:20]]
+                    source_stats[u]["通用"] = sum(1 for f in futures if f.result() < 5.0)
+        except: continue
 
-            online_in_source = 0
-            if current_raw:
-                with ThreadPoolExecutor(max_workers=100) as ex:
-                    futures = {ex.submit(get_speed, x['url'], current_headers, test_session): x for x in current_raw}
-                    for f in futures:
-                        item = futures[f]
-                        s = f.result()
-                        if s < 5.0:
-                            is_white = any(k in item['name'].upper() for k in KEYWORDS)
-                            is_black = any(b in item['name'].upper() for b in BLOCK_KEYWORDS)
-                            if is_white and not is_black:
-                                feat_list = FEATURES.get(provider_name, [])
-                                if any(feat.lower() in item['url'].lower() for feat in feat_list): s -= 10.0 
-                                item['speed'] = s
-                                summary['items'].append(item)
-                                online_in_source += 1
-            
-            total_online += online_in_source
-            source_stats.append(f"   ┣ {u[:50]}... (連通: {online_in_source}/{len(current_raw)})")
-            provider_results[u] = summary
-        except Exception as e:
-            source_stats.append(f"   ┣ ❌ 失敗: {u[:40]} ({str(e)[:15]})")
-
-    logging.info(f"\n📊 --- 【{provider_name} 診斷報告】 ---")
-    if mask_ip: logging.info(f"   🎭 偽裝 IP: {mask_ip}")
-    for stat in source_stats: logging.info(stat)
-    logging.info(f"   ┗ 總計有效線路: {total_online}")
+    # 📝 輸出你想要嘅「終極報告」
+    logging.info("\n📊 --- 【直播源五線連通性終極報告】 ---")
+    for u, stat in source_stats.items():
+        logging.info(f"源: {u}")
+        logging.info(f"┗ 總量: {stat['total']} | 移动: {stat['移动']} | 电信: {stat['电信']} | 联通: {stat['联通']} | 广电: {stat['广电']} | 通用: {stat['通用']}")
+    logging.info("-" * 65)
     
-    return provider_results, total_online
+    return provider_items
 
 # --- 【5. 主流程】 ---
 
@@ -168,18 +182,8 @@ def main():
         logging.error("❌ 找不到 sources.txt")
         return
 
-    isp_counts = {}
-    all_provider_final_data = {}
-    for p in ["移动", "电信", "联通", "广电"]:
-        all_res, count = crawl_and_test(p, sources, ip_cache)
-        isp_counts[p] = count
-        merged = []
-        for src_data in all_res.values(): merged.extend(src_data['items'])
-        all_provider_final_data[p] = sorted(merged, key=lambda x: x.get('speed', 999))
-
-    logging.info("\n🏆 --- 【廣州全網通終極報告】 ---")
-    logging.info(f"   移动: {isp_counts['移动']} | 电信: {isp_counts['电信']} | 联通: {isp_counts['联通']} | 广电: {isp_counts['广电']}")
-    logging.info("-" * 65)
+    # 執行診斷與統計
+    all_provider_final_data = diagnostic_and_test(sources, ip_cache)
 
     update_time = datetime.datetime.now().strftime("%m%d %H:%M")
     files_map = {
@@ -187,42 +191,34 @@ def main():
         "联通": ("gz_ltlive.m3u", "廣州聯通"), "广电": ("gz_gdlive.m3u", "廣州廣電")
     }
     
+    # 借用機制：搵出最好嘅 ISP 做備選
     valid_providers = {k: v for k, v in all_provider_final_data.items() if v}
-    if not valid_providers: return
-    best_p_key = max(valid_providers, key=lambda k: len(valid_providers[k]))
-    best_isp_all_data = valid_providers[best_p_key]
+    best_p_key = max(valid_providers, key=lambda k: len(valid_providers[k])) if valid_providers else None
 
     for provider, (filename, desc) in files_map.items():
-        current_isp_data = all_provider_final_data.get(provider, [])
+        current_data = all_provider_final_data.get(provider, [])
         try:
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"\n')
-                # 時間標籤直接放入 ISP 分組
-                f.write(f'#EXTINF:-1 group-title="{desc}" tvg-name="更新", {update_time}\nhttp://10.255.255.1/info.ts\n')
+                # 時間標籤歸類入 ISP 分組
+                f.write(f'#EXTINF:-1 group-title="{desc}" tvg-name="更新", 📅 更新：{update_time}\nhttp://10.255.255.1/info.ts\n')
                 
                 for target_group in ["廣東", "香港", "澳門", "台灣", "特色", "其他"]:
-                    group_items = []
-                    local_items = [item for item in current_isp_data if get_group(item["name"]) == target_group]
-                    group_items.extend(local_items)
+                    group_items = [i for i in current_data if get_group(i["name"]) == target_group]
                     
-                    if provider != best_p_key:
-                        local_urls = {li['url'] for li in local_items}
-                        for x in best_isp_all_data:
-                            if get_group(x["name"]) == target_group and x['url'] not in local_urls:
-                                group_items.append(x)
+                    # 借用補償 (如果本 ISP 冇呢個組，就去最好嗰個 ISP 借)
+                    if not group_items and best_p_key and provider != best_p_key:
+                        group_items = [i for i in all_provider_final_data[best_p_key] if get_group(i["name"]) == target_group]
                     
                     group_items.sort(key=lambda x: x.get('speed', 999))
-                    final_unique_items, seen_urls, channel_count = [], set(), {}
-
+                    
+                    seen_urls, channel_count = set(), {}
                     for item in group_items:
                         if item['url'] not in seen_urls:
                             channel_count[item['name']] = channel_count.get(item['name'], 0) + 1
                             if channel_count[item['name']] <= 8:
-                                final_unique_items.append(item)
+                                f.write(f'#EXTINF:-1 group-title="{target_group}" tvg-name="{item["name"]}", {item["name"]}\n{item["url"]}\n')
                                 seen_urls.add(item['url'])
-                    
-                    for item in final_unique_items:
-                        f.write(f'#EXTINF:-1 group-title="{target_group}" tvg-name="{item["name"]}", {item["name"]}\n{item["url"]}\n')
             logging.info(f"💾 產出完成: {filename}")
         except Exception as e: logging.error(f"❌ 寫入錯誤 {filename}: {e}")
 
