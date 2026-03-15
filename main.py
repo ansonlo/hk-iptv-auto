@@ -197,21 +197,25 @@ def main():
     # 寫入輸出 A: 自己睇嘅 hk_live.m3u
     with open("hk_live.m3u", "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
-        f.write(f'#EXTINF:-1 group-title="最後更新", 🔄 {update_time}\nhttp://127.0.0.1/time.mp4\n')
+        f.write(f'#EXTINF:-1 group-title="最後更新" tvg-name="總表更新", 更：{update_time}\nhttp://127.0.0.1/time.mp4\n')
         
         for target in ["廣東", "香港", "台灣", "澳門", "特色", "其他"]:
             for name, items in channel_groups.items():
                 if get_group(name) == target:
-                    # 1. 準備 Logo (利用歸一化後嘅名)
+                    # 1. 準備 Logo
                     logo_url = f"https://raw.githubusercontent.com/FanMingming/live/main/tv/logo/{name}.png"
                     
                     for line in items:
-                        # 2. 【補喺呢度】識別 IPv6 並加上標籤
+                        # 🌟 核心過濾：跳過舊時間標籤，防止 main.py 寫入 all-in-one 嘅時間
+                        if any(x in name for x in ["更", "更新", "偽", "查我IP"]):
+                            continue
+                            
+                        # 2. 識別 IPv6
                         display_name = name
                         if "[" in line["url"] and "]" in line["url"]:
                             display_name = f"{name} [V6]"
                         
-                        # 3. 寫入檔案 (用 display_name 顯示，用 name 做 tvg-name)
+                        # 3. 寫入檔案
                         f.write(f'#EXTINF:-1 group-title="{target}" tvg-name="{name}" tvg-logo="{logo_url}", {display_name}\n{line["url"]}\n')
 
     # 寫入輸出 B: 畀廣州朋友用嘅 (如果你想佢哋都見到 V6 標籤，邏輯同上)
