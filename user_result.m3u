@@ -1,17 +1,13 @@
 #EXTM3U
-#EXTINF:-1, 大灣區衛視
-http://222.128.55.152:9080/live/dwq.m3u8
-#EXTINF:-1, 廣東經濟科教
-http://119.32.12.17:2901/udp/224.1.100.6:11111
-#EXTINF:-1, 廣州競賽
-http://8.138.7.223/tv/gzjs.m3u8
-#EXTINF:-1, 廣東新聞
-http://119.32.12.17:2901/udp/224.1.100.5:11111
 #EXTINF:-1, 廣東民生
 http://183.11.239.36:808/hls/18/index.m3u8
-#EXTINF:-1, 廣州新聞
-http://tencentplay.gztv.com/live/xinwen.m3u8?txSecret=d2c2db0b598c02ec1b5623728434d367&txTime=18d57929bd3
+#EXTINF:-1, 廣州競賽
+http://8.138.7.223/tv/gzjs.m3u8
+#EXTINF:-1, 大灣區衛視
+http://222.128.55.152:9080/live/dwq.m3u8
 #EXTINF:-1, 廣東體育
 http://cdn2.132.us.kg/live/gdty/stream.m3u8
 #EXTINF:-1, 廣州綜合
 http://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=c8dbe86d6f86eb1a21999ab479fd5667&txTime=18d3c4690e8
+#EXTINF:-1, 廣州新聞
+http://tencentplay.gztv.com/live/xinwen.m3u8?txSecret=d2c2db0b598c02ec1b5623728434d367&txTime=18d57929bd3
