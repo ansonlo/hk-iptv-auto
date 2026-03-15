@@ -153,7 +153,7 @@ def main():
             for idx, link in enumerate(final_auto, 1):
                 f.write(f"NEW_SOURCE_{idx},{link}\n")
         logging.info(f"\n✅ 自動更新完畢：新增 {len(new_discovered)} 個優質源。")
-        logging.info(f"📊 已將最新 1500 條結果保存至 {SOURCE_FILE}。")
+        logging.info(f"📊 已將最新結果保存至 {SOURCE_FILE}。")
     else:
         logging.info(f"\n🏁 手動掃描完畢：發現新源 {len(new_discovered)} 個。")
         logging.info(f"📝 提示：手動模式不改動文件，請檢查上面日誌獲取新 Link。")
