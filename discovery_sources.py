@@ -10,7 +10,9 @@ MAX_AUTO_KEEP = 5000
 cc = OpenCC('s2t')
 
 # 關鍵字與黑名單
-KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "翡翠", "明珠", "港台", "廣東", "澳門", "CCTV"]
+KEYWORDS = ["VIUTV", "HOY", "RTHK", "JADE", "PEARL", "J2", "J5", "NOW", "無線", "有線", "翡翠", "明珠", "港台", 
+            "廣東", "珠江", "廣州", "大灣區", "南方", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", 
+            "緯來", "年代", "中天", "非凡", "澳視", "澳門", "TDM", "澳亞", "CCTV"]
 BLACK_LIST = ["ADULT", "PORN", "SHOPPING", "購物", "遊戲", "浙江", "湖南", "湖北", "江蘇", "福建", "杭州"]
 
 BASE_DISCOVERY_URLS = [
