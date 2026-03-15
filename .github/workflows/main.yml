@@ -67,13 +67,15 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # 關鍵：即使文件冇變，log 一定要記低
+        # 確保 log 和 m3u 檔案有被追蹤
         git add sources.txt auto_repair.log *.m3u || true
         
+        # 檢查是否有任何變動（包括 log 檔案的更新）
         if ! git diff --staged --quiet; then
+          # 使用 --rebase 避免產生額外的 merge commit
           git pull origin main --rebase
-          git commit -m "🚀 自動更新: 核心數據 ($(date +'%m-%d %H:%M'))"
+          git commit -m "🚀 數據更新 [Mode: $SCAN_MODE] ($(date +'%m-%d %H:%M'))"
           git push origin main
         else
-          echo "✅ 數據冇變動（手動模式或無新源），無需提交文件改動"
+          echo "✅ 數據與日誌均無變動，跳過提交"
         fi
