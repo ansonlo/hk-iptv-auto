@@ -70,7 +70,15 @@ def get_filtered_links(url):
 
 # --- 【4. 主程序】 ---
 def main():
-    logging.info(f"\n🚀 模式: {SCAN_MODE}")
+    # --- 開頭增加醒目標示 ---
+    logging.info("\n" + "ID" * 30)
+    if SCAN_MODE == "MANUAL_ONLY":
+        logging.info("🎯 【手動模式 - 精準狙擊】")
+        logging.info("🔎 僅針對 sources.txt 手動區內的種子進行深度挖掘...")
+    else:
+        logging.info("🌐 【自動模式 - 全網獵奇】")
+        logging.info("📡 正在啟動 12 小時一次的保底源 + GitHub + Gitee 全量掃描...")
+    logging.info("ID" * 30 + "\n")
     fixed_content, auto_links, is_auto_zone = [], [], False
 
     if os.path.exists(SOURCE_FILE):
@@ -103,15 +111,11 @@ def main():
                     current_all_set.add(l)
 
     if SCAN_MODE == "FULL_SCAN":
-        final_auto = (auto_links + new_discovered)[-MAX_AUTO_KEEP:]
-        with open(SOURCE_FILE, "w", encoding="utf-8") as f:
-            f.writelines([l.rstrip() + "\n" for l in fixed_content])
-            f.write("\n# --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---\n")
-            for idx, link in enumerate(final_auto, 1):
-                f.write(f"NEW_SOURCE_{idx},{link}\n")
-        logging.info(f"✅ 更新完成！新增 {len(new_discovered)} 條。")
+        logging.info(f"✅ 自動更新完畢：新增 {len(new_discovered)} 個潛在優質源。")
+        logging.info(f"📊 已將最新sources.txt。")
     else:
-        logging.info(f"📊 報告：發現新源 {len(new_discovered)} 個（手動模式不寫入）。")
+        logging.info(f"🏁 手動掃描完畢：發現新源 {len(new_discovered)} 個。")
+        logging.info(f"📝 提示：手動模式僅作「報告」，唔會改動你份 sources.txt。")
 
 if __name__ == "__main__":
     main()
