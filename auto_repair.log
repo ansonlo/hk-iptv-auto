@@ -1,12 +1,12 @@
 ✅ [數據讀取] 已從 sources.txt 加載 4 個源
 =================================================================
-📅 更新時間：0315 18:29
+📅 更新時間：0315 18:35
 =================================================================
 
 ✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u
    ┣ [源頭掃描] 總台數: 365
-   ┣ [網絡狀況] 連通數: 283 | 唔通數: 82
-   ┗ [內容過濾] 中白名單: 6 (採納) | 中黑名單: 22 (剔除)
+   ┣ [網絡狀況] 連通數: 268 | 唔通數: 97
+   ┗ [內容過濾] 中白名單: 7 (採納) | 中黑名單: 22 (剔除)
    ┗ [🚫 黑名單細節]:
       浙江休閒台, 浙江公共新聞, 浙江國際, 浙江教科, 浙江教育
       浙江數碼時代, 浙江新聞, 浙江民生, 浙江民生休閒, 浙江生活
@@ -14,4 +14,44 @@
       浙江錢江, 浙江錢江都市, 浙江錢江頻道, 湖南國際, 湖南電視劇
       福建新聞, 福建經濟
 -----------------------------------------------------------------
-🏁 完工！精選 6 個頻道，共 6 條優質線路
+🏁 完工！精選 7 個頻道，共 7 條優質線路
+
+📊 --- 【移动 診斷報告】 ---
+   🎭 偽裝 IP: 120.196.212.55
+   ┣ https://api.allorigins.win/raw?url=https://live.ha... (連通: 7/365)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
+   ┗ 總計有效線路: 7
+
+📊 --- 【电信 診斷報告】 ---
+   🎭 偽裝 IP: 14.215.114.33
+   ┣ https://api.allorigins.win/raw?url=https://live.ha... (連通: 7/365)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
+   ┗ 總計有效線路: 7
+
+📊 --- 【联通 診斷報告】 ---
+   🎭 偽裝 IP: 27.36.105.196
+   ┣ ❌ 失敗: https://api.allorigins.win/raw?url=https (HTTPSConnection)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
+   ┗ 總計有效線路: 0
+
+📊 --- 【广电 診斷報告】 ---
+   🎭 偽裝 IP: 103.27.26.100
+   ┣ https://api.allorigins.win/raw?url=https://live.ha... (連通: 7/365)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
+   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
+   ┗ 總計有效線路: 7
+
+🏆 --- 【廣州全網通終極報告】 ---
+   移动: 7 | 电信: 7 | 联通: 0 | 广电: 7
+-----------------------------------------------------------------
+💾 產出完成: gz_live.m3u
+💾 產出完成: gz_dxlive.m3u
+💾 產出完成: gz_ltlive.m3u
+💾 產出完成: gz_gdlive.m3u
