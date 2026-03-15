@@ -1,17 +1,17 @@
-#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml,https://epg.pw/xmltv/feed/subscription/free/hk.xml"
-#EXTINF:-1 group-title="廣州電訊" tvg-name="更", 更0315 10:38 
+#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"
+#EXTINF:-1 group-title="廣州電訊" tvg-name="更", 更0315 10:53
 http://10.255.255.1/info.ts
-#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
-http://cdn2.132.us.kg/live/gdty/stream.m3u8
-#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
-http://183.11.239.36:808/hls/18/index.m3u8
-#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
+#EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽 (广电)
 http://8.138.7.223/tv/gzjs.m3u8
-#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
+#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視 (广电)
 http://222.128.55.152:9080/live/dwq.m3u8
-#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江 (广电)
 http://cdn2.132.us.kg/live/gdzj/stream.m3u8
-#EXTINF:-1 group-title="廣東" tvg-name="廣州綜合", 廣州綜合
+#EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生 (广电)
+http://183.11.239.36:808/hls/18/index.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣州綜合", 廣州綜合 (广电)
 http://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=c8dbe86d6f86eb1a21999ab479fd5667&txTime=18d3c4690e8
-#EXTINF:-1 group-title="廣東" tvg-name="廣州新聞", 廣州新聞
+#EXTINF:-1 group-title="廣東" tvg-name="廣州新聞", 廣州新聞 (广电)
 http://tencentplay.gztv.com/live/xinwen.m3u8?txSecret=d2c2db0b598c02ec1b5623728434d367&txTime=18d57929bd3
+#EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育 (广电)
+http://cdn2.132.us.kg/live/gdty/stream.m3u8
