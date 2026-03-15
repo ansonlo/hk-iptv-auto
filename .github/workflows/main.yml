@@ -67,14 +67,18 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # 確保 log 和 m3u 檔案有被追蹤
+        # 1. 先從遠端拉取最新的改動（避免多人同時跑導致衝突）
+        git pull origin main --rebase
+        
+        # 2. 確保所有目標檔案都被追蹤
         git add sources.txt auto_repair.log *.m3u || true
         
-        # 檢查是否有任何變動（包括 log 檔案的更新）
+        # 3. 檢查是否有變動
         if ! git diff --staged --quiet; then
-          # 使用 --rebase 避免產生額外的 merge commit
-          git pull origin main --rebase
-          git commit -m "🚀 數據更新 [Mode: $SCAN_MODE] ($(date +'%m-%d %H:%M'))"
+          # 確保 $SCAN_MODE 有值，如果是空值則顯示為 UNKNOWN
+          MODE_NAME=${SCAN_MODE:-"UNKNOWN"}
+          
+          git commit -m "🚀 數據更新 [Mode: $MODE_NAME] ($(date +'%m-%d %H:%M'))"
           git push origin main
         else
           echo "✅ 數據與日誌均無變動，跳過提交"
