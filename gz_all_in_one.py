@@ -206,8 +206,8 @@ def main():
         try:
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"\n')
-                # 寫入更新時間標記
-                f.write(f'#EXTINF:-1 group-title="最後更新", 🔄 {desc} | {update_time}\nhttp://10.255.255.1/info.ts\n')
+                
+                f.write(f'#EXTINF:-1 group-title="{desc}" tvg-name="更新時間", 更{update_time}\nhttp://10.255.255.1/info.ts\n')
                 
                 for target_group in ["廣東", "香港", "澳門", "台灣", "特色", "其他"]:
                     group_items = []
