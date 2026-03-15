@@ -1,202 +1,94 @@
-import requests, datetime, time, logging, re, sys, os, urllib3
-from opencc import OpenCC
+import requests, os, logging, time
 from concurrent.futures import ThreadPoolExecutor
-from tqdm import tqdm
+from opencc import OpenCC
 
-# --- 【1. 初始化工具】 ---
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# --- 【1. 配置】 ---
+SOURCE_FILE = "sources.txt"
+MY_PRIVATE_M3U = "my_private_list.m3u"  # 你自己私人用嘅檔名
 cc = OpenCC('s2t')
 
-adapter = requests.adapters.HTTPAdapter(pool_connections=50, pool_maxsize=50)
-session = requests.Session()
-session.mount('http://', adapter)
-session.mount('https://', adapter)
+# 定義你私人名單嘅過濾標準 (確保只留精華)
+KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "翡翠", "明珠", "港台", "廣東", "澳門", "CCTV"]
+BLACK_LIST = ["ADULT", "PORN", "SHOPPING", "購物", "遊戲", "浙江", "湖南", "湖北", "江蘇", "福建", "杭州"]
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(message)s',
-    handlers=[
-        logging.FileHandler("auto_repair.log", mode='w', encoding="utf-8"), 
-        logging.StreamHandler()
-    ]
-)
-
-# --- 【2. 核心配置】 ---
-KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
-            "珠江", "廣州", "大灣區", "南方", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", "緯來", "年代",
-            "中天", "非凡", "澳視", "澳門", "TDM", "澳亞", "CCTV"]
-
-BLOCK_KEYWORDS = ["FOX", "UHD", "8K", "浙江", "杭州", "深圳", "延时", "測試", "購物", "福建", "江蘇", "湖南", "湖北"]
-
-# 中國特色源關鍵字 (不測速直接保留)
-INTERNAL_DOMAINS = ['chinamobile.com', 'cmvideo.cn', 'unicom', 'telecom', 'ottrrs', 'dbiptv', '10.255.', '172.16.']
-
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'}
-
-# --- 【工具函數】 ---
-def load_sources(file_path="sources.txt"):
-    if os.path.exists(file_path):
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                urls = [line.strip() for line in f if line.strip() and not line.startswith("#")]
-                logging.info(f"✅ [數據讀取] 已從 {file_path} 加載 {len(urls)} 個源")
-                return urls
-        except Exception as e:
-            logging.error(f"❌ [數據讀取] 錯誤: {e}")
-    return []
+logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 def get_speed(url):
-    is_internal = any(domain in url.lower() for domain in INTERNAL_DOMAINS) or "CCTV" in url.upper()
-    current_timeout = 1.5 if is_internal else 2.5
-    
-    for i in range(2):
-        try:
-            start = time.time()
-            r = session.get(url, timeout=current_timeout, headers=HEADERS, stream=True, verify=False)
-            if r.status_code < 400:
-                return time.time() - start
-        except Exception:
-            if i == 0:
-                time.sleep(0.5)
-            continue
-    return 999
-
-def get_group(name):
-    check_name = name.upper().replace(" ", "")
-    if "CCTV" in check_name: return "特色"
-    if any(x in name for x in ["翡翠", "VIU", "HOY", "RTHK", "港台", "明珠", "無線", "有線", "J2", "J5", "鳳凰"]): return "香港"
-    if any(x in name for x in ["東森", "三立", "中視", "公視", "TVBS", "緯來", "民視", "年代", "中天", "非凡", "台視"]): return "台灣"
-    if any(x in name for x in ["廣東", "珠江", "廣州", "大灣區", "南方", "深圳"]): return "廣東"
-    if any(x in name for x in ["澳視", "澳門", "TDM", "澳亞"]): return "澳門"
-    return "其他"
-
-def clean_name(raw_name):
-    name = cc.convert(raw_name).replace('臺', '台').upper().strip()
-    name = re.sub(r'\[.*?\]|\(.*?\)|\（.*?\）', '', name)
-    suffixes = ["超清", "高清", "藍光", "標清", "頻道", "1080P", "720P", "4K", "HD", "SD", "FHD", "BD"]
-    for s in suffixes:
-        name = name.replace(s, "")
-    return name.strip("-").strip("_").strip()
-
-def diagnose_report(u):
-    all_raw_items = []
-    born_list = []
+    """測速函數：返還延遲毫秒數"""
     try:
-        r = session.get(u, timeout=25, headers=HEADERS, verify=False)
-        r.encoding = 'utf-8'
-        if r.status_code != 200: return [], False
-        
-        current_name = ""
-        for line in r.text.split('\n'):
-            line = line.strip()
-            if line.startswith("#EXTINF"):
-                raw_name = line.split(',')[-1]
-                current_name = clean_name(raw_name)
-            elif line.startswith("http") and current_name:
-                raw_url = line.split('$')[0].strip()
-                all_raw_items.append({'name': current_name, 'url': raw_url})
-                current_name = ""
+        start = time.time()
+        # 只取頭部信息，快好多
+        r = requests.head(url, timeout=2, verify=False)
+        if r.status_code < 400:
+            return int((time.time() - start) * 1000)
+    except:
+        pass
+    return 9999
 
-        if not all_raw_items: return [], False
+def run_audit_and_test():
+    """執行本地庫審核並輸出你想要嘅報告格式"""
+    if not os.path.exists(SOURCE_FILE):
+        logging.info(f"❌ 錯誤：搵唔到 {SOURCE_FILE}")
+        return
 
-        test_items = []
-        special_items = []
-        for x in all_raw_items:
-            if any(domain in x['url'].lower() for domain in INTERNAL_DOMAINS):
-                x['speed'] = 1.0
-                special_items.append(x)
+    with open(SOURCE_FILE, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    total_count = 0
+    white_list = []
+    black_names = []
+
+    # 1. 審核內容
+    for line in lines:
+        line = line.strip()
+        if "," in line and "://" in line:
+            total_count += 1
+            name, url = line.split(',', 1)
+            name = cc.convert(name)
+            combined = (name + url).upper()
+
+            if any(b.upper() in combined for b in BLACK_LIST):
+                black_names.append(name)
+            elif any(k.upper() in combined for k in KEYWORDS):
+                white_list.append({"name": name, "url": url})
             else:
-                test_items.append(x)
+                # 唔喺黑名單亦唔喺關鍵字，可以當普通台放入去，或者直接唔要
+                white_list.append({"name": name, "url": url})
 
-        if test_items:
-            with ThreadPoolExecutor(max_workers=50) as ex:
-                futures = {ex.submit(get_speed, x['url']): x for x in test_items}
-                for f in tqdm(list(futures.keys()), desc=f"⚡ 測速: {u[:15]}...", unit="link", ncols=80, leave=False):
-                    speed = f.result()
-                    item = futures[f]
-                    if speed < 5.0:
-                        item['speed'] = speed
-                        upper_name = item['name'].upper()
-                        if any(k in upper_name for k in KEYWORDS) and not any(b in upper_name for b in BLOCK_KEYWORDS):
-                            born_list.append(item)
-
-        for item in special_items:
-            upper_name = item['name'].upper()
-            if any(k in upper_name for k in KEYWORDS) and not any(b in upper_name for b in BLOCK_KEYWORDS):
-                born_list.append(item)
-
-        return born_list, len(born_list) > 0
-    except Exception as e:
-        return [], False
-
-# --- 【4. 主流程】 ---
-def main():
-    RAW_SOURCES = load_sources("sources.txt")
-    if not RAW_SOURCES: return
-
-    all_channels = []
-    current_urls = list(dict.fromkeys(RAW_SOURCES))
+    # --- 輸出你指定嘅詳細報告格式 ---
+    logging.info(f"\n✅ 報告: 本地私人庫審核 ({SOURCE_FILE})")
+    logging.info(f" ┣ [源頭掃描] 總台數: {total_count}")
+    logging.info(f" ┗ [內容過濾] 採納: {len(white_list)} | 剔除: {len(black_names)}")
     
-    for url in current_urls:
-        data, is_alive = diagnose_report(url)
-        if is_alive: all_channels.extend(data)
+    if black_names:
+        logging.info(f" ┗ [🚫 黑名單細節]:")
+        # 顯示頭 40 個被剔除嘅名，每 5 個一行
+        for i in range(0, min(len(black_names), 40), 5):
+            logging.info("      " + ", ".join(black_names[i:i+5]))
 
-    if not all_channels: return
+    # 2. 開始測速 (私人用，速度最緊要)
+    logging.info(f"\n🚀 正在為 {len(white_list)} 個採納頻道進行私人測速...")
+    
+    def task(item):
+        delay = get_speed(item['url'])
+        if delay < 5000: # 只留 5 秒內有反應嘅
+            return {"name": item['name'], "url": item['url'], "speed": delay}
+        return None
 
-    # --- 💡 寫入前獲取最新完工時間 ---
-    final_finish_time = datetime.datetime.now().strftime("%m%d %H:%M")
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        valid_results = list(filter(None, executor.map(task, white_list)))
 
-    # 去重與排序
-    channel_groups = {}
-    for item in sorted(all_channels, key=lambda x: x['speed']):
-        name = item['name']
-        url = item['url']
-        base_url = url.split('?')[0].split('#')[0].strip()
-        if name not in channel_groups:
-            channel_groups[name] = []
-        existing_urls = [x['url'].split('?')[0] for x in channel_groups[name]]
-        if base_url not in existing_urls:
-            channel_groups[name].append(item)
+    # 按速度排列，最快擺上面
+    valid_results.sort(key=lambda x: x['speed'])
 
-    # 寫入輸出 A: hk_live.m3u (你自己用嘅總表)
-    with open("hk_live.m3u", "w", encoding="utf-8") as f:
+    # 3. 生成私人 M3U 檔案
+    with open(MY_PRIVATE_M3U, "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
-        # 標題標籤，設為 "總表更新" 以便同 gz 分流腳本隔離
-        f.write(f'#EXTINF:-1 group-title="最後更新" tvg-name="更", 更：{final_finish_time}\nhttp://10.255.255.1/info.ts\n')
-        f.write(f'http://10.255.255.1/info.ts\n')
-        
-        sort_order = ["廣東", "香港", "台灣", "澳門", "特色", "其他"]
-        for target in sort_order:
-            for name, items in channel_groups.items():
-                if get_group(name) == target:
-                    # 自動匹配 Logo
-                    logo_url = f"https://raw.githubusercontent.com/FanMingming/live/main/tv/logo/{name}.png"
-                    
-                    for line in items:
-                        # 🌟 徹底過濾：唔要時間標籤同埋你自己唔用嘅功能台
-                        if any(x in name for x in ["更", "更新", "偽", "查我IP"]):
-                            continue
-                            
-                        display_name = name
-                        # 🌟 IPv6 識別標籤
-                        if "[" in line["url"] and "]" in line["url"]:
-                            display_name = f"{name} [V6]"
-                        
-                        f.write(f'#EXTINF:-1 group-title="{target}" tvg-name="{name}" tvg-logo="{logo_url}", {display_name}\n{line["url"]}\n')
+        for res in valid_results:
+            f.write(f"#EXTINF:-1, {res['name']} [{res['speed']}ms]\n{res['url']}\n")
 
-    # 寫入輸出 B: user_result.m3u (簡潔版)
-    with open("user_result.m3u", "w", encoding="utf-8") as f:
-        f.write("#EXTM3U\n")
-        for name, items in channel_groups.items():
-            if any(x in name for x in ["更", "更新", "偽", "查我IP"]):
-                continue
-            for line in items:
-                d_name = name
-                if "[" in line["url"] and "]" in line["url"]:
-                    d_name = f"{name} [V6]"
-                f.write(f'#EXTINF:-1, {d_name}\n{line["url"]}\n')
-
-    logging.info(f"🏁 完工！hk_live.m3u 已生成。時間：{final_finish_time}")
+    logging.info(f"\n🎉 私人列表已更新: {MY_PRIVATE_M3U}")
+    logging.info(f"📊 最終精選: {len(valid_results)} 台 (已排好序)")
 
 if __name__ == "__main__":
-    main()
+    run_audit_and_test()
