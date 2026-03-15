@@ -43,10 +43,10 @@ jobs:
         python discovery_sources.py
         
         # 2. 測速 (如果你想手動行都測速，就開返佢)
-        python main.py
+        #python main.py
                 
         # 3. 專線診斷
-        python gz_all_in_one.py
+        #python gz_all_in_one.py
 
     - name: Commit and push
       run: |
