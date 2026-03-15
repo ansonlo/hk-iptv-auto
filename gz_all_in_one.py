@@ -255,6 +255,11 @@ def main():
                     
                     # 4. 寫入文件
                     for item in final_unique_items:
+                        # 🌟 核心改動：跳過所有舊嘅功能性標籤（如 main.py 產生嘅時間）
+                        # 咁樣就唔會出現重複嘅「更」，亦唔會出現「更 (移动)」
+                        if any(x in item['name'] for x in ["更", "伪", "查我IP"]):
+                            continue
+                            
                         d_name = item.get('display_name', item['name'])
                         f.write(f'#EXTINF:-1 group-title="{item["final_group"]}" tvg-name="{item["name"]}", {d_name}\n{item["url"]}\n')
 
