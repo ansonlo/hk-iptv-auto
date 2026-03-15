@@ -2,9 +2,18 @@ name: Update IPTV Source
 
 on:
   schedule:
-    # 北京時間 08:00 同 20:00 執行
-    - cron: '0 */12 * * *'
-  workflow_dispatch: # 方便手動隨時執行
+    # 北京時間 08:00 同 20:00 執行（呢個係自動模式，行 FULL_SCAN）
+    - cron: '0 0,12 * * *'
+  workflow_dispatch:
+    inputs:
+      scan_mode:
+        description: '選擇執行模式'
+        required: true
+        default: 'MANUAL_ONLY'
+        type: choice
+        options:
+          - MANUAL_ONLY
+          - FULL_SCAN
 
 permissions:
   contents: write
@@ -12,7 +21,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -33,9 +41,15 @@ jobs:
       run: |
         export TZ='Asia/Shanghai'
         
-        # 1. 執藥 (呢個先係出「[源頭掃描]」報告嘅地方)
+        # 判斷係自動定手動觸發。如果是定時(schedule)，強制用 FULL_SCAN；手動則用你揀嘅 Mode
+        if [ "${{ github.event_name }}" == "schedule" ]; then
+          export SCAN_MODE="FULL_SCAN"
+        else
+          export SCAN_MODE="${{ github.event.inputs.scan_mode }}"
+        fi
+        
         echo "---------------------------------------"
-        echo "Step 1: 執藥腳本 (Discovery)"
+        echo "Step 1: 執藥腳本 (Discovery) [Mode: $SCAN_MODE]"
         python discovery_sources.py
         
         # 2. 測速 
@@ -52,18 +66,14 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-
-        # 添加生成嘅檔案
+        
+        # 關鍵：即使文件冇變，log 一定要記低
         git add sources.txt auto_repair.log *.m3u || true
         
-        # 只有喺有改動嘅時候先執行提交
         if ! git diff --staged --quiet; then
-          git stash
           git pull origin main --rebase
-          git stash pop || echo "No stash to pop"
-          git add .
-          git commit -m "🚀 自動更新: 核心 + 廣州五路診斷 ($(date +'%m-%d %H:%M'))"
+          git commit -m "🚀 自動更新: 核心數據 ($(date +'%m-%d %H:%M'))"
           git push origin main
         else
-          echo "✅ 數據冇變動，無需提交"
+          echo "✅ 數據冇變動（手動模式或無新源），無需提交文件改動"
         fi
