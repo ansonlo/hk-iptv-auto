@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 # --- 【1. 配置與初始化】 ---
 SOURCE_FILE = "sources.txt"
 SCAN_MODE = os.getenv("SCAN_MODE", "FULL_SCAN")
-MAX_AUTO_KEEP = 1500  
+MAX_AUTO_KEEP = 5000  
 cc = OpenCC('s2t')
 
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
@@ -125,9 +125,12 @@ def main():
     current_all_set = manual_urls.union(set(auto_links))
 
     if SCAN_MODE == "MANUAL_ONLY":
-        targets = list(manual_urls)
+        # 如果你想手動行都要搵新嘢，可以將 targets 改為全量，但唔寫入文件
+        targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + search_github() + search_gitee()))
+        logging.info(f"🎯 手動測試模式：正在模擬掃描 {len(targets)} 個源（唔會改動文件）...")
     else:
         targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + search_github() + search_gitee()))
+        logging.info(f"🌐 全量更新模式：掃描 {len(targets)} 個源並將更新文件...")
 
     new_discovered = []
     
@@ -155,11 +158,14 @@ def main():
             f.write("\n# --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---\n")
             for idx, link in enumerate(final_auto, 1):
                 f.write(f"NEW_SOURCE_{idx},{link}\n")
+        
         logging.info(f"\n✅ 自動更新完畢：新增 {len(new_discovered)} 個優質源。")
-        logging.info(f"📊 已將最新結果保存至 {SOURCE_FILE}。")
+        logging.info(f"📊 已將結果寫入 {SOURCE_FILE}。")
     else:
-        logging.info(f"\n🏁 手動掃描完畢：發現新源 {len(new_discovered)} 個。")
-        logging.info(f"📝 提示：手動模式不改動文件，請檢查上面日誌獲取新 Link。")
+        # 手動模式只係「出報告」，話你知搵到幾多，但唔行 open(SOURCE_FILE, "w")
+        logging.info(f"\n✨ 模擬掃描完畢：發現新源 {len(new_discovered)} 個！")
+        logging.info(f"📝 提示：當前係 MANUAL 模式，呢 {len(new_discovered)} 個新源【冇】寫入 sources.txt。")
+        logging.info(f"💡 如果你想更新文件，請喺 GitHub Actions 選擇 FULL_SCAN 模式執行。")
 
 if __name__ == "__main__":
     main()
