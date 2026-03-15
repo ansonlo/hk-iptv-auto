@@ -1,14 +1,14 @@
 #EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"
-#EXTINF:-1 group-title="最後更新", 🔄 廣州移動 | 0315 18:15
+#EXTINF:-1 group-title="廣州移動" tvg-name="更新時間", 更0315 18:23
 http://10.255.255.1/info.ts
 #EXTINF:-1 group-title="廣東" tvg-name="廣東體育", 廣東體育
 https://epg.pw/stream/7b470f9fc5c305db0c8622117b7b25ca00eb35ba3e93e865cf0ff9df5c736681.m3u8
-#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
-http://cdn2.132.us.kg/live/gdzj/stream.m3u8
-#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
-http://222.128.55.152:9080/live/dwq.m3u8
 #EXTINF:-1 group-title="廣東" tvg-name="廣州競賽", 廣州競賽
 http://8.138.7.223/tv/gzjs.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="大灣區衛視", 大灣區衛視
+http://222.128.55.152:9080/live/dwq.m3u8
+#EXTINF:-1 group-title="廣東" tvg-name="廣東珠江", 廣東珠江
+http://cdn2.132.us.kg/live/gdzj/stream.m3u8
 #EXTINF:-1 group-title="廣東" tvg-name="廣東民生", 廣東民生
 http://183.11.239.36:808/hls/18/index.m3u8
 #EXTINF:-1 group-title="廣東" tvg-name="廣州新聞", 廣州新聞
