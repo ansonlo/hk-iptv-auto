@@ -42,8 +42,8 @@ jobs:
         # 1. 執藥
         python discovery_sources.py
         
-        # 2. 測速 (如果你想手動行都測速，就開返佢)
-        #python main.py
+        # 2. 通用 
+        python main.py
                 
         # 3. 專線診斷
         #python gz_all_in_one.py
