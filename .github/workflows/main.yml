@@ -33,24 +33,17 @@ jobs:
       run: |
         export TZ='Asia/Shanghai'
         
-        # 1. 判斷模式
-        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-          echo "🔘 手動觸發：僅掃描手動區種子 ..."
-          export SCAN_MODE="MANUAL_ONLY"
-        else
-          echo "⏰ 定時執行：啟動全網搜刮模式 ..."
-          export SCAN_MODE="FULL_SCAN"
-        fi
-
-        # 2. 先執行執藥腳本 (一定要喺 main.py 之前)
-        echo "🔍 正在執行執藥腳本 (discovery_sources.py)..."
+        # 1. 執藥 (呢個先係出「[源頭掃描]」報告嘅地方)
+        echo "---------------------------------------"
+        echo "Step 1: 執藥腳本 (Discovery)"
         python discovery_sources.py
         
-        # 3. 執行通用測試
-        echo "🌍 正在執行通用環境測試 (main.py)..."
+        # 2. 測速 
+        echo "---------------------------------------"
+        echo "Step 2: 🌍 正在執行通用環境測試 (main.py)...""
         python main.py
-        
-        # 4. 執行專線診斷
+                
+        # 3. 執行專線診斷
         echo "🏥 正在執行廣州五路專線診斷 (gz_all_in_one.py)..."
         python gz_all_in_one.py
 
