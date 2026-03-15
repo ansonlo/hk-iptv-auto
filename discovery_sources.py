@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 # --- 【1. 配置】 ---
 SOURCE_FILE = "sources.txt"
 SCAN_MODE = os.getenv("SCAN_MODE", "FULL_SCAN")
-MAX_AUTO_KEEP = 5000  # 自動區保留上限
+MAX_AUTO_KEEP = 5000
 cc = OpenCC('s2t')
 
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "翡翠", "明珠", "港台", "廣東", "澳門", "CCTV"]
@@ -15,12 +15,15 @@ BLACK_LIST = ["ADULT", "PORN", "SHOPPING", "購物", "遊戲"]
 BASE_DISCOVERY_URLS = [
     "https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u",
     "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
-    "https://iptv.hacks.tools/m3u/all.m3u"
+    "https://iptv.hacks.tools/m3u/all.m3u",
+    "https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u",
+    "https://gitee.com/fomm/live/raw/main/tv/m3u/ipv6.m3u"
 ]
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'}
 
-logging.basicConfig(level=logging.INFO, format='%(message)s', handlers=[logging.StreamHandler()])
+# 淨係顯示重要資訊
+logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 # --- 【2. 核心過濾】 ---
 def analyze_source(url):
@@ -36,7 +39,7 @@ def analyze_source(url):
             if line.startswith("#EXTINF"):
                 temp_name = cc.convert(line.split(',')[-1]).strip()
             elif "://" in line:
-                name = temp_name if temp_name else "Unknown"
+                name = temp_name if temp_name else ""
                 link = line.strip()
                 combined = (name + link).upper()
                 if not any(b.upper() in combined for b in BLACK_LIST):
@@ -48,65 +51,50 @@ def analyze_source(url):
 
 # --- 【3. 主程序】 ---
 def main():
-    logging.info(f"🚀 當前模式: {SCAN_MODE}")
-
-    fixed_content = []      # 存放 # MY MANUAL SOURCES 內容
-    old_auto_links = []     # 存放原本自動區嘅內容
+    fixed_content = []
+    old_auto_links = []
     is_auto_zone = False
 
-    # 1. 分割讀取現有的 sources.txt
+    # 1. 讀取現有資料
     if os.path.exists(SOURCE_FILE):
         with open(SOURCE_FILE, "r", encoding="utf-8") as f:
             for line in f:
-                # 碰到自動區標記，開始切換
-                if "--- AUTO DISCOVERED" in line or "AUTO_UPDATE" in line:
+                if "--- AUTO DISCOVERED" in line:
                     is_auto_zone = True
                     continue
-                
                 if not is_auto_zone:
                     fixed_content.append(line)
                 else:
                     if "://" in line:
-                        link = line.split(',')[-1].strip()
-                        old_auto_links.append(link)
+                        old_auto_links.append(line.split(',')[-1].strip())
 
-    # 2. 獲取手動區所有現成嘅 URL (用嚟去重)
-    manual_urls_only = set(re.findall(r'https?://[^\s,]+', "".join(fixed_content)))
+    manual_urls = set(re.findall(r'https?://[^\s,]+', "".join(fixed_content)))
 
-    # 3. 全網搜刮新源
-    targets = list(dict.fromkeys(BASE_DISCOVERY_URLS)) # 呢度可以加埋 search_github()
+    # 2. 執行掃描
+    targets = list(dict.fromkeys(BASE_DISCOVERY_URLS))
     new_found_links = []
     with ThreadPoolExecutor(max_workers=10) as executor:
         results = list(executor.map(analyze_source, targets))
         for links in results:
             new_found_links.extend(links)
 
-    # 4. 合併舊自動區 + 新搵到嘅 Link，並進行去重
-    # 去重原則：如果手動區已經有嘅，自動區就唔再重複收錄
-    combined_auto = []
-    seen = manual_urls_only.copy()
+    # 3. 去重與合併
+    new_discovered = [l for l in set(new_found_links) if l not in manual_urls and l not in old_auto_links]
     
-    # 優先保留舊嘅自動源，再加新源
-    for l in (old_auto_links + new_found_links):
-        if l not in seen:
-            combined_auto.append(l)
-            seen.add(l)
-
-    # 5. 寫入文件 (僅限 FULL_SCAN)
+    # 4. 根據模式輸出結果 (淨係講發現咗幾個新源)
     if SCAN_MODE == "FULL_SCAN":
-        final_auto = combined_auto[-MAX_AUTO_KEEP:] # 保持數量限制
+        final_auto = (old_auto_links + new_discovered)[-MAX_AUTO_KEEP:]
         with open(SOURCE_FILE, "w", encoding="utf-8") as f:
-            # 寫入固定嘅手動區
             f.writelines([l.rstrip() + "\n" for l in fixed_content])
-            # 寫入自動區標題
             f.write("\n# --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---\n")
-            # 寫入合併後嘅自動源
             for idx, link in enumerate(final_auto, 1):
                 f.write(f"NEW_SOURCE_{idx},{link}\n")
         
-        logging.info(f"✅ 更新成功！手動區保留，自動區現有 {len(final_auto)} 個源。")
+        logging.info(f"✅ 自動更新完畢：全網發現 {len(new_discovered)} 個新源，已寫入 sources.txt。")
     else:
-        logging.info(f"✨ 報告：今日全網發現 {len(new_found_links)} 個新源，手動區有 {len(manual_urls_only)} 個源。")
+        # 手動模式只會噴呢一句
+        logging.info(f"✨ 模擬掃描完畢：全網發現 {len(new_discovered)} 個新源！")
+        logging.info(f"📝 提示：當前係 MANUAL 模式，呢 {len(new_discovered)} 個新源【冇】寫入 sources.txt。")
 
 if __name__ == "__main__":
     main()
