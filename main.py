@@ -197,7 +197,7 @@ def main():
     # 寫入輸出 A: 自己睇嘅 hk_live.m3u
     with open("hk_live.m3u", "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
-        f.write(f'#EXTINF:-1 group-title="最後更新" tvg-name="總表更新", 更：{update_time}\nhttp://127.0.0.1/time.mp4\n')
+        f.write(f'#EXTINF:-1 group-title="最後更新" tvg-name="總表更新", 更：{update_time}\nhttp://10.255.255.1/info.ts\n')
         
         for target in ["廣東", "香港", "台灣", "澳門", "特色", "其他"]:
             for name, items in channel_groups.items():
