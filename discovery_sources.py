@@ -109,7 +109,7 @@ def main():
         for line in reversed(final_output[:MAX_AUTO_KEEP]):
             f.write(line + "\n")
     
-    logging.info(f"✅ 搞掂！手動源已保護/補回，並更新咗自動源。")
+    logging.info(f"✅ 搞掂！更新咗自動源。")
 
 if __name__ == "__main__":
     main()
