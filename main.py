@@ -173,7 +173,7 @@ def main():
     with open("hk_live.m3u", "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
         # 標記最後更新時間，方便喺播放器入面睇
-        f.write(f'#EXTINF:-1 group-title="最後更新", 🔄 更新時間：{update_time}\nhttp://127.0.0.1/time.mp4\n')
+        f.write(f'#EXTINF:-1 group-title="最後更新", 更{update_time}\nhttp://127.0.0.1/time.mp4\n')
         
         for target in ["廣東", "香港", "台灣", "澳門", "特色", "其他"]:
             for name in channel_groups:
