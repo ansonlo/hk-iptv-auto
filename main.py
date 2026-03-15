@@ -38,15 +38,16 @@ def load_sources(file_path="sources.txt"):
     return []
 
 def get_speed(url):
-    """優化 1：快速測速邏輯 (使用 stream=True 攞到 Header 即停)"""
-    try:
-        start = time.time()
-        # 唔需要下載成個 TS 檔案，只要對方 Server 有回應（Header）就計算延遲
-        with session.get(url, timeout=1.5, headers=HEADERS, stream=True, verify=False) as r:
-            if r.status_code < 400:
-                return time.time() - start
-    except:
-        pass
+    # 增加 User-Agent
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+    for _ in range(2): # 畀兩次機會佢
+        try:
+            start = time.time()
+            with session.get(url, timeout=3.0, headers=headers, stream=True, verify=False) as r:
+                if r.status_code < 400:
+                    return time.time() - start
+        except:
+            time.sleep(0.5)
     return 999
 
 def get_group(name):
