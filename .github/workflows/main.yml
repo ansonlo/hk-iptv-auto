@@ -33,9 +33,14 @@ jobs:
       run: |
         export TZ='Asia/Shanghai'
         
-        # 1. 搵新源
-        #echo "📡 正在全網自動搜尋新發現的好源..."
-        #python discovery_sources.py
+        # 1. 搵新源 (每 7 日執行一次，設定喺星期一)
+        # $(date +%u) 1為星期一，7為星期日
+        if [ "$(date +%u)" = "1" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "📅 今日係執行日（或手動執行），啟動全網自動搜尋新發現的好源..."
+          python discovery_sources.py
+        else
+          echo "⏭️ 今日非搜尋日，跳過 discovery_sources.py，直接進入連通性測試。"
+        fi
         
         # 2. 通用測試
         echo "🌍 正在執行通用環境測試 (main.py)..."
@@ -53,7 +58,7 @@ jobs:
         # 添加生成嘅檔案
         git add sources.txt auto_repair.log *.m3u || true
         
-        # 只有喺有改動嘅時候先執行 Stash 同 Push
+        # 只有喺有改動嘅時候先執行提交
         if ! git diff --staged --quiet; then
           git stash
           git pull origin main --rebase
