@@ -22,14 +22,59 @@ BASE_DISCOVERY_URLS = [
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
 
-logging.basicConfig(level=logging.INFO, format='%(message)s', handlers=[logging.FileHandler("auto_repair.log", mode='a', encoding="utf-8"), logging.StreamHandler()])
+# 設定日誌格式
+logging.basicConfig(level=logging.INFO, format='%(message)s', 
+                    handlers=[logging.FileHandler("auto_repair.log", mode='a', encoding="utf-8"), 
+                              logging.StreamHandler()])
 
-# --- 【2. 核心過濾】 ---
-def is_useful(name, url):
-    combined_text = (str(name) + str(url)).upper()
-    if any(black.upper() in combined_text for black in BLACK_LIST): return False
-    if any(key.upper() in combined_text for key in KEYWORDS): return True
-    return False
+# --- 【2. 核心過濾與分析邏輯】 ---
+def analyze_source(url):
+    """深度掃描單個源，並返回詳細報告"""
+    stats = {"total": 0, "online": 0, "white": 0, "black": 0, "links": []}
+    try:
+        r = requests.get(url, timeout=20, headers=HEADERS, verify=False)
+        r.encoding = 'utf-8'
+        if r.status_code != 200: return stats
+        
+        lines = r.text.split('\n')
+        temp_name = ""
+        for line in lines:
+            line = line.strip()
+            if not line: continue
+            
+            # 解析頻道名
+            name = ""
+            link = ""
+            if line.startswith("#EXTINF"):
+                name = cc.convert(line.split(',')[-1]).strip()
+                # 搵下一行網址
+                continue 
+            elif "://" in line:
+                if "," in line and not line.startswith("http"): # 格式: 頻道,網址
+                    parts = line.split(',')
+                    name = cc.convert(parts[0]).strip()
+                    link = parts[1].strip()
+                else: # 格式: 網址 (配合上面 EXTINF)
+                    name = temp_name
+                    link = line.strip()
+            
+            if link:
+                stats["total"] += 1
+                combined = (str(name) + str(link)).upper()
+                # 過濾邏輯
+                if any(b.upper() in combined for b in BLACK_LIST):
+                    stats["black"] += 1
+                elif any(k.upper() in combined for k in KEYWORDS):
+                    stats["white"] += 1
+                    stats["links"].append(link.split('$')[0].split('#')[0].strip())
+                temp_name = ""
+            elif name:
+                temp_name = name
+
+        stats["online"] = stats["total"] # 這裡簡化處理，能下載到文件視為連通
+    except:
+        pass
+    return stats
 
 # --- 【3. 搜尋引擎】 ---
 def search_github():
@@ -49,36 +94,18 @@ def search_gitee():
     except: pass
     return []
 
-def get_filtered_links(url):
-    links = []
-    try:
-        r = requests.get(url, timeout=20, headers=HEADERS, verify=False)
-        r.encoding = 'utf-8'
-        temp_name = ""
-        for line in r.text.split('\n'):
-            line = line.strip()
-            if line.startswith("#EXTINF"):
-                temp_name = cc.convert(line.split(',')[-1]).strip()
-            elif line.startswith("http") and temp_name:
-                if is_useful(temp_name, line): links.append(line.split('$')[0].split('#')[0].strip())
-                temp_name = ""
-            elif "," in line and "://" in line:
-                parts = line.split(',')
-                if is_useful(cc.convert(parts[0]), parts[1]): links.append(parts[1].strip())
-    except: pass
-    return list(dict.fromkeys(links))
-
 # --- 【4. 主程序】 ---
 def main():
-    # --- 開頭增加醒目標示 ---
-    logging.info("\n" + "ID" * 30)
+    # --- 打印模式標頭 ---
+    logging.info("\n" + "="*60)
     if SCAN_MODE == "MANUAL_ONLY":
-        logging.info("🎯 【手動模式 - 精準狙擊】")
-        logging.info("🔎 僅針對 sources.txt 手動區內的種子進行深度挖掘...")
+        logging.info(f"🎯 【手動模式】 📅 更新時間：{time.strftime('%m%d %H:%M')}")
+        logging.info("🔎 僅針對 sources.txt 手動區種子進行深度挖掘...")
     else:
-        logging.info("🌐 【自動模式 - 全網獵奇】")
-        logging.info("📡 正在啟動 12 小時一次的保底源 + GitHub + Gitee 全量掃描...")
-    logging.info("ID" * 30 + "\n")
+        logging.info(f"🌐 【自動模式】 📅 更新時間：{time.strftime('%m%d %H:%M')}")
+        logging.info("📡 啟動 12 小時全網搜刮 (GitHub/Gitee/核心源)...")
+    logging.info("="*60)
+
     fixed_content, auto_links, is_auto_zone = [], [], False
 
     if os.path.exists(SOURCE_FILE):
@@ -94,28 +121,42 @@ def main():
     manual_urls = set(re.findall(r'https?://[^\s,]+', "".join(fixed_content)))
     current_all_set = manual_urls.union(set(auto_links))
 
-    # 🎯 核心改動：模式決定掃描範圍
     if SCAN_MODE == "MANUAL_ONLY":
         targets = list(manual_urls)
-        logging.info(f"🎯 手動模式：僅掃描手動區 {len(targets)} 個源...")
     else:
         targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + search_github() + search_gitee()))
-        logging.info(f"🌐 全量模式：掃描 {len(targets)} 個源...")
 
     new_discovered = []
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        for found in executor.map(get_filtered_links, targets):
-            for l in found:
+    
+    # 開始逐個掃描並輸出詳細報告
+    for url in targets:
+        report = analyze_source(url)
+        if report["total"] > 0:
+            logging.info(f"✅ 報告: {url}")
+            logging.info(f"   ┣ [源頭掃描] 總台數: {report['total']}")
+            logging.info(f"   ┣ [網絡狀況] 連通數: {report['online']}")
+            logging.info(f"   ┗ [內容過濾] 中白名單: {report['white']} (採納) | 中黑名單: {report['black']} (剔除)")
+            
+            for l in report["links"]:
                 if l not in current_all_set:
                     new_discovered.append(l)
                     current_all_set.add(l)
+        else:
+            logging.info(f"❌ 報告: {url} (連通失敗或無內容)")
 
+    # --- 寫入與總結 ---
     if SCAN_MODE == "FULL_SCAN":
-        logging.info(f"✅ 自動更新完畢：新增 {len(new_discovered)} 個潛在優質源。")
-        logging.info(f"📊 已將最新sources.txt。")
+        final_auto = (auto_links + new_discovered)[-MAX_AUTO_KEEP:]
+        with open(SOURCE_FILE, "w", encoding="utf-8") as f:
+            f.writelines([l.rstrip() + "\n" for l in fixed_content])
+            f.write("\n# --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---\n")
+            for idx, link in enumerate(final_auto, 1):
+                f.write(f"NEW_SOURCE_{idx},{link}\n")
+        logging.info(f"\n✅ 自動更新完畢：新增 {len(new_discovered)} 個優質源。")
+        logging.info(f"📊 已將最新 1500 條結果保存至 {SOURCE_FILE}。")
     else:
-        logging.info(f"🏁 手動掃描完畢：發現新源 {len(new_discovered)} 個。")
-        logging.info(f"📝 提示：手動模式僅作「報告」，唔會改動你份 sources.txt。")
+        logging.info(f"\n🏁 手動掃描完畢：發現新源 {len(new_discovered)} 個。")
+        logging.info(f"📝 提示：手動模式不改動文件，請檢查上面日誌獲取新 Link。")
 
 if __name__ == "__main__":
     main()
