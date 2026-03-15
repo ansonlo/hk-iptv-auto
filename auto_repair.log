@@ -1,21 +1,19 @@
 ✅ [數據讀取] 已從 sources.txt 加載 2 個源
+✅ 報告: https://api.allorigins.win/raw... | 採納: 8
 ❌ 錯誤: CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming (No connection adapters were found for 'CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming')
-🎭 【移动】戴上面具: 120.231.139.205
-✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 259/368)
-💀 出錯: CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming (No connection adapte)
-🎭 【电信】戴上面具: 14.215.114.33
+🏁 完工！已生成 hk_live.m3u 及 user_result.m3u
+🎭 【移动】戴上面具: 120.196.210.12
 💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
 💀 出錯: CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming (No connection adapte)
-🎭 【联通】戴上面具: 27.36.105.196
-✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 290/368)
+🎭 【电信】戴上面具: 14.145.29.75
+💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
+💀 出錯: CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming (No connection adapte)
+🎭 【联通】戴上面具: 121.33.150.55
+💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
 💀 出錯: CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming (No connection adapte)
 🎭 【广电】戴上面具: 103.27.26.88
-✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 280/368)
+💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
 💀 出錯: CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming (No connection adapte)
 ⚠️ 通用 無面具用原生 IP
-✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 271/368)
+💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
 💀 出錯: CCTV,http://[2409:8087:8:21::18]:6610/otttv.bj.chinamobile.com/PLTV/88888888/224/3221226318/1.m3u8? # fanmingming (No connection adapte)
-💾 檔案已保存: gz_live.m3u
-💾 檔案已保存: gz_dxlive.m3u
-💾 檔案已保存: gz_ltlive.m3u
-💾 檔案已保存: gz_gdlive.m3u
