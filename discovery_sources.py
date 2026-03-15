@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 SOURCE_FILE = "sources.txt"
 # 從 YAML 環境變數讀取模式，預設為 FULL_SCAN
 SCAN_MODE = os.getenv("SCAN_MODE", "FULL_SCAN")
-MAX_AUTO_KEEP = 1500  # 自動區最多保留 1500 條精華
+MAX_AUTO_KEEP = 5000  # 自動區最多條精華
 cc = OpenCC('s2t')
 
 # ⚪ 白名單 (KEYWORDS)：符合呢啲字眼先會執入去
