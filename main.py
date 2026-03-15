@@ -162,7 +162,7 @@ def main():
     with open("hk_live.m3u", "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
         # 標題標籤，設為 "總表更新" 以便同 gz 分流腳本隔離
-        f.write(f'#EXTINF:-1 group-title="最後更新" tvg-name="總表更新", 📅 完成時間：{final_finish_time}\n')
+        f.write(f'#EXTINF:-1 group-title="最後更新" tvg-name="總表更新", 更：{final_finish_time}\n')
         f.write(f'http://10.255.255.1/info.ts\n')
         
         sort_order = ["廣東", "香港", "台灣", "澳門", "特色", "其他"]
