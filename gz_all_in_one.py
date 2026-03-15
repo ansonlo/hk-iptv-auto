@@ -12,7 +12,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(message)s',
     handlers=[
-        logging.FileHandler("gz_repair.log", mode='w', encoding="utf-8"), 
+        logging.FileHandler("auto_repair.log", mode='a', encoding="utf-8"), 
         logging.StreamHandler()
     ]
 )
