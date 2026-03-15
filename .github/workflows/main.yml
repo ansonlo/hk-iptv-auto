@@ -48,28 +48,17 @@ jobs:
         # 3. 專線診斷
         python gz_all_in_one.py
 
-    - name: Commit and push
+    - name: 提交並推送更新
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # 🌟 關鍵優化 1：先將所有可能改動過嘅嘢都 add 入去
-        # 確保 rebase 嗰陣 worktree 係乾淨嘅
-        git add *.txt *.log *.m3u || true
+        # 🌟 呢度係重點：確保 add 咗 auto_repair.log
+        git add auto_repair.log sources.txt *.m3u || true
         
-        # 檢查有無嘢改過
         if ! git diff --staged --quiet; then
-          MODE_NAME=${SCAN_MODE:-"UNKNOWN"}
-          git commit -m "🚀 數據更新 [Mode: $MODE_NAME] ($(date +'%m-%d %H:%M'))"
-          
-          # 🌟 關鍵優化 2：先 fetch，如果有衝突就用 ours 策略或者直接 push
-          git fetch origin main
-          
-          # 如果 rebase 仲係報錯，最簡單係先 pull 再 push，或者直接 push
-          # 喺 Action 入面，通常用 rebase 係為咗保持 timeline 乾淨
-          git rebase origin/main || git rebase --abort
-          
+          git commit -m "🚀 數據更新 & 五線診斷報告 ($(date +'%m-%d %H:%M'))"
           git push origin main
         else
-          echo "✅ 數據與日誌均無變動，跳過提交"
+          echo "✅ 無變動，跳過提交"
         fi
