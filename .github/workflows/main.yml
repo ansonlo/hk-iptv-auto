@@ -46,7 +46,7 @@ jobs:
         python main.py
                 
         # 3. 專線診斷
-        #python gz_all_in_one.py
+        python gz_all_in_one.py
 
     - name: Commit and push
       run: |
