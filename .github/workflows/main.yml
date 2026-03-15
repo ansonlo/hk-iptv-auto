@@ -2,18 +2,9 @@ name: Update IPTV Source
 
 on:
   schedule:
-    # 北京時間 08:00 同 20:00 執行（呢個係自動模式，行 FULL_SCAN）
+    # 北京時間 08:00 同 20:00 執行
     - cron: '0 0,12 * * *'
-  workflow_dispatch:
-    inputs:
-      scan_mode:
-        description: '選擇執行模式'
-        required: true
-        default: 'MANUAL_ONLY'
-        type: choice
-        options:
-          - MANUAL_ONLY
-          - FULL_SCAN
+  workflow_dispatch: # 👈 改咗呢度：刪除咗 inputs，唔使再揀
 
 permissions:
   contents: write
@@ -24,8 +15,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-        persist-credentials: true
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -41,45 +30,36 @@ jobs:
       run: |
         export TZ='Asia/Shanghai'
         
-        # 判斷係自動定手動觸發。如果是定時(schedule)，強制用 FULL_SCAN；手動則用你揀嘅 Mode
+        # 🤖 自動切換模式：
         if [ "${{ github.event_name }}" == "schedule" ]; then
           export SCAN_MODE="FULL_SCAN"
+          echo ">>> 偵測到定時任務：啟動 FULL_SCAN 模式 <<<"
         else
-          export SCAN_MODE="${{ github.event.inputs.scan_mode }}"
+          export SCAN_MODE="MANUAL_ONLY"
+          echo ">>> 偵測到手動撳制：啟動 MANUAL_ONLY 模式 <<<"
         fi
         
-        echo "---------------------------------------"
-        echo "Step 1: 執藥腳本 (Discovery) [Mode: $SCAN_MODE]"
+        # 1. 執藥
         python discovery_sources.py
         
-        # 2. 測速 
-        #echo "---------------------------------------"
-        #echo "Step 2: 🌍 正在執行通用環境測試 (main.py)...""
-        #python main.py
+        # 2. 測速 (如果你想手動行都測速，就開返佢)
+        python main.py
                 
-        # 3. 執行專線診斷
-        #echo "---------------------------------------"
-        #echo "🏥 正在執行廣州五路專線診斷 (gz_all_in_one.py)..."
-        #python gz_all_in_one.py
+        # 3. 專線診斷
+        python gz_all_in_one.py
 
     - name: Commit and push
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # 1. 先從遠端拉取最新的改動（避免多人同時跑導致衝突）
-        git pull origin main --rebase
-        
-        # 2. 確保所有目標檔案都被追蹤
+        # 先 Add，再 Pull，最後 Push，解決 128 衝突問題
         git add sources.txt auto_repair.log *.m3u || true
         
-        # 3. 檢查是否有變動
         if ! git diff --staged --quiet; then
-          # 確保 $SCAN_MODE 有值，如果是空值則顯示為 UNKNOWN
-          MODE_NAME=${SCAN_MODE:-"UNKNOWN"}
-          
-          git commit -m "🚀 數據更新 [Mode: $MODE_NAME] ($(date +'%m-%d %H:%M'))"
+          git pull origin main --rebase
+          git commit -m "🚀 數據更新 [${{ github.event_name }}] ($(date +'%m-%d %H:%M'))"
           git push origin main
         else
-          echo "✅ 數據與日誌均無變動，跳過提交"
+          echo "✅ 冇數據變動，跳過提交"
         fi
