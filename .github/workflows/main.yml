@@ -33,25 +33,24 @@ jobs:
       run: |
         export TZ='Asia/Shanghai'
         
-        # 1. 搵新源邏輯
+        # 1. 判斷模式
         if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-          echo "🔘 手動觸發：啟動特殊模式，僅掃描 sources.txt 中的 # MY MANUAL SOURCES ..."
-          # 這裡傳遞一個環境變數給 Python 腳本
+          echo "🔘 手動觸發：僅掃描手動區種子 ..."
           export SCAN_MODE="MANUAL_ONLY"
-          python discovery_sources.py
-        elif [ "$(date +%u)" = "1" ]; then
-          echo "📅 星期一例行：啟動全網自動搜尋新源..."
-          export SCAN_MODE="FULL_SCAN"
-          python discovery_sources.py
         else
-          echo "⏭️ 今日非搜尋日，跳過 discovery_sources.py。"
+          echo "⏰ 定時執行：啟動全網搜刮模式 ..."
+          export SCAN_MODE="FULL_SCAN"
         fi
+
+        # 2. 先執行執藥腳本 (一定要喺 main.py 之前)
+        echo "🔍 正在執行執藥腳本 (discovery_sources.py)..."
+        python discovery_sources.py
         
-        # 2. 通用測試
+        # 3. 執行通用測試
         echo "🌍 正在執行通用環境測試 (main.py)..."
         python main.py
         
-        # 3. 專線診斷
+        # 4. 執行專線診斷
         echo "🏥 正在執行廣州五路專線診斷 (gz_all_in_one.py)..."
         python gz_all_in_one.py
 
