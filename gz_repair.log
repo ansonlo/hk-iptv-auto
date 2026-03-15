@@ -1,38 +1,18 @@
+🛰️ 診斷中: 【移动】專線模式...
+🛰️ 診斷中: 【电信】專線模式...
+🛰️ 診斷中: 【联通】專線模式...
+🛰️ 診斷中: 【广电】專線模式...
+🌐 診斷中: 【通用模式】測試...
 
-📊 --- 【移动 診斷報告】 ---
-   🎭 偽裝 IP: 120.196.212.55
-   ┣ https://api.allorigins.win/raw?url=https://live.ha... (連通: 7/365)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
-   ┗ 總計有效線路: 7
-
-📊 --- 【电信 診斷報告】 ---
-   🎭 偽裝 IP: 14.145.29.75
-   ┣ https://api.allorigins.win/raw?url=https://live.ha... (連通: 0/0)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
-   ┗ 總計有效線路: 0
-
-📊 --- 【联通 診斷報告】 ---
-   🎭 偽裝 IP: 27.36.105.196
-   ┣ https://api.allorigins.win/raw?url=https://live.ha... (連通: 7/365)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
-   ┗ 總計有效線路: 7
-
-📊 --- 【广电 診斷報告】 ---
-   🎭 偽裝 IP: 103.27.26.88
-   ┣ https://api.allorigins.win/raw?url=https://live.ha... (連通: 7/365)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://rsms.me/res/proxy.php?u=https://live.hacks... (連通: 0/0)
-   ┣ https://live.hacks.tools/tv/ipv4/categories/hong_k... (連通: 0/0)
-   ┗ 總計有效線路: 7
-
-🏆 --- 【廣州全網通終極報告】 ---
-   移动: 7 | 电信: 0 | 联通: 7 | 广电: 7
+📊 --- 【直播源五線連通性終極報告】 ---
+源: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u
+┗ 總量: 365 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 7 | 通用: 18
+源: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u
+┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
+源: https://rsms.me/res/proxy.php?u=https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u
+┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
+源: https://live.hacks.tools/tv/ipv4/categories/hong_kong.m3u
+┗ 總量: 0 | 移动: 0 | 电信: 0 | 联通: 0 | 广电: 0 | 通用: 0
 -----------------------------------------------------------------
 💾 產出完成: gz_live.m3u
 💾 產出完成: gz_dxlive.m3u
