@@ -34,8 +34,8 @@ jobs:
         export TZ='Asia/Shanghai'
         
         # 1. 搵新源
-        echo "📡 正在全網自動搜尋新發現的好源..."
-        python discovery_sources.py
+        #echo "📡 正在全網自動搜尋新發現的好源..."
+        #python discovery_sources.py
         
         # 2. 通用測試
         echo "🌍 正在執行通用環境測試 (main.py)..."
