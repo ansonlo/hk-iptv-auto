@@ -20,6 +20,7 @@ logging.basicConfig(
 KEYWORDS = ["廣州", "珠江", "廣東", "大灣區", "南方", "深圳", "翡翠", "VIU", "HOY", "RTHK", "港台", "明珠", "無線", "鳳凰", "澳視", "澳門", "TDM", "澳亞", "CCTV", "台灣", "TVBS", "三立"]
 BLOCK_KEYWORDS = ["*SG", "redirect", "酒店", "TEST", "測試", "購物", "延時", "8K", "UHD"]
 
+# 廣東移動、電信等本地 ISP 特徵
 FEATURES = {
     "移动": ["120.196.", "120.197.", "183.232.", "183.235.", "gdmcc", "2409:"], 
     "电信": ["gdct", "113.108.", "125.88.", "14.215.", "240e:"],
@@ -30,19 +31,18 @@ FEATURES = {
 # --- 【2. 強化版工具函數】 ---
 
 def clean_name(raw_name):
-    """強效歸一化：確保翡翠台HD、翡翠台(超清)都變成『翡翠台』"""
-    # 基礎轉換：繁轉簡、統一台字、轉大寫
+    # 🌟 增加防禦：如果名字入面包含「更」或者「📅」，直接保留原樣（方便後面過濾）
+    if any(x in raw_name for x in ["更", "📅"]):
+        return raw_name.strip()
+        
     name = cc.convert(raw_name).replace('臺', '台').upper().strip()
-    # 移除括號內容 [xxx], (xxx), （xxx）
     name = re.sub(r'\[.*?\]|\(.*?\)|\（.*?\）', '', name)
-    # 移除畫質同干擾後綴
     suffixes = ["超清", "高清", "藍光", "標清", "頻道", "1080P", "720P", "4K", "HD", "SD", "FHD", "BD"]
     for s in suffixes:
         name = name.replace(s, "")
     return name.strip("-").strip("_").strip()
 
 def get_speed(url, custom_headers, current_session): 
-    """強化版測速：加入 2 次重試機制，對抗網絡抖動"""
     for i in range(2):
         try:
             start = time.time()
@@ -63,7 +63,7 @@ def get_group(name):
     if "CCTV" in check_name: return "特色"
     return "其他"
 
-# --- 【3. IP 池與面具邏輯 (保留你的原創)】 ---
+# --- 【3. IP 池與面具邏輯】 ---
 
 def load_ip_pool(file_name="IP_Pool.txt"):
     cache = {}
@@ -113,7 +113,6 @@ def crawl_and_test(provider_name, source_list, ip_cache):
     
     if not mask_ip:
         for key in ['X-Forwarded-For', 'X-Real-IP', 'Client-IP']: current_headers.pop(key, None)
-        logging.info(f"⚠️ {provider_name} 無面具用原生 IP")
     else:
         logging.info(f"🎭 【{provider_name}】戴上面具: {mask_ip}")
 
@@ -132,7 +131,6 @@ def crawl_and_test(provider_name, source_list, ip_cache):
                     summary['total'] += 1
                     parts = line.split(',')
                     raw_name = parts[-1] if parts else "UNKNOWN"
-                    # --- ✅ 調用歸一化函數 ---
                     name = clean_name(raw_name)
                 elif (line.startswith("http") or line.startswith("rtmp")) and name:
                     clean_url = line.split('$')[0].split('#')[0].split('|')[0].replace(' ', '').strip()
@@ -142,7 +140,6 @@ def crawl_and_test(provider_name, source_list, ip_cache):
             if current_raw:
                 with ThreadPoolExecutor(max_workers=150) as ex:
                     futures = {ex.submit(get_speed, x['url'], current_headers, test_session): x for x in current_raw}
-                    pbar = tqdm(total=len(futures), desc=f"⏳ 分析【{provider_name}】", unit="link", ncols=100, leave=False)
                     for f in futures:
                         item = futures[f]
                         try:
@@ -155,16 +152,14 @@ def crawl_and_test(provider_name, source_list, ip_cache):
                                     summary['white'] += 1
                                     fs = s 
                                     feat_list = FEATURES.get(provider_name, [])
-                                    # ISP 權重優化：本地 ISP 源置頂
+                                    # ISP 權重優化：本地源在測速上扣減「虛擬秒數」以便排喺最頭
                                     if any(feat.lower() in item['url'].lower() for feat in feat_list):
                                         fs -= 10.0 
-                                    item['speed'], item['display_speed'] = fs, s
+                                    item['speed'] = fs
                                     summary['items'].append(item)
                                 elif is_black: summary['black'] += 1
                             else: summary['offline'] += 1
                         except: summary['offline'] += 1
-                        finally: pbar.update(1)
-                    pbar.close()
             
             provider_results[u] = summary
             logging.info(f"✅ 報告: {u} (連通: {summary['online']}/{summary['total']})")
@@ -173,8 +168,6 @@ def crawl_and_test(provider_name, source_list, ip_cache):
             provider_results[u] = summary
     return provider_results
 
-# --- 【5. 診斷入口】 ---
-
 def diagnosis(ip_cache):
     sources = []
     if os.path.exists("sources.txt"):
@@ -182,13 +175,13 @@ def diagnosis(ip_cache):
             sources = [line.strip() for line in f if line.strip() and not line.startswith("#")]
     
     if not sources: return {}
-    all_res = {p: crawl_and_test(p, sources, ip_cache) for p in ["移动", "电信", "联通", "广电", "通用"]}
+    # 分流測速
+    all_res = {p: crawl_and_test(p, sources, ip_cache) for p in ["移动", "电信", "联通", "广电"]}
 
     final_data = {p: [] for p in ["移动", "电信", "联通", "广电"]}
     for p in final_data.keys():
         merged = []
         for src_data in all_res[p].values(): merged.extend(src_data['items'])
-        # 全局排序
         final_data[p] = sorted(merged, key=lambda x: x.get('speed', 999))
     return final_data
 
@@ -199,6 +192,7 @@ def main():
     all_provider_final_data = diagnosis(ip_cache) 
     if not all_provider_final_data: return
 
+    # 🌟 寫入前獲取時間
     update_time = datetime.datetime.now().strftime("%m%d %H:%M")
     files_map = {
         "移动": ("gz_live.m3u", "廣州移動"), 
@@ -209,21 +203,22 @@ def main():
     
     valid_providers = {k: v for k, v in all_provider_final_data.items() if v}
     if not valid_providers: return
+    # 搵出資源最豐富嘅 ISP 作為補償源
     best_p_key = max(valid_providers, key=lambda k: len(valid_providers[k]))
     best_isp_all_data = valid_providers[best_p_key]
 
     for provider, (filename, desc) in files_map.items():
         current_isp_data = all_provider_final_data.get(provider, [])
-        _, mask_ip = get_headers_with_mask(provider, ip_cache)
         
         try:
             with open(filename, "w", encoding="utf-8") as f:
-                f.write(f'#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml,https://epg.pw/xmltv/feed/subscription/free/hk.xml"\n')
-                f.write(f'#EXTINF:-1 group-title="{desc}" tvg-name="更", 更{update_time} \nhttp://10.255.255.1/info.ts\n')
+                f.write(f'#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"\n')
+                # 🌟 標籤隔離：tvg-name 叫 "更"，顯示叫 "更XXXX"
+                f.write(f'#EXTINF:-1 group-title="{desc}" tvg-name="更", 更{update_time}\nhttp://10.255.255.1/info.ts\n')
                 
                 for target_group in ["廣東", "香港", "澳門", "台灣", "特色", "其他"]:
                     group_items = []
-                    # 1. 加入原生 ISP 數據
+                    # 1. 本地 ISP 數據
                     local_items = [item for item in current_isp_data if get_group(item["name"]) == target_group]
                     for x in local_items:
                         x['final_group'] = target_group
@@ -235,29 +230,29 @@ def main():
                         for x in best_isp_all_data:
                             if get_group(x["name"]) == target_group and x['url'] not in local_urls:
                                 x_copy = x.copy()
+                                # 標記係借返嚟嘅
                                 x_copy['display_name'] = f"{x['name']} ({best_p_key})"
                                 x_copy['final_group'] = target_group
                                 group_items.append(x_copy)
                     
-                    # --- ✅ 3. 排序與「Base URL」二次去重 ---
+                    # 3. 排序與去重
                     group_items.sort(key=lambda x: x.get('speed', 999))
                     final_unique_items = []
                     seen_urls = set()
                     
                     for item in group_items:
-                        # 提取網址真身去重
-                        base_url = item['url'].split('?')[0].split('#')[0].split('$')[0].strip()
+                        base_url = item['url'].split('?')[0].split('#')[0].strip()
                         unique_key = f"{item['name']}_{base_url}"
                         
                         if unique_key not in seen_urls:
                             final_unique_items.append(item)
                             seen_urls.add(unique_key)
                     
-                    # 4. 寫入文件
+                    # 4. 寫入文件 (加入標籤過濾)
                     for item in final_unique_items:
-                        # 🌟 核心改動：跳過所有舊嘅功能性標籤（如 main.py 產生嘅時間）
-                        # 咁樣就唔會出現重複嘅「更」，亦唔會出現「更 (移动)」
-                        if any(x in item['name'] for x in ["更", "伪", "查我IP"]):
+                        # 🌟 核心改動：跳過 main.py 嘅時間標籤同埋所有「更」字
+                        # 確保唔會出現「更 (移动)」這種由 clean_name 誤判產生嘅嘢
+                        if any(x in item['name'] for x in ["更", "📅", "偽", "查我IP"]):
                             continue
                             
                         d_name = item.get('display_name', item['name'])
@@ -266,7 +261,7 @@ def main():
             logging.info(f"💾 檔案已保存: {filename}")
         except Exception as e: logging.info(f"❌ 寫入錯誤 {filename}: {e}")
 
-    print(f"🏁 任務完成！最強線路：{best_p_key}")
+    print(f"🏁 任務完成！")
 
 if __name__ == "__main__":
     main()
