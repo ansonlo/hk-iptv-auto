@@ -1,2 +1,13 @@
-✅ [數據讀取] 已從 sources.txt 加載 2 個源
-🏁 完工！hk_live.m3u 已生成。時間：0315 10:58
+✅ [數據讀取] 已從 sources.txt 加載 1 個源
+🎭 【移动】戴上面具: 183.232.231.229
+💀 出錯: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (HTTPSConnectionPool()
+🎭 【电信】戴上面具: 14.215.114.33
+✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 289/360)
+🎭 【联通】戴上面具: 27.36.105.196
+✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 291/360)
+🎭 【广电】戴上面具: 103.27.26.100
+✅ 報告: https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u (連通: 290/360)
+💾 檔案已保存: gz_live.m3u
+💾 檔案已保存: gz_dxlive.m3u
+💾 檔案已保存: gz_ltlive.m3u
+💾 檔案已保存: gz_gdlive.m3u
