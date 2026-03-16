@@ -6,7 +6,6 @@ from tqdm import tqdm
 # --- 【1. 初始化配置】 ---
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 cc = OpenCC('s2t')
-# 增加連接池大小以提升併發效率
 adapter = requests.adapters.HTTPAdapter(pool_connections=200, pool_maxsize=200)
 
 logging.basicConfig(
@@ -22,7 +21,6 @@ logging.basicConfig(
 KEYWORDS = ["廣州", "珠江", "廣東", "大灣區", "南方", "深圳", "翡翠", "VIU", "HOY", "RTHK", "港台", "明珠", "無線", "鳳凰", "澳視", "澳門", "TDM", "CCTV", "台灣", "TVBS", "三立"]
 BLOCK_KEYWORDS = ["*SG", "redirect", "酒店", "TEST", "測試", "購物", "延時", "8K", "UHD"]
 
-# 各運營商特徵碼
 FEATURES = {
     "移动": ["120.196.", "120.197.", "183.232.", "183.235.", "gdmcc", "2409:"], 
     "电信": ["gdct", "113.108.", "125.88.", "14.215.", "240e:"],
@@ -33,7 +31,6 @@ FEATURES = {
 # --- 【2. 工具函數】 ---
 
 def load_ip_pool(file_name="IP_Pool.txt"):
-    """載入 IP 池"""
     cache = {}
     if os.path.exists(file_name):
         try:
@@ -49,7 +46,6 @@ def load_ip_pool(file_name="IP_Pool.txt"):
     return cache
 
 def get_mask_ip(provider_name, pool_cache):
-    """獲取隨機面具 IP，支持 CIDR 網段"""
     import ipaddress
     name_map = {"移动": ["移动", "移動"], "电信": ["电信", "電信"], "联通": ["联通", "聯通"], "广电": ["广电", "廣電"]}
     target_names = name_map.get(provider_name, [provider_name])
@@ -67,38 +63,36 @@ def get_mask_ip(provider_name, pool_cache):
     return choice
 
 def get_headers_with_mask(provider_name, pool_cache):
-    """生成帶面具的 Header，UA 同步自 main.py"""
-    # 同步 main.py 的 User-Agent
+    # 同步 main.py 嘅 UA
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'}
-    mask_ip = get_mask_ip(provider_name, pool_cache)
-    if mask_ip and provider_name != "通用":
-        headers.update({'X-Forwarded-For': mask_ip, 'X-Real-IP': mask_ip, 'Client-IP': mask_ip})
+    mask_ip = None
+    if provider_name != "通用":
+        mask_ip = get_mask_ip(provider_name, pool_cache)
+        if mask_ip:
+            headers.update({'X-Forwarded-For': mask_ip, 'X-Real-IP': mask_ip, 'Client-IP': mask_ip})
     return headers, mask_ip
 
 def load_sources(file_path="sources.txt"):
-    """讀取待檢測源"""
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
             return [line.strip() for line in f if line.strip() and not line.startswith("#")]
     return []
 
 def get_speed(url, custom_headers, current_session): 
-    """🌟 核心同步：1.5s 超時 + 100KB 數據讀取 (對齊 main.py)"""
+    """🌟 核心同步：1.5s 超時 + 100KB 數據流讀取 (對齊 main.py)"""
     try:
         start = time.time()
-        # 同步 main.py 的 1.5s 超時與 stream 模式
         r = current_session.get(url, timeout=1.5, headers=custom_headers, stream=True, verify=False)
         if r.status_code < 400:
             content = b""
             for chunk in r.iter_content(chunk_size=1024):
                 content += chunk
-                if len(content) >= 1024 * 100: break # 同步 main.py 的數據塊讀取邏輯
+                if len(content) >= 1024 * 100: break
             return time.time() - start
     except: pass
     return 999
 
 def get_group(name):
-    """分組邏輯"""
     check_name = name.upper().replace(" ", "")
     if any(x in check_name for x in ["廣東", "珠江", "廣州", "大灣區", "南方", "深圳"]): return "廣東"
     if any(x in check_name for x in ["翡翠", "VIU", "HOY", "RTHK", "港台", "明珠", "無線"]): return "香港"
@@ -108,32 +102,36 @@ def get_group(name):
     return "其他"
 
 def mark_source_as_deleted(url):
-    """在 sources.txt 中註釋掉失效源"""
+    """喺 sources.txt 執行標記封印"""
     try:
         if os.path.exists("sources.txt"):
-            with open("sources.txt", "r", encoding="utf-8") as f: lines = f.readlines()
+            with open("sources.txt", "r", encoding="utf-8") as f:
+                lines = f.readlines()
             with open("sources.txt", "w", encoding="utf-8") as f:
                 for line in lines:
                     if url.strip() in line and not line.strip().startswith("#"):
                         f.write(f"# {line}")
-                    else: f.write(line)
-    except: pass
+                    else:
+                        f.write(line)
+            logging.info(f"✅ 成功喺 sources.txt 標記封印: {url[:40]}...")
+    except Exception as e:
+        logging.error(f"❌ 標記封印失敗: {e}")
 
 # --- 【3. 核心測試流程】 ---
 
 def crawl_and_test(provider_name, source_list, ip_cache):
-    """執行單個運營商線路的測試"""
     test_session = requests.Session()
     test_session.mount('http://', adapter)
     test_session.mount('https://', adapter)
     
     current_headers, mask_ip = get_headers_with_mask(provider_name, ip_cache)
     
-    # 🌟 針對「通用」線路：強制使用原生測速 (不加面具 Header)
+    # 🌟 同步邏輯：通用線路 = 絕對原生 IP 測速
     if provider_name == "通用":
         mask_ip = None
-        for key in ['X-Forwarded-For', 'X-Real-IP', 'Client-IP']: current_headers.pop(key, None)
-        logging.info(f"🌐 【通用】線路：同步 main.py 原生測速模式")
+        for key in ['X-Forwarded-For', 'X-Real-IP', 'Client-IP']:
+            current_headers.pop(key, None)
+        logging.info(f"🌐 【通用】線路：執行 main.py 原生模式 (不戴面具)")
     elif not mask_ip:
         logging.info(f"⚠️  {provider_name} 無面具，用原生 IP")
     else:
@@ -166,12 +164,12 @@ def crawl_and_test(provider_name, source_list, ip_cache):
                     for f in futures:
                         item = f.result()
                         target_item = futures[f]
-                        if item < 5.0: # 連通閾值
+                        if item < 5.0:
                             summary['online'] += 1
                             if any(k in target_item['name'] for k in KEYWORDS) and not any(b in target_item['name'] for b in BLOCK_KEYWORDS):
                                 fs = item
                                 feat_list = FEATURES.get(provider_name, [])
-                                if any(feat.lower() in target_item['url'].lower() for feat in feat_list): fs -= 10.0 # ISP 置頂邏輯
+                                if any(feat.lower() in target_item['url'].lower() for feat in feat_list): fs -= 10.0
                                 target_item['speed'] = fs
                                 summary['items'].append(target_item)
                         pbar.update(1)
@@ -181,42 +179,54 @@ def crawl_and_test(provider_name, source_list, ip_cache):
     return provider_results
 
 def diagnosis(ip_cache):
-    """五線診斷與失效追蹤邏輯"""
+    """五線診斷 + 15天日期追蹤封印"""
     sources = load_sources("sources.txt")
     if not sources: return {}
     
-    # 執行五線測試 (通用線已同步 main.py 邏輯)
     all_res = {p: crawl_and_test(p, sources, ip_cache) for p in ["移动", "电信", "联通", "广电", "通用"]}
 
-    # 15 天連續失效計數器
+    # --- 🌟 15 天日期追蹤核心邏輯 ---
     tracker_file = "fail_tracker.json"
+    today_obj = datetime.datetime.now()
+    today_str = today_obj.strftime("%Y-%m-%d")
+    
     if os.path.exists(tracker_file):
         try:
             with open(tracker_file, "r", encoding="utf-8") as f: tracker = json.load(f)
         except: tracker = {}
     else: tracker = {}
 
-    logging.info("\n📊 --- 【直播源五線連通性終極報告】 ---")
+    logging.info("\n📊 --- 【五線連通性終極診斷報告】 ---")
     for url in sources:
-        # 匯總 5 條線路的連通情況
         total_online = sum(all_res[p].get(url, {}).get('online', 0) for p in ["移动", "电信", "联通", "广电", "通用"])
         
         stats = [f"{p}: {all_res[p].get(url, {}).get('online', 0)}" for p in ["移动", "电信", "联通", "广电", "通用"]]
         logging.info(f"源: {url[:60]}...\n┗ " + " | ".join(stats))
         
         if total_online == 0:
-            tracker[url] = tracker.get(url, 0) + 1
-            if tracker[url] >= 15:
-                logging.warning(f"🚫 連續 15 天五線全斷，標記刪除：{url}")
-                mark_source_as_deleted(url)
-                if url in tracker: del tracker[url]
-            else: logging.info(f"⚠️ 失效計數：{tracker[url]}/15 天")
+            if url not in tracker:
+                tracker[url] = today_str  # 紀錄開始失效嘅第一日
+                logging.info(f"  📍 首次發現全線失效，紀錄日期：{today_str}")
+            else:
+                try:
+                    start_date = datetime.datetime.strptime(tracker[url], "%Y-%m-%d")
+                    days_diff = (today_obj - start_date).days
+                    if days_diff >= 15:
+                        logging.warning(f"  🚫 已連續失效達 {days_diff} 天，正式封印！")
+                        mark_source_as_deleted(url)
+                        del tracker[url]
+                    else:
+                        logging.info(f"  ⏳ 已經失效 {days_diff} 天，等夠 15 天先封。")
+                except: tracker[url] = today_str
         else:
-            if url in tracker: del tracker[url]
+            if url in tracker:
+                logging.info(f"  ✅ 該源喺其中一條線通返，清除失效計時。")
+                del tracker[url]
 
-    with open(tracker_file, "w", encoding="utf-8") as f: json.dump(tracker, f, indent=4)
+    with open(tracker_file, "w", encoding="utf-8") as f:
+        json.dump(tracker, f, indent=4)
+    # ------------------------------------
 
-    # 整合結果回傳
     final_data = {p: [] for p in ["移动", "电信", "联通", "广电"]}
     for p in final_data.keys():
         merged = []
@@ -226,7 +236,7 @@ def diagnosis(ip_cache):
         final_data[p] = sorted(unique_items.values(), key=lambda x: x.get('speed', 999))
     return final_data
 
-# --- 【4. 執行與保存】 ---
+# --- 【4. 主程序入口】 ---
 
 def main():
     ip_cache = load_ip_pool()
@@ -236,7 +246,6 @@ def main():
     update_time = datetime.datetime.now().strftime("%m%d %H:%M")
     files_map = {"移动": ("gz_live.m3u", "廣州移動"), "电信": ("gz_dxlive.m3u", "廣州電訊"), "联通": ("gz_ltlive.m3u", "廣州聯通"), "广电": ("gz_gdlive.m3u", "廣州廣電")}
     
-    # 獲取樣本數據量最多的線路作為補償源
     valid_providers = {k: v for k, v in all_provider_final_data.items() if v}
     if not valid_providers: return
     best_p_key = max(valid_providers, key=lambda k: len(valid_providers[k]))
