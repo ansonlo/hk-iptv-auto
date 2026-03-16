@@ -48,22 +48,26 @@ jobs:
         # 3. 專線診斷
         python gz_all_in_one.py
 
-    - name: Commit and Push
+    - name: Commit and Push (Gentle Version)
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # 1. Add 檔案
+        # 1. 先 Fetch 最新嘅遠端分支
+        git fetch origin main
+        
+        # 2. Add 你啱啱產出嘅新數據
         git add auto_repair.log sources.txt *.m3u || true
         
-        # 2. 檢查有無嘢要 commit
+        # 3. 嘗試 Commit
         if ! git diff --staged --quiet; then
           git commit -m "🚀 數據更新 & 五線診斷報告 ($(date +'%m-%d %H:%M'))"
           
-          # 🌟 核心修復：喺 push 之前加呢一行
-          git pull --rebase origin main
+          # 🌟 溫柔核心：使用 merge 策略 "ours"
+          # 意思係：如果同遠端有衝突，以我呢份 (剛剛測速完的新數據) 為準
+          git merge origin/main -X ours --allow-unrelated-histories -m "🔄 自動合併遠端更改"
           
-          # 3. 執行推送
+          # 4. 推送
           git push origin main
         else
           echo "✅ 無變動，跳過提交"
