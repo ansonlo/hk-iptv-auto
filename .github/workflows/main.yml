@@ -48,16 +48,22 @@ jobs:
         # 3. 專線診斷
         python gz_all_in_one.py
 
-    - name: 提交並推送更新
+    - name: Commit and Push
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # 🌟 呢度係重點：確保 add 咗 auto_repair.log
+        # 1. Add 檔案
         git add auto_repair.log sources.txt *.m3u || true
         
+        # 2. 檢查有無嘢要 commit
         if ! git diff --staged --quiet; then
           git commit -m "🚀 數據更新 & 五線診斷報告 ($(date +'%m-%d %H:%M'))"
+          
+          # 🌟 核心修復：喺 push 之前加呢一行
+          git pull --rebase origin main
+          
+          # 3. 執行推送
           git push origin main
         else
           echo "✅ 無變動，跳過提交"
