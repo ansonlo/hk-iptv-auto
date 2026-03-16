@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 # --- 【1. 配置與初始化】 ---
 SOURCE_FILE = "sources.txt"
-MAX_AUTO_KEEP = 1500  # 既然係精準抓藥，保留 1500 條精華已經好夠用
+MAX_AUTO_KEEP = 5000  # 既然係精準抓藥，保留 1500 條精華已經好夠用
 cc = OpenCC('s2t')
 
 # 核心白名單 (同你 main.py 保持一致)
