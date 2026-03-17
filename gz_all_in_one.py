@@ -62,7 +62,7 @@ def load_sources(file_path="sources.txt"):
                 is_capture_zone = True
                 continue
             # 2. 定義終點
-            if "# --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---" in line.upper():
+            if "# --- AUTO DISCOVERED SOURCES ---" in line.upper():
                 is_capture_zone = False
                 break
             # 3. 區間內提取 URL
