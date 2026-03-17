@@ -18,7 +18,9 @@ KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線"
 BASE_DISCOVERY_URLS = [
     "https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u",
     "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
+    "https://iptv.hacks.tools/m3u/all.m3u",
     "https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u",
+    "https://gitee.com/fomm/live/raw/main/tv/m3u/ipv6.m3u"
 ]
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
