@@ -40,7 +40,8 @@ jobs:
         fi
         
         # 1. 執藥
-        python discovery_sources.py
+        - name: 🚀 自動搜尋新源
+          run: python discovery_sources.py
         
         # 2. 通用 
         python main.py
