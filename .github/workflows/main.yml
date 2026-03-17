@@ -39,15 +39,14 @@ jobs:
           echo ">>> 偵測到手動撳制：啟動 MANUAL_ONLY 模式 <<<"
         fi
         
-        # 1. 執藥
-        - name: 🚀 自動搜尋新源
-          run: python discovery_sources.py
-        
-        # 2. 通用 
-        python main.py
-                
-        # 3. 專線診斷
-        python gz_all_in_one.py
+    - name: 🚀 1. 執藥 (搜尋新源)
+      run: python discovery_sources.py
+
+    - name: 🌐 2. 通用 (生成香港列表)
+      run: python main.py
+
+    - name: 📡 3. 專線診斷 (生成廣州列表)
+      run: python gz_all_in_one.py
 
     - name: Commit and Push (Gentle Version)
       run: |
