@@ -52,7 +52,7 @@ def load_sources(file_path="sources.txt"):
                 if "# MY MANUAL SOURCES" in line.upper():
                     is_capture_zone = True
                     continue
-                if "# --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---" in line.upper():
+                if "# --- AUTO DISCOVERED SOURCES ---" in line.upper():
                     is_capture_zone = False
                     break
                 if is_capture_zone and line.startswith("http"):
