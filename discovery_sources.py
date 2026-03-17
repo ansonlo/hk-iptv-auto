@@ -38,7 +38,7 @@ logging.basicConfig(
 # --- 【2. 搜尋引擎函數】 ---
 
 def search_github():
-    """搜尋 GitHub 最近更新的 IPTV 倉庫"""
+    logging.info("🔍 正在github搜尋最新 IPTV ...")
     query = quote("iptv gd m3u")
     api_url = f"https://api.github.com/search/repositories?q={query}&sort=updated"
     discovered = []
@@ -54,7 +54,7 @@ def search_github():
     return discovered
 
 def search_gitee():
-    """搜尋 Gitee 相關項目"""
+    logging.info("🔍 正在gitee搜尋最新 IPTV ...")
     search_url = "https://gitee.com/search?q=iptv%20gd&type=repositories"
     discovered = []
     try:
