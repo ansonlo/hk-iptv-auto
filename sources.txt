@@ -74,3 +74,4 @@ https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u
 
 
 # --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---
+https://www.pconline.com.cn/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u
