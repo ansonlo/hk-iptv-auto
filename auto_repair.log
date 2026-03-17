@@ -1,6 +1,6 @@
 ✅ [數據讀取] 已從 sources.txt 加載 4 個源
 =================================================================
-📅 更新時間：0317 10:24
+📅 更新時間：0317 10:29
 =================================================================
 💀 報告: https://www.pconline.com.cn/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u
    ┣ [源頭掃描] 總台數: 0
@@ -10,3 +10,7 @@
 >>> 偵測到手動撳制：啟動 MANUAL_ONLY 模式 <<<
 >>> 掃描範圍：# MY MANUAL SOURCES 之後，直到自動更新標籤之前 <<<
 🚀 [手動模式] 鎖定測試區間，共加載 3 個源
+💾 檔案已保存: gz_live_manual.m3u
+💾 檔案已保存: gz_dxlive_manual.m3u
+💾 檔案已保存: gz_ltlive_manual.m3u
+💾 檔案已保存: gz_gdlive_manual.m3u
