@@ -73,5 +73,5 @@ https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u
 https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u
 https://iptv-org.github.io/iptv/countries/cn.m3u
 
-# --- AUTO DISCOVERED & CLEANED SOURCES (DYNAMIC UPDATE) ---
+# --- AUTO DISCOVERED SOURCES ---
 https://www.pconline.com.cn/MercuryZz/IPTVN/refs/heads/Files/GAT.m3u
