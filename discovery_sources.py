@@ -8,8 +8,13 @@ SOURCE_FILE = "sources.txt"
 MAX_AUTO_KEEP = 5000
 cc = OpenCC('s2t')
 
-# 獲取環境變量模式 (確保同你 workflow 嘅 SCAN_MODE 對應)
-SCAN_MODE = os.getenv('SCAN_MODE', 'MANUAL_ONLY')
+GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
+
+if GITHUB_EVENT == 'workflow_dispatch':
+    SCAN_MODE = "MANUAL_ONLY"
+else:
+    # 只要唔係手動撳掣（例如定時任務 schedule），就全量更新
+    SCAN_MODE = "FULL_SCAN"
 
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
             "珠江", "廣州", "大灣區", "南方", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", "緯來", "年代",
