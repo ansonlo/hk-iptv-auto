@@ -185,7 +185,7 @@ def main():
     dynamic_urls = search_github() + search_gitee() + search_gitcode()
     all_targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + dynamic_urls))
     logging.info(f"📡 鎖定 {len(all_targets)} 個潛在源頭，準備精準提取...")
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=20) as executor:
         results = list(executor.map(get_filtered_links, all_targets))
     final_links = []
     for r in results: final_links.extend(r)
