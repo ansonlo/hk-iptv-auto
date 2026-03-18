@@ -13,7 +13,7 @@ cc = OpenCC('s2t')
 GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
 
 if GITHUB_EVENT == 'workflow_dispatch':
-    SCAN_MODE = "FULL_SCAN"
+    SCAN_MODE = "MANUAL_ONLY"
 else:
     SCAN_MODE = "FULL_SCAN"
 
