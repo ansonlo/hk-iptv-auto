@@ -1,9 +1,10 @@
-import requests, re, os, logging, time
+import requests, re, os, logging, time, urllib3
 from urllib.parse import quote, urljoin
 from opencc import OpenCC
 from concurrent.futures import ThreadPoolExecutor
 
 # --- 【1. 配置與初始化】 ---
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 SOURCE_FILE = "sources.txt"
 MAX_AUTO_KEEP = 5000
 cc = OpenCC('s2t')
