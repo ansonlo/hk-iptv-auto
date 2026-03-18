@@ -29,15 +29,7 @@ jobs:
     - name: Run scripts
       run: |
         export TZ='Asia/Shanghai'
-        
-        # 🤖 自動切換模式：
-        if [ "${{ github.event_name }}" == "schedule" ]; then
-          export SCAN_MODE="FULL_SCAN"
-          echo ">>> 偵測到定時任務：啟動 FULL_SCAN 模式 <<<"
-        else
-          export SCAN_MODE="MANUAL_ONLY"
-          echo ">>> 偵測到手動撳制：啟動 MANUAL_ONLY 模式 <<<"
-        fi
+        echo ">>> 自動模式偵測已移交至 Python 腳本處理 <<<"
         
     - name: 🚀 1. 執藥 (搜尋新源)
       run: python discovery_sources.py
