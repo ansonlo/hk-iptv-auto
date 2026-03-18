@@ -1,5 +1,5 @@
 import requests, re, os, logging, time
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
 from opencc import OpenCC
 from concurrent.futures import ThreadPoolExecutor
 
@@ -14,14 +14,12 @@ GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
 if GITHUB_EVENT == 'workflow_dispatch':
     SCAN_MODE = "MANUAL_ONLY"
 else:
-    # 只要唔係手動撳掣（例如定時任務 schedule），就全量更新（FULL_SCAN）
     SCAN_MODE = "FULL_SCAN"
 
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
             "珠江", "廣州", "大灣區", "南方", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", "緯來", "年代",
             "中天", "非凡", "澳視", "澳門", "TDM", "澳亞", "CCTV"]
 
-# 固定優質源頭清單
 BASE_DISCOVERY_URLS = [
     "https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u",
     "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
@@ -38,10 +36,85 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
-# --- 【2. 跨平台搜尋模組】 ---
+# --- 【2. 核心過濾與深度校驗邏輯】 ---
+
+def is_fake_by_size(m3u8_url):
+    """🚀 深度校驗：檢查 m3u8 嘅第一個切片體積，剔除『我已死』假源"""
+    try:
+        # 1. 攞 m3u8 內容
+        r = requests.get(m3u8_url, timeout=5, verify=False, headers=HEADERS)
+        if r.status_code != 200: return False
+        
+        # 2. 搵第一個 .ts 切片
+        # 兼容絕對路徑同相對路徑
+        ts_match = re.findall(r'(http.*?\.ts|[\w\d\-_/]+\.ts)', r.text)
+        if not ts_match: return False
+        
+        ts_url = ts_match[0]
+        if not ts_url.startswith("http"):
+            ts_url = urljoin(m3u8_url, ts_url)
+            
+        # 3. 攞 Header 檢查 Content-Length
+        ts_head = requests.head(ts_url, timeout=3, verify=False, headers=HEADERS)
+        f_size = int(ts_head.headers.get('Content-Length', 0))
+        
+        # 💡 判斷邏輯：直播流切片正常 > 100KB (102400 bytes)
+        # 廣告片或報錯片通常極細
+        if 0 < f_size < 102400:
+            return True
+        return False
+    except:
+        return False
+
+def get_filtered_links(url):
+    """提取網址並進行即時過濾"""
+    links = []
+    short_url = url[:60] + "..." if len(url) > 60 else url
+    try:
+        r = requests.get(url, timeout=12, headers=HEADERS, verify=False)
+        r.encoding = 'utf-8'
+        if r.status_code != 200: return []
+            
+        lines = r.text.split('\n')
+        match_count = 0
+        temp_name = ""
+        
+        for line in lines:
+            line = line.strip()
+            target_link = ""
+            
+            # --- 提取邏輯 ---
+            if line.startswith("#EXTINF"):
+                temp_name = cc.convert(line.split(',')[-1]).strip().upper()
+                continue
+            elif line.startswith("http") and temp_name:
+                if any(k.upper() in temp_name for k in KEYWORDS):
+                    target_link = line.split('$')[0].split('#')[0].strip()
+                temp_name = ""
+            elif "," in line and "://" in line: # TXT 格式
+                txt_name = cc.convert(line.split(',')[0]).upper()
+                if any(k.upper() in txt_name for k in KEYWORDS):
+                    target_link = line.split(',')[1].strip()
+
+            # --- 🚀 執行深度校驗 ---
+            if target_link:
+                if ".m3u8" in target_link.lower():
+                    if is_fake_by_size(target_link):
+                        # logging.info(f"  🗑️ 跳過假源 (體積過細): {target_link}")
+                        continue
+                
+                match_count += 1
+                links.append(target_link)
+
+        if match_count > 0:
+            logging.info(f"  ✅ 成功執到 {match_count:3d} 條藥方 | 來源: {short_url}")
+            
+    except: pass
+    return list(dict.fromkeys(links))
+
+# --- 【3. 搜尋模組與檔案寫入 (其餘保持不變)】 ---
 
 def search_github():
-    """搜尋 GitHub 最新更新項目"""
     query = quote("iptv gd m3u")
     api_url = f"https://api.github.com/search/repositories?q={query}&sort=updated"
     discovered = []
@@ -57,11 +130,10 @@ def search_github():
     return discovered
 
 def search_gitee():
-    """搜尋 Gitee 項目"""
     discovered = []
     search_url = "https://gitee.com/search?q=iptv%20gd&type=repositories"
     try:
-        r = requests.get(search_url, headers=HEADERS, timeout=10)
+        r = requests.get(search_url, headers=HEADERS, timeout=10, verify=False)
         paths = re.findall(r'href="/([^/"]+/[^/"]+)"', r.text)
         for p in paths:
             if any(x in p.lower() for x in ['search', 'explore', 'help']): continue
@@ -71,7 +143,6 @@ def search_gitee():
     return list(set(discovered))
 
 def search_gitcode():
-    """搜尋 GitCode (CSDN) 項目"""
     discovered = []
     search_url = "https://gitcode.com/explore/search?q=iptv%20gd"
     try:
@@ -84,63 +155,19 @@ def search_gitcode():
     except: pass
     return list(set(discovered))
 
-# --- 【3. 核心過濾與詳細報告邏輯】 ---
-
-def get_filtered_links(url):
-    """提取網址，並喺 Log 輸出詳細結果"""
-    links = []
-    short_url = url[:60] + "..." if len(url) > 60 else url
-    try:
-        r = requests.get(url, timeout=12, headers=HEADERS, verify=False)
-        r.encoding = 'utf-8'
-        if r.status_code != 200: return []
-            
-        lines = r.text.split('\n')
-        match_count = 0
-        temp_name = ""
-        
-        for line in lines:
-            line = line.strip()
-            if line.startswith("#EXTINF"):
-                temp_name = cc.convert(line.split(',')[-1]).strip().upper()
-            elif line.startswith("http") and temp_name:
-                if any(k.upper() in temp_name for k in KEYWORDS):
-                    match_count += 1
-                    links.append(line.split('$')[0].split('#')[0].strip())
-                temp_name = ""
-            elif "," in line and "://" in line: # TXT 格式
-                txt_name = cc.convert(line.split(',')[0]).upper()
-                if any(k.upper() in txt_name for k in KEYWORDS):
-                    match_count += 1
-                    links.append(line.split(',')[1].strip())
-
-        if match_count > 0:
-            logging.info(f"  ✅ 成功執到 {match_count:3d} 條藥方 | 來源: {short_url}")
-            
-    except: pass
-    return list(dict.fromkeys(links))
-
-# --- 【4. 主程序與檔案寫入邏輯】 ---
-
 def update_source_file(new_links):
-    """將新搵到嘅源寫入自動區，對齊最新長標籤"""
     fixed_content = []
-    # 🌟 已經改為你指定嘅最新長標籤
     target_tag = "# --- AUTO DISCOVERED SOURCES ---"
-
     if os.path.exists(SOURCE_FILE):
         with open(SOURCE_FILE, "r", encoding="utf-8") as f:
             for line in f:
-                if target_tag in line: break # 遇到自動區標籤就停止，保留上面嘅固定區
+                if target_tag in line: break
                 fixed_content.append(line)
-
     try:
         with open(SOURCE_FILE, "w", encoding="utf-8") as f:
             for line in fixed_content: f.write(line)
             if fixed_content and not fixed_content[-1].endswith("\n"): f.write("\n")
-            
-            f.write(f"\n{target_tag}\n") # 寫入標籤
-            
+            f.write(f"\n{target_tag}\n")
             count = 0
             for link in new_links[:MAX_AUTO_KEEP]:
                 if link.strip():
@@ -152,30 +179,20 @@ def update_source_file(new_links):
 
 def main():
     logging.info("\n" + "="*75)
-    logging.info(f"🚀 啟動【全平台執藥模式】 | 模式: {SCAN_MODE}")
+    logging.info(f"🚀 啟動【全平台執藥 + 假源過濾模式】 | 模式: {SCAN_MODE}")
     logging.info("="*75)
-
-    # 1. 跨平台搜刮入口
-    logging.info("🔍 正在掃描 GitHub, Gitee, GitCode 的最新項目...")
     dynamic_urls = search_github() + search_gitee() + search_gitcode()
     all_targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + dynamic_urls))
-    
     logging.info(f"📡 鎖定 {len(all_targets)} 個潛在源頭，準備精準提取...")
-
-    # 2. 多線程執藥
     with ThreadPoolExecutor(max_workers=10) as executor:
         results = list(executor.map(get_filtered_links, all_targets))
-    
     final_links = []
     for r in results: final_links.extend(r)
     final_links = list(dict.fromkeys(final_links))
-
     logging.info("-" * 75)
-    logging.info(f"🏁 執藥完畢：本次共發現 {len(final_links)} 條符合白名單嘅源。")
-
-    # 3. 核心保護邏輯
+    logging.info(f"🏁 執藥完畢：本次共發現 {len(final_links)} 條符合要求嘅源。")
     if SCAN_MODE == "MANUAL_ONLY":
-        logging.info("🛡️  [手動保護] 本次發現嘅新源【唔會】寫入檔案，僅供日誌參考。")
+        logging.info("🛡️  [手動保護] 本次發現嘅新源【唔會】寫入檔案。")
     else:
         update_source_file(final_links)
 
