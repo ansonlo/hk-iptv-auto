@@ -9,10 +9,10 @@ SOURCE_FILE = "sources.txt"
 MAX_AUTO_KEEP = 5000
 cc = OpenCC('s2t')
 
-# 💡 偵測 GitHub 事件（手動撳掣 vs 定時任務）MANUAL_ONLY
+# 偵測 GitHub 事件 (手動 vs 自動)
 GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
 if GITHUB_EVENT == 'workflow_dispatch':
-    SCAN_MODE = "FULL_SCAN"
+    SCAN_MODE = "MANUAL_ONLY"
     logging.info(">>> 偵測到手動撳掣：啟動 MANUAL_ONLY 模式 (唔會寫入檔案) <<<")
 else:
     SCAN_MODE = "FULL_SCAN"
@@ -22,8 +22,8 @@ KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線"
             "珠江", "廣州", "大灣區", "南方", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", "緯來", "年代",
             "中天", "非凡", "澳視", "澳門", "TDM", "澳亞", "CCTV"]
 
-# 🚀 白名單：呢啲域名嘅源通常係真嘅，唔使浪費時間驗體積
-WHITELIST_DOMAINS = ["raw.githubusercontent.com", "gitee.com", "hacks.tools", "gitlab.com", "github.com"]
+# 🚀 白名單域名：嚟自呢啲地方嘅源頭，直接提取，唔驗體積 (慳時間)
+WHITELIST_DOMAINS = ["raw.githubusercontent.com", "gitee.com", "hacks.tools", "gitlab.com", "githubusercontent.com"]
 
 BASE_DISCOVERY_URLS = [
     "https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/user_result.m3u",
@@ -37,13 +37,12 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 logging.basicConfig(level=logging.INFO, format='%(message)s', handlers=[logging.StreamHandler()])
 
-# --- 【2. 核心校驗邏輯】 ---
+# --- 【2. 核心過濾與深度校驗邏輯】 ---
 
 def is_fake_by_size(m3u8_url):
-    """🚀 深度校驗：檢查 m3u8 第一個切片體積"""
+    """🚀 深度校驗：檢查 m3u8 第一個切片體積 (針對懷疑對象)"""
     try:
-        # 縮短 timeout 至 3 秒，避免死等
-        r = requests.get(m3u8_url, timeout=3, verify=False, headers=HEADERS)
+        r = requests.get(m3u8_url, timeout=2, verify=False, headers=HEADERS)
         if r.status_code != 200: return False
         
         ts_match = re.findall(r'(http.*?\.ts|[\w\d\-_/]+\.ts)', r.text)
@@ -53,23 +52,28 @@ def is_fake_by_size(m3u8_url):
         if not ts_url.startswith("http"):
             ts_url = urljoin(m3u8_url, ts_url)
             
-        ts_head = requests.head(ts_url, timeout=3, verify=False, headers=HEADERS)
+        ts_head = requests.head(ts_url, timeout=2, verify=False, headers=HEADERS)
         f_size = int(ts_head.headers.get('Content-Length', 0))
         
-        # 100KB 以下判定為假源
+        # 100KB 以下通常係假源或廣告
         return 0 < f_size < 102400
     except:
         return False
 
 def get_filtered_links(url):
-    """提取網址並進行智能過濾"""
+    """提取網址並顯示詳細日誌"""
     links = []
+    short_url = url[:60] + "..." if len(url) > 60 else url
     try:
+        # 判斷呢個源頭本身係咪喺白名單入面
+        is_safe_source = any(dom in url for dom in WHITELIST_DOMAINS)
+        
         r = requests.get(url, timeout=12, headers=HEADERS, verify=False)
         r.encoding = 'utf-8'
         if r.status_code != 200: return []
             
         lines = r.text.split('\n')
+        match_count = 0
         temp_name = ""
         
         for line in lines:
@@ -89,20 +93,21 @@ def get_filtered_links(url):
                     target_link = line.split(',')[1].strip()
 
             if target_link:
-                # 💡 智能校驗：只驗懷疑對象，唔驗白名單
-                is_in_whitelist = any(domain in target_link for domain in WHITELIST_DOMAINS)
-                is_suspicious = "freetv" in target_link or "stream1" in target_link or len(re.findall(r'[a-f0-9]{32,}', target_link)) > 0
-                
-                if ".m3u8" in target_link.lower() and not is_in_whitelist:
-                    # 只有唔喺白名單，或者特徵可疑先驗體積
+                # 只有「唔喺白名單」且係「m3u8」先驗體積，其餘直接過
+                if not is_safe_source and ".m3u8" in target_link.lower():
                     if is_fake_by_size(target_link):
                         continue
                 
                 links.append(target_link)
+                match_count += 1
+
+        if match_count > 0:
+            logging.info(f"  ✅ 成功執到 {match_count:4d} 條藥方 | 來源: {short_url}")
+            
     except: pass
     return list(dict.fromkeys(links))
 
-# --- 【3. 搜尋模組】 ---
+# --- 【3. 跨平台搜尋模組】 ---
 
 def search_github():
     query = quote("iptv gd m3u")
@@ -171,15 +176,15 @@ def update_source_file(new_links):
 
 def main():
     logging.info("\n" + "="*75)
-    logging.info(f"🚀 啟動【智能加速過濾模式】 | 模式: {SCAN_MODE}")
+    logging.info(f"🚀 啟動【精確Log + 智能加速模式】 | 模式: {SCAN_MODE}")
     logging.info("="*75)
 
     dynamic_urls = search_github() + search_gitee() + search_gitcode()
     all_targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + dynamic_urls))
     
-    logging.info(f"📡 鎖定 {len(all_targets)} 個源頭，使用 100 線程轟炸檢查中...")
+    logging.info(f"📡 鎖定 {len(all_targets)} 個源頭，準備執行多線程提取...")
 
-    # 💡 關鍵優化：線程開到 100，速度提升 5 倍以上
+    # 線程數開到 100，速度保證
     with ThreadPoolExecutor(max_workers=100) as executor:
         results = list(executor.map(get_filtered_links, all_targets))
     
