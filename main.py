@@ -7,10 +7,10 @@ from tqdm import tqdm  # 引入進度條
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 cc = OpenCC('s2t')
 
-# 💡 新增：偵測 GitHub Actions 觸發事件
+# 💡 新增：偵測 GitHub Actions 觸發事件 MANUAL_ONLY
 GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
 if GITHUB_EVENT == 'workflow_dispatch':
-    RUN_MODE = "MANUAL_ONLY"
+    RUN_MODE = "FULL_SCAN"
 else:
     RUN_MODE = "FULL_SCAN"
 
