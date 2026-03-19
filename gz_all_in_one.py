@@ -20,10 +20,10 @@ logging.basicConfig(
 # 偵測 GitHub Actions 觸發事件
 GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
 if GITHUB_EVENT == 'workflow_dispatch':
-    SCAN_MODE = "MANUAL_ONLY"  # 統一用 SCAN_MODE 呢個名
+    RUN_MODE = "MANUAL_ONLY"   
     logging.info(">>> 偵測到手動撳制：啟動 MANUAL_ONLY 模式 <<<")
 else:
-    SCAN_MODE = "FULL_SCAN"
+    RUN_MODE = "FULL_SCAN"
     logging.info(">>> 偵測到定時任務：啟動 FULL_SCAN 模式 (全量掃描) <<<")
 
 # 配置與過濾關鍵字
