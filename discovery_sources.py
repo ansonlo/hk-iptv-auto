@@ -9,10 +9,10 @@ SOURCE_FILE = "sources.txt"
 MAX_AUTO_KEEP = 5000
 cc = OpenCC('s2t')
 
-# 偵測 GitHub 事件 (手動 vs 自動)
+# 偵測 GitHub 事件 (手動 vs 自動) MANUAL_ONLY
 GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
 if GITHUB_EVENT == 'workflow_dispatch':
-    SCAN_MODE = "MANUAL_ONLY"
+    SCAN_MODE = "FULL_SCAN"
     logging.info(">>> 偵測到手動撳掣：啟動 MANUAL_ONLY 模式 (唔會寫入檔案) <<<")
 else:
     SCAN_MODE = "FULL_SCAN"
