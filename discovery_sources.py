@@ -61,11 +61,10 @@ def is_fake_by_size(m3u8_url):
         return False
 
 def get_filtered_links(url):
-    """提取網址並顯示詳細日誌"""
     links = []
     short_url = url[:60] + "..." if len(url) > 60 else url
     try:
-        # 判斷呢個源頭本身係咪喺白名單入面
+        # 💡 判斷來源是否可靠 (GitHub, Gitee 等)
         is_safe_source = any(dom in url for dom in WHITELIST_DOMAINS)
         
         r = requests.get(url, timeout=12, headers=HEADERS, verify=False)
@@ -80,6 +79,7 @@ def get_filtered_links(url):
             line = line.strip()
             target_link = ""
             
+            # --- 提取邏輯 (維持不變) ---
             if line.startswith("#EXTINF"):
                 temp_name = cc.convert(line.split(',')[-1]).strip().upper()
                 continue
@@ -87,13 +87,15 @@ def get_filtered_links(url):
                 if any(k.upper() in temp_name for k in KEYWORDS):
                     target_link = line.split('$')[0].split('#')[0].strip()
                 temp_name = ""
-            elif "," in line and "://" in line: # TXT 格式
+            elif "," in line and "://" in line: 
                 txt_name = cc.convert(line.split(',')[0]).upper()
                 if any(k.upper() in txt_name for k in KEYWORDS):
                     target_link = line.split(',')[1].strip()
 
             if target_link:
-                # 只有「唔喺白名單」且係「m3u8」先驗體積，其餘直接過
+                # 🚀 核心優化點：
+                # 1. 如果係來自「唔知底細」嘅搜尋源，先至去驗體積 (is_fake_by_size)
+                # 2. 如果係「白名單」GitHub 源，直接 links.append，唔好諗咁多
                 if not is_safe_source and ".m3u8" in target_link.lower():
                     if is_fake_by_size(target_link):
                         continue
