@@ -9,17 +9,24 @@ SOURCE_FILE = "sources.txt"
 MAX_AUTO_KEEP = 5000
 cc = OpenCC('s2t')
 
-# 💡 強制日誌即時輸出，解決 GitHub Actions 唔顯示 Log 嘅問題
 def log(msg):
     print(msg, flush=True)
 
-# 偵測 GitHub 事件 
 GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
 SCAN_MODE = "MANUAL_ONLY" if GITHUB_EVENT == 'workflow_dispatch' else "FULL_SCAN"
 
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
             "珠江", "廣州", "大灣區", "南方", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", "緯來", "年代",
             "中天", "非凡", "澳視", "澳門", "TDM", "澳亞", "CCTV"]
+
+# 💡 新增：域名黑名單 (專門出廣告、404 或動態 Token 極易失效的源)
+BLACKLIST_DOMAINS = [
+    "freetv.fun", "m3u8.best", "akamaized.net", "livednow.com", 
+    "p2p.com", "mtvnservices.com", "bitmovin.com"
+]
+
+# 💡 新增：廣告關鍵字 (頻道名包含這些字眼直接剔除)
+AD_KEYWORDS = ["掃碼", "關注", "微信", "群", "福利", "加我", "支付", "APP", "提示", "廣告", "登錄"]
 
 WHITELIST_DOMAINS = ["fanmingming", "Guovin", "hacks.tools", "gitee.com", "githubusercontent.com"]
 
@@ -43,6 +50,7 @@ def is_fake_by_size(m3u8_url):
         if not ts_match: return False
         ts_url = urljoin(m3u8_url, ts_match[0])
         ts_head = requests.head(ts_url, timeout=2, verify=False, headers=HEADERS)
+        # 100KB 以下判定為假 (通常是報錯畫面或 1 秒廣告片)
         return 0 < int(ts_head.headers.get('Content-Length', 0)) < 102400
     except: return False
 
@@ -50,6 +58,11 @@ def get_filtered_links(url):
     links = []
     kw_counts = {k.upper(): 0 for k in KEYWORDS}
     short_url = url[:50] + "..." if len(url) > 50 else url
+    
+    # 💡 檢查來源 URL 是否在黑名單
+    if any(dom in url.lower() for dom in BLACKLIST_DOMAINS):
+        return []
+
     try:
         is_safe = any(dom in url for dom in WHITELIST_DOMAINS)
         r = requests.get(url, timeout=12, headers=HEADERS, verify=False)
@@ -57,12 +70,13 @@ def get_filtered_links(url):
         if r.status_code != 200: return []
             
         lines = r.text.split('\n')
-        matched, faked, quota_hit = 0, 0, 0
+        matched, faked, quota_hit, ad_blocked = 0, 0, 0, 0
         temp_name = ""
         
         for line in lines:
             line = line.strip()
             target_link, current_kw = "", ""
+            
             if line.startswith("#EXTINF"):
                 temp_name = cc.convert(line.split(',')[-1]).strip().upper()
                 continue
@@ -71,48 +85,101 @@ def get_filtered_links(url):
                     if k.upper() in temp_name:
                         target_link, current_kw = line.split('$')[0].split('#')[0].strip(), k.upper()
                         break
-                temp_name = ""
+                # temp_name 唔清空住，等下面檢查
             elif "," in line and "://" in line:
                 parts = line.split(',')
                 txt_name = cc.convert(parts[0]).upper()
                 for k in KEYWORDS:
                     if k.upper() in txt_name:
-                        target_link, current_kw = line.split(',')[1].strip(), k.upper()
+                        target_link, current_kw = parts[1].strip(), k.upper()
+                        temp_name = txt_name
                         break
 
             if target_link and current_kw:
+                # 💡 1. 檢查頻道名或網址是否包含廣告關鍵字/黑名單域名
+                if any(ad_k in temp_name for ad_k in AD_KEYWORDS) or \
+                   any(dom in target_link.lower() for dom in BLACKLIST_DOMAINS):
+                    ad_blocked += 1
+                    temp_name = ""
+                    continue
+
+                # 2. 檢查配額 (每頻道 10 條)
                 if kw_counts[current_kw] >= 10:
                     quota_hit += 1
+                    temp_name = ""
                     continue
+
+                # 3. 檢查體積 (非白名單源)
                 if not is_safe and ".m3u8" in target_link.lower() and is_fake_by_size(target_link):
                     faked += 1
+                    temp_name = ""
                     continue
+                
                 links.append(target_link)
                 kw_counts[current_kw] += 1
                 matched += 1
+                temp_name = ""
 
         if matched > 0:
-            log(f"  ✅ 來源: {short_url:55} | 執到: {matched:3d} | 假源: {faked:2d} | 爆額跳過: {quota_hit:3d}")
-    except Exception as e:
-        pass
+            log(f"  ✅ 來源: {short_url:50} | 執到: {matched:3d} | 假源: {faked:2d} | 廣告/黑名單: {ad_blocked:2d} | 爆額跳過: {quota_hit:3d}")
+    except: pass
     return list(dict.fromkeys(links))
 
 # --- 【3. 搜尋與主程序】 ---
 
 def search_github():
     log("🔍 正在搜尋 GitHub 資源...")
-    # ... (此處保留之前的 search 邏輯)
-    return [] # 範例簡化，請保留你原本的 search 函數內容
+    query = quote("iptv gd m3u")
+    api_url = f"https://api.github.com/search/repositories?q={query}&sort=updated"
+    discovered = []
+    try:
+        r = requests.get(api_url, headers=HEADERS, timeout=10)
+        if r.status_code == 200:
+            for repo in r.json().get('items', []):
+                name = repo.get('full_name')
+                discovered.append(f"https://raw.githubusercontent.com/{name}/main/live.m3u")
+                discovered.append(f"https://raw.githubusercontent.com/{name}/master/live.m3u")
+    except: pass
+    return discovered
+
+def search_gitee():
+    log("🔍 正在搜尋 Gitee 資源...")
+    discovered = []
+    try:
+        r = requests.get("https://gitee.com/search?q=iptv%20gd&type=repositories", headers=HEADERS, timeout=10, verify=False)
+        for p in re.findall(r'href="/([^/"]+/[^/"]+)"', r.text):
+            if not any(x in p.lower() for x in ['search', 'explore', 'help']):
+                discovered.append(f"https://gitee.com/{p}/raw/main/live.m3u")
+    except: pass
+    return list(set(discovered))
+
+def update_source_file(new_links):
+    fixed_content = []
+    target_tag = "# --- AUTO DISCOVERED SOURCES ---"
+    if os.path.exists(SOURCE_FILE):
+        with open(SOURCE_FILE, "r", encoding="utf-8") as f:
+            for line in f:
+                if target_tag in line: break
+                fixed_content.append(line)
+    
+    with open(SOURCE_FILE, "w", encoding="utf-8") as f:
+        for line in fixed_content: f.write(line)
+        f.write(f"\n{target_tag}\n")
+        count = 0
+        for link in new_links[:MAX_AUTO_KEEP]:
+            f.write(f"{link}\n")
+            count += 1
+    log(f"📝 檔案更新成功：已寫入 {count} 條精華源。")
 
 def main():
-    log("\n" + "="*80)
-    log(f"🚀 啟動【詳細報表模式】 | 偵測事件: {GITHUB_EVENT} | 運行模式: {SCAN_MODE}")
-    log("="*80)
+    log("\n" + "="*85)
+    log(f"🚀 啟動【抗廣告報表模式】 | 偵測事件: {GITHUB_EVENT} | 運行模式: {SCAN_MODE}")
+    log("="*85)
 
-    dynamic_urls = search_github() # 呢度會 call 返你原本啲 search 函數
+    dynamic_urls = search_github() + search_gitee()
     all_targets = list(dict.fromkeys(BASE_DISCOVERY_URLS + dynamic_urls))
     
-    log(f"📡 共有 {len(all_targets)} 個目標源頭，準備開始提取...")
+    log(f"📡 共有 {len(all_targets)} 個目標源頭，準備開始深度過濾...")
 
     with ThreadPoolExecutor(max_workers=50) as executor:
         results = list(executor.map(get_filtered_links, all_targets))
@@ -124,16 +191,15 @@ def main():
     final_links = list(dict.fromkeys(raw_links))
     duplicates = total_raw - len(final_links)
 
-    log("-" * 80)
+    log("-" * 85)
     log(f"📊 執行總結：")
     log(f"   1. 原始提取總數： {total_raw:5d} 條")
     log(f"   2. 剔除重複連結： {duplicates:5d} 條 (跨來源重複)")
     log(f"   3. 最終入庫數量： {len(final_links):5d} 條")
-    log("-" * 80)
+    log("-" * 85)
 
     if SCAN_MODE != "MANUAL_ONLY" and final_links:
-        # 更新檔案邏輯...
-        log(f"📝 檔案更新成功：已寫入 {min(len(final_links), MAX_AUTO_KEEP)} 條源。")
+        update_source_file(final_links)
     elif SCAN_MODE == "MANUAL_ONLY":
         log("🛡️  [手動模式] 僅執行掃描，未寫入檔案。")
 
