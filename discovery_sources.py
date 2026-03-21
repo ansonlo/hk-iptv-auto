@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 # --- 【1. 配置與初始化】 ---
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 SOURCE_FILE = "sources.txt"
-MAX_AUTO_KEEP = 5000
+MAX_AUTO_KEEP = 1000
 cc = OpenCC('s2t')
 
 def log(msg):
@@ -44,14 +44,21 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 def is_fake_by_size(m3u8_url):
     try:
-        r = requests.get(m3u8_url, timeout=2, verify=False, headers=HEADERS)
+        # 加入 allow_redirects 處理 302 跳轉源
+        r = requests.get(m3u8_url, timeout=2, verify=False, headers=HEADERS, allow_redirects=True)
         if r.status_code != 200: return False
+        
         ts_match = re.findall(r'(http.*?\.ts|[\w\d\-_/]+\.ts)', r.text)
         if not ts_match: return False
+        
         ts_url = urljoin(m3u8_url, ts_match[0])
-        ts_head = requests.head(ts_url, timeout=2, verify=False, headers=HEADERS)
-        # 100KB 以下判定為假 (通常是報錯畫面或 1 秒廣告片)
-        return 0 < int(ts_head.headers.get('Content-Length', 0)) < 102400
+        ts_head = requests.head(ts_url, timeout=2, verify=False, headers=HEADERS, allow_redirects=True)
+        
+        size = ts_head.headers.get('Content-Length')
+        if size:
+            # 100KB 以下通常係廣告或錯誤提示
+            return 0 < int(size) < 102400
+        return False
     except: return False
 
 def get_filtered_links(url):
@@ -155,10 +162,16 @@ def search_gitee():
 
 def update_source_file(new_links):
     fixed_content = []
+    blocked_urls = set()
     target_tag = "# --- AUTO DISCOVERED SOURCES ---"
     if os.path.exists(SOURCE_FILE):
         with open(SOURCE_FILE, "r", encoding="utf-8") as f:
             for line in f:
+                strip_line = line.strip()
+                if strip_line.startswith("# http"):
+                    url_part = strip_line.replace("#", "").strip().split('$')[0].split('#')[0]
+                    blocked_urls.add(url_part)
+                
                 if target_tag in line: break
                 fixed_content.append(line)
     
@@ -166,10 +179,19 @@ def update_source_file(new_links):
         for line in fixed_content: f.write(line)
         f.write(f"\n{target_tag}\n")
         count = 0
-        for link in new_links[:MAX_AUTO_KEEP]:
-            f.write(f"{link}\n")
-            count += 1
-    log(f"📝 檔案更新成功：已寫入 {count} 條精華源。")
+        unique_new = list(dict.fromkeys(new_links))
+        for link in unique_new:
+            # 💡 檢查呢條新爬返嚟嘅 link，係咪之前已經被標記為死源
+            clean_link = link.split('$')[0].split('#')[0].strip()
+            
+            if clean_link not in blocked_urls:
+                f.write(f"{link}\n")
+                count += 1
+            
+            # 限制數量，保持檔案輕量
+            if count >= MAX_AUTO_KEEP: break
+            
+    log(f"📝 檔案更新成功：已寫入 {count} 條新源（已避開 {len(blocked_urls)} 條封印死源）。")
 
 def main():
     log("\n" + "="*85)
