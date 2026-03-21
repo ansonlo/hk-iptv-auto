@@ -224,24 +224,33 @@ def diagnosis(ip_cache):
             with open(tracker_file, "r", encoding="utf-8") as f: tracker = json.load(f)
         except: tracker = {}
 
-        logging.info("\n📊 --- 【失效追蹤診斷】 ---")
+        logging.info("\n" + "="*30 + " 【失效追蹤報表】 " + "="*30)
         for url in sources:
             total_online = sum(all_res.get(p, {}).get(url, {}).get('online', 0) for p in ["移动", "电信", "联通", "广电", "通用"])
+            short_url = url[:45] + "..." if len(url) > 45 else url.ljust(48)
             if total_online == 0:
                 if url not in tracker:
                     tracker[url] = today_str
-                    logging.info(f"📍 首次失效: {url[:50]}...")
+                    logging.info(f"🔴 [初次失效] | {short_url} | 始於: {today_str}")
                 else:
                     start_date = datetime.datetime.strptime(tracker[url], "%Y-%m-%d")
                     days_diff = (today_obj - start_date).days
                     if days_diff >= 15:
-                        logging.warning(f"🚫 失效滿 {days_diff} 天，執行標記註釋。")
+                        logging.warning(f"🚫 [正式封印] | {short_url} | 已死滿 {days_diff} 天，執行死刑！")
                         mark_source_as_deleted(url)
                         del tracker[url]
-                    else: logging.info(f"⏳ 失效 {days_diff} 天 (未滿 15 天)")
-            elif url in tracker: del tracker[url]
+                    else:
+                        remain = 15 - days_diff
+                        logging.info(f"⏳ [監控中...] | {short_url} | 已死 {days_diff:2d} 天 | 剩餘 {remain:2d} 天封印")
+            
+            elif url in tracker:
+                # 如果原本喺黑名單但今日通返，就恭喜佢「翻生」
+                logging.info(f"🟢 [起死回生] | {short_url} | 偵測到成功通訊，計數歸零。")
+                del tracker[url]
 
-        with open(tracker_file, "w", encoding="utf-8") as f: json.dump(tracker, f, indent=4)
+        logging.info("="*77 + "\n")
+        with open(tracker_file, "w", encoding="utf-8") as f: 
+            json.dump(tracker, f, indent=4, ensure_ascii=False)
 
     # 數據整理
     final_data = {p: [] for p in ["移动", "电信", "联通", "广电"]}
