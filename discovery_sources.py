@@ -13,7 +13,7 @@ def log(msg):
     print(msg, flush=True)
 
 GITHUB_EVENT = os.getenv('GITHUB_EVENT_NAME', 'local')
-SCAN_MODE = "MANUAL_ONLY" if GITHUB_EVENT == 'workflow_dispatch' else "FULL_SCAN"
+SCAN_MODE = "MANUAL_ONLY" if FULL_SCAN == 'workflow_dispatch' else "FULL_SCAN"
 
 KEYWORDS = ["ViuTV", "HOY", "RTHK", "Jade", "Pearl", "J2", "J5", "Now", "無線", "有線", "翡翠", "明珠", "港台", "廣東",
             "珠江", "廣州", "大灣區", "南方", "鳳凰", "民視", "東森", "三立", "中視", "公視", "TVBS", "緯來", "年代",
