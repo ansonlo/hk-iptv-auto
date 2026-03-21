@@ -111,7 +111,7 @@ def diagnose_report(u):
     all_raw_items = []
     
     try:
-        r = session.get(u, timeout=20, headers=HEADERS, verify=False)
+        r = session.get(u, timeout=10, headers=HEADERS, verify=False)
         r.encoding = 'utf-8'
         if r.status_code != 200: return [], False
         
@@ -182,10 +182,16 @@ def main():
     logging.info(f"📅 更新時間：{update_time} | 模式：{RUN_MODE}")
     logging.info("=" * 65)
 
-    for url in current_urls:
-        data, is_alive = diagnose_report(url)
-        if is_alive: all_channels.extend(data)
+    with ThreadPoolExecutor(max_workers=50) as executor:
+        # 使用大併發一次過跑完所有診斷
+        results = list(executor.map(diagnose_report, current_urls))
 
+    # 跑完之後，將所有結果執埋一齊
+    for data, is_alive in results:
+        if is_alive:
+            all_channels.extend(data)
+
+    # 確保全部跑完先檢查有冇數據
     if not all_channels:
         logging.error("❌ 全軍覆沒")
         return
