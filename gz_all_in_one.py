@@ -6,7 +6,10 @@ from tqdm import tqdm
 # --- 【1. 初始化與模式偵測】 ---
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 cc = OpenCC('s2t')
-adapter = requests.adapters.HTTPAdapter(pool_connections=200, pool_maxsize=200)
+adapter = requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=250)
+global_session = requests.Session()  
+global_session.mount('http://', adapter) 
+global_session.mount('https://', adapter) 
 
 logging.basicConfig(
     level=logging.INFO,
@@ -112,16 +115,19 @@ def get_headers_with_mask(provider_name, pool_cache):
         if mask_ip: headers.update({'X-Forwarded-For': mask_ip, 'X-Real-IP': mask_ip, 'Client-IP': mask_ip})
     return headers, mask_ip
 
-def get_speed(url, custom_headers, current_session): 
+def get_speed(url, custom_headers): 
     try:
         start = time.time()
-        r = current_session.get(url, timeout=1.5, headers=custom_headers, stream=True, verify=False)
+        # 💡 重點 1：改用 global_session，timeout 縮短到 1.5s
+        r = global_session.get(url, timeout=1.5, headers=custom_headers, stream=True, verify=False)
         if r.status_code < 400:
             content = b""
             for chunk in r.iter_content(chunk_size=1024):
                 content += chunk
-                if len(content) >= 1024 * 100: break
+                if len(content) >= 102400: break 
+            r.close() # 👈 重點 2：一定要收線，釋放位畀下一個人
             return time.time() - start
+        r.close() # 👈 唔通都要收線
     except: pass
     return 999
 
@@ -151,9 +157,6 @@ def mark_source_as_deleted(url):
 # --- 【3. 診斷與測試邏輯】 ---
 
 def crawl_and_test(provider_name, source_list, ip_cache):
-    test_session = requests.Session()
-    test_session.mount('http://', adapter)
-    test_session.mount('https://', adapter)
     current_headers, mask_ip = get_headers_with_mask(provider_name, ip_cache)
     
     if provider_name == "通用":
@@ -163,7 +166,7 @@ def crawl_and_test(provider_name, source_list, ip_cache):
     for u in source_list:
         summary = {'total': 0, 'online': 0, 'items': []}
         try:
-            r = test_session.get(u, timeout=7, headers=current_headers, verify=False)
+            r = global_session.get(u, timeout=7, headers=current_headers, verify=False)
             r.encoding = 'utf-8'
             name, current_raw = "", []
             for line in r.text.splitlines():
@@ -178,8 +181,8 @@ def crawl_and_test(provider_name, source_list, ip_cache):
                     name = ""
 
             if current_raw:
-                with ThreadPoolExecutor(max_workers=70) as ex:
-                    futures = {ex.submit(get_speed, x['url'], current_headers, test_session): x for x in current_raw}
+                with ThreadPoolExecutor(max_workers=35) as ex:
+                    futures = {ex.submit(get_speed, x['url'], current_headers): x for x in current_raw}
                     for f in as_completed(futures):
                         speed = f.result()
                         item = futures[f]
@@ -255,11 +258,10 @@ def diagnosis(ip_cache):
     # 數據整理
     final_data = {p: [] for p in ["移动", "电信", "联通", "广电"]}
     for p in final_data.keys():
-        merged = []  # <--- 確保呢度開始有正確縮進
-        # 攞所屬 ISP 嘅結果
+        merged = []  
         for src_data in all_res.get(p, {}).values():
             merged.extend(src_data.get('items', []))
-        # 攞「通用」線路嘅結果
+        
         for src_data in all_res.get("通用", {}).values():
             merged.extend(src_data.get('items', []))
         
