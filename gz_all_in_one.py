@@ -1,6 +1,6 @@
 import requests, datetime, time, logging, re, sys, os, urllib3, random, json
 from opencc import OpenCC
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
 # --- 【1. 初始化與模式偵測】 ---
@@ -178,15 +178,16 @@ def crawl_and_test(provider_name, source_list, ip_cache):
                     name = ""
 
             if current_raw:
-                with ThreadPoolExecutor(max_workers=150) as ex:
+                with ThreadPoolExecutor(max_workers=70) as ex:
                     futures = {ex.submit(get_speed, x['url'], current_headers, test_session): x for x in current_raw}
-                    for f in tqdm(futures, desc=f"⏳ {provider_name} 測試", unit="link", ncols=80, leave=False):
+                    for f in as_completed(futures):
                         speed = f.result()
                         item = futures[f]
                         if speed < 5.0:
                             summary['online'] += 1
                             if any(k in item['name'] for k in KEYWORDS) and not any(b in item['name'] for b in BLOCK_KEYWORDS):
-                                if any(feat.lower() in item['url'].lower() for feat in FEATURES.get(provider_name, [])): speed -= 10.0
+                                if any(feat.lower() in item['url'].lower() for feat in FEATURES.get(provider_name, [])): 
+                                    speed -= 10.0
                                 item['speed'] = speed
                                 summary['items'].append(item)
             provider_results[u] = summary
@@ -197,9 +198,22 @@ def diagnosis(ip_cache):
     sources = load_sources("sources.txt")
     if not sources: return {}
     
-    # 執行五線測試
-    all_res = {p: crawl_and_test(p, sources, ip_cache) for p in ["移动", "电信", "联通", "广电", "通用"]}
+    all_res = {}
+    target_isps = ["移动", "电信", "联通", "广电", "通用"]
+    logging.info(f"🚀 開始併發診斷 {len(target_isps)} 個網絡...")
 
+    # 正確的併發提交
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_p = {executor.submit(crawl_and_test, p, sources, ip_cache): p for p in target_isps}
+        
+        for future in tqdm(as_completed(future_to_p), total=len(target_isps), desc="🌐 網絡全量診斷"):
+            p = future_to_p[future]
+            try:
+                all_res[p] = future.result()
+            except Exception as e:
+                logging.error(f"❌ {p} 測試崩潰: {e}")
+                all_res[p] = {}
+                
     # --- 🌟 15 天失效封印 (僅在 FULL_SCAN 模式執行) ---
     if RUN_MODE == "FULL_SCAN":
         tracker_file = "fail_tracker.json"
@@ -212,7 +226,7 @@ def diagnosis(ip_cache):
 
         logging.info("\n📊 --- 【失效追蹤診斷】 ---")
         for url in sources:
-            total_online = sum(all_res[p].get(url, {}).get('online', 0) for p in ["移动", "电信", "联通", "广电", "通用"])
+            total_online = sum(all_res.get(p, {}).get(url, {}).get('online', 0) for p in ["移动", "电信", "联通", "广电", "通用"])
             if total_online == 0:
                 if url not in tracker:
                     tracker[url] = today_str
@@ -232,9 +246,14 @@ def diagnosis(ip_cache):
     # 數據整理
     final_data = {p: [] for p in ["移动", "电信", "联通", "广电"]}
     for p in final_data.keys():
-        merged = []
-        for src_data in all_res[p].values(): merged.extend(src_data['items'])
-        for src_data in all_res["通用"].values(): merged.extend(src_data['items'])
+        merged = []  # <--- 確保呢度開始有正確縮進
+        # 攞所屬 ISP 嘅結果
+        for src_data in all_res.get(p, {}).values():
+            merged.extend(src_data.get('items', []))
+        # 攞「通用」線路嘅結果
+        for src_data in all_res.get("通用", {}).values():
+            merged.extend(src_data.get('items', []))
+        
         unique_items = {x['url']: x for x in merged}
         final_data[p] = sorted(unique_items.values(), key=lambda x: x.get('speed', 999))
     return final_data
@@ -258,7 +277,6 @@ def main():
 
     for provider, (filename, desc) in files_map.items():
         current_isp_data = all_provider_final_data.get(provider, [])
-        _, mask_ip = get_headers_with_mask(provider, ip_cache)
         with open(filename, "w", encoding="utf-8") as f:
             f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"\n')
             f.write(f'#EXTINF:-1 group-title="{desc}" tvg-name="更", 更{update_time} | {RUN_MODE}\nhttp://10.255.255.1/info.ts\n')
@@ -273,15 +291,19 @@ def main():
                 if provider != best_p_key:
                     local_urls = {li['url'] for li in local_items}
                     for x in best_isp_all_data:
+                        # 修正：確保唔好重複加，同埋 group 匹配
                         if get_group(x["name"]) == target_group and x['url'] not in local_urls:
-                            x_copy = x.copy()
-                            x_copy['display_name'] = f"{x_copy['name']} ({best_p_key})"
+                            x_copy = dict(x)
+                            x_copy['display_name'] = f"{x['name']} ({best_p_key})"
                             x_copy['final_group'] = target_group
+                            # 補償源速度增加 5 秒，確保排喺本地源後面
+                            x_copy['speed'] = x.get('speed', 0) + 5.0 
                             group_items.append(x_copy)
                 
                 group_items.sort(key=lambda x: x.get('speed', 999))
                 for item in group_items:
-                    f.write(f'#EXTINF:-1 group-title="{item["final_group"]}" tvg-name="{item["name"]}", {item.get("display_name", item["name"])}\n{item["url"]}\n')
+                    display_title = item.get("display_name", item["name"])
+                    f.write(f'#EXTINF:-1 group-title="{item["final_group"]}" tvg-name="{item["name"]}", {display_title}\n{item["url"]}\n')
         logging.info(f"💾 檔案已保存: {filename}")
     print(f"🏁 {RUN_MODE} 任務完成！")
 
