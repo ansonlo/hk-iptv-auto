@@ -15,6 +15,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -24,21 +26,21 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests opencc-python-reimplemented tqdm
+        pip install requests opencc-python-reimplemented tqdm urllib3
 
     - name: Run scripts
       run: |
         export TZ='Asia/Shanghai'
-        echo ">>> 自動模式偵測已移交至 Python 腳本處理 <<<"
         
-    - name: 🚀 1. 執藥 (搜尋新源)
-      run: python discovery_sources.py
-
-    - name: 🌐 2. 通用 (生成香港列表)
-      run: python main.py
-
-    - name: 📡 3. 專線診斷 (生成廣州列表)
-      run: python gz_all_in_one.py
+        # 👈 改咗：明確分開步驟執行，確保「先執藥、後測速」
+        echo ">>> 🚀 1. 執藥 (搜尋新源) <<<"
+        python discovery_sources.py
+        
+        echo ">>> 🌐 2. 通用 (執行 main.py) <<<"
+        python main.py || echo "⚠️ main.py 跳過或出錯"
+        
+        echo ">>> 📡 3. 專線診斷 (生成廣州列表並封印死源) <<<"
+        python gz_all_in_one.py
 
     - name: Commit and Push (Gentle Version)
       run: |
@@ -49,7 +51,7 @@ jobs:
         git fetch origin main
         
         # 2. Add 你啱啱產出嘅新數據
-        git add auto_repair.log sources.txt *.m3u || true
+        git add auto_repair.log sources.txt *.m3u fail_tracker.json || true
         
         # 3. 嘗試 Commit
         if ! git diff --staged --quiet; then
