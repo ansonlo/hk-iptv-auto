@@ -4,7 +4,7 @@ on:
   schedule:
     # 北京時間 08:00 同 20:00 執行
     - cron: '0 0,12 * * *'
-  workflow_dispatch: # 👈 改咗呢度：刪除咗 inputs，唔使再揀
+  workflow_dispatch: 
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -31,21 +31,26 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests opencc-python-reimplemented tqdm urllib3
 
-    - name: Run scripts
+    # --- 這裡開始拆開三個腳本，方便看各自的時間 ---
+
+    - name: 🚀 1. 執藥 (Discovery Sources)
       env:
         GITHUB_EVENT_NAME: ${{ github.event_name }}
       run: |
         export TZ='Asia/Shanghai'
-        
-        # 👈 改咗：明確分開步驟執行，確保「先執藥、後測速」
-        echo ">>> 🚀 1. 執藥 (搜尋新源) <<<"
         python discovery_sources.py
-        
-        echo ">>> 🌐 2. 通用 (執行 main.py) <<<"
+
+    - name: 🌐 2. 通用測速 (Main Global)
+      run: |
+        export TZ='Asia/Shanghai'
         python main.py || echo "⚠️ main.py 跳過或出錯"
-        
-        echo ">>> 📡 3. 專線診斷 (生成廣州列表並封印死源) <<<"
+
+    - name: 📡 3. 廣州專線診斷 (GZ All-in-one)
+      run: |
+        export TZ='Asia/Shanghai'
         python gz_all_in_one.py
+
+    # --- 腳本執行完畢，開始提交 ---
 
     - name: Commit and Push (Gentle Version)
       run: |
