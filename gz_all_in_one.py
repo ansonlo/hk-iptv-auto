@@ -181,7 +181,7 @@ def crawl_and_test(provider_name, source_list, ip_cache):
                     name = ""
 
             if current_raw:
-                with ThreadPoolExecutor(max_workers=35) as ex:
+                with ThreadPoolExecutor(max_workers=23) as ex:
                     futures = {ex.submit(get_speed, x['url'], current_headers): x for x in current_raw}
                     for f in as_completed(futures):
                         speed = f.result()
