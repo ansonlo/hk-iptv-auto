@@ -161,5 +161,5 @@
     "http://171.108.239.80:8181/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0": "2026-03-21",
     "http://171.108.239.99:8181/tsfile/live/1023_1.m3u8?key=txiptv": "2026-03-21",
     "http://171.108.239.98:8181/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0": "2026-03-21",
-    "https://api.allorigins.win/raw?url=https://live.hacks.tools/tv/ipv4/categories/地方频道.m3u": "2026-03-26"
+    "https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8": "2026-03-27"
 }
