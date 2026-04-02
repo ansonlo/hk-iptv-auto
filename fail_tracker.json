@@ -12,7 +12,6 @@
     "https://raw.githubusercontent.com/blackbird-tv/iptv/master/hk_tw.m3u": "2026-03-21",
     "https://raw.githubusercontent.com/mizhen/IPTV/master/m3u8/hk.m3u": "2026-03-21",
     "https://raw.githubusercontent.com/Memory-of-Love/IPTV/main/HK.m3u": "2026-03-21",
-    "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mo.m3u": "2026-03-21",
     "https://raw.githubusercontent.com/TOC-Portal/IPTV/main/main.m3u": "2026-03-21",
     "https://raw.githubusercontent.com/moevv/iptv/main/iptv.m3u": "2026-03-21",
     "https://raw.githubusercontent.com/Supprise0901/TVBox-IPTV/main/live.m3u": "2026-03-21",
@@ -160,6 +159,5 @@
     "http://171.108.239.79:8181/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0": "2026-03-21",
     "http://171.108.239.80:8181/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0": "2026-03-21",
     "http://171.108.239.99:8181/tsfile/live/1023_1.m3u8?key=txiptv": "2026-03-21",
-    "http://171.108.239.98:8181/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0": "2026-03-21",
-    "https://raw.githubusercontent.com/Free-TV/IPTV/refs/heads/master/playlists/playlist_hong_kong.m3u8": "2026-04-01"
+    "http://171.108.239.98:8181/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0": "2026-03-21"
 }
